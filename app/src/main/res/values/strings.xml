@@ -1,0 +1,51 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Hitch Dating Platform</string>
+    <string name="banner_ad_unit">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="facebook_app_id">Facebook App ID</string>
+    <string name="facebook_client_token">Facebook Client ID</string>
+
+    <!--    MainActivity-->
+    <string name="login_with_google">Login With Google</string>
+    <string name="login_with_number">Login With Number</string>
+    <string name="login_with_facebook">Login With Facebook</string>
+
+    <!--    Sign Up-->
+    <string name="Sign_Up">Sign Up</string>
+    <string name="Contact_Number">Contact Number</string>
+    <string name="Enter_Contact_number">Enter Contact number</string>
+    <string name="Get_OTP">Get OTP</string>
+    <string name="Sign_Up_Message">We will send one time password to your mobile number. Message and data rate may apply.</string>
+    <string name="Sign_Up_With">___________ Or Sign up with ___________</string>
+    <string name="Sign_Up_fb">Facebook</string>
+    <string name="Sign_Up_Google">Google</string>
+
+    <!--    Verification-->
+
+
+    <string name="OTP_Verification">OTP Verification</string>
+    <string name="Enter_otp">Enter the OTP sent to</string>
+    <string name="Enter_Digit">Enter 4 Digit Number that got on registered Number</string>
+    <string name="Verify_otp">Verify</string>
+    <string name="Resend_otp">RESEND</string>
+
+    <!--    Profile Completion-->
+
+    <string name="Profile_Completion">Profile Completion</string>
+    <string name="First_Name_Text">First Name*</string>
+    <string name="First_Name_Hint">Enter First name</string>
+    <string name="Last_Name">Last Name*</string>
+    <string name="Last_Name_Hint">Enter Last name</string>
+    <string name="Email">Email*</string>
+    <string name="Enter_Email_Hint">Enter Email</string>
+    <string name="Birth_Date">Birth Date*</string>
+    <string name="Birth_Date_Hint">Select birth date</string>
+    <string name="Gender">Gender*</string>
+    <string name="Religion">Religion*</string>
+    <string name="Sexual_Orientation">Sexual Orientation*</string>
+    <string name="Interested_in">Interested in*</string>
+    <string name="Get_Started">Get Started</string>
+    <string name="Sign_in_msg">You have already an account? Sign in</string>
+    <string name="Sing_with_text">___________ Or Sign up with __________</string>
+
+
+</resources>

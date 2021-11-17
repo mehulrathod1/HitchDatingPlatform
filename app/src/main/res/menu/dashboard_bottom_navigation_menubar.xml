@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/home"
+        android:title=""
+        android:icon="@drawable/home_icon"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/matches"
+        android:title=""
+        android:icon="@drawable/like_icon"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/chats"
+        android:title=""
+        android:icon="@drawable/chat_icon"
+        app:showAsAction="ifRoom" />
+
+    <item android:id="@+id/account"
+        android:title=""
+        android:icon="@drawable/profile_icon"
+        app:showAsAction="ifRoom" />
+
+</menu>

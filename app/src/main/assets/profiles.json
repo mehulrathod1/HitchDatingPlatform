@@ -1,0 +1,104 @@
+[  
+   {  
+      "url":"https://pbs.twimg.com/profile_images/572905100960485376/GK09QnNG.jpeg",
+      "name":"Sofia",
+      "age":20,
+      "location":"New York"
+   },
+   {  
+      "url":"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F14%2F2019%2F10%2F02%2FBDW00-000001014_L-2000.jpg",
+      "name":"Roma",
+      "age":22,
+      "location":"California"
+   },
+   {  
+      "url":"http://i.imgur.com/N6SaAlZ.jpg",
+      "name":"Zoya",
+      "age":23,
+      "location":"Atlantic City"
+   },
+   {  
+      "url":"https://cdn.asiatatler.com/asiatatler/i/sg/2020/02/10164257-natalie-portman-2_cover_2000x1326.jpg",
+      "name":"Carol",
+      "age":19,
+      "location":"New City"
+   },
+   {  
+      "url":"https://fuzeimages.s3.ap-south-1.amazonaws.com/wp-content/uploads/2015/05/26233804/Shrenu-Parikh1.jpg",
+      "name":"Saansa",
+      "age":20,
+      "location":"Manhattan"
+   },
+   {  
+      "url":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1fhM6u1g4H94NUU7cbJfLdYVADpEJUGiSYw&usqp=CAU",
+      "name":"Khaleesi",
+      "age":24,
+      "location":"Future Westros"
+   },
+   {  
+      "url":"https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F14%2F2019%2F10%2F02%2FBDW0-000001331-2000.jpg",
+      "name":"Heena",
+      "age":21,
+      "location":"India"
+   },
+   {  
+      "url":"https://assets-metrostyle.abs-cbn.com/prod/metrostyle/attachments/fcca1c90-d2a3-48da-9b67-6cdd2f0ced59_img_1227.jpg",
+      "name":"Jasmin",
+      "age":23,
+      "location":"Taxes"
+   },
+   {  
+      "url":"https://www.sheknows.com/wp-content/uploads/2018/12/best-dressed-emma-stone_bhjayf.jpeg",
+      "name":"Monica",
+      "age":23,
+      "location":"New York"
+   },
+   {  
+      "url":"http://cdn.cavemancircus.com//wp-content/uploads/images/2015/june/pretty_girls_3/pretty_girls_20.jpg",
+      "name":"Phoebe",
+      "age":22,
+      "location":"New York City"
+   },
+   {  
+      "url":"https://www.dublinhorseshow.com/images/uploads/general/Best_Dressed_Lady.jpg",
+      "name":"Rachel",
+      "age":22,
+      "location":"Central Perk"
+   },
+   {  
+      "url":"https://s-media-cache-ak0.pinimg.com/736x/de/87/7b/de877bcccc2295a58fe8758fee0ebc7d.jpg",
+      "name":"Jainis",
+      "age":24,
+      "location":"New York"
+   },
+   {  
+      "url":"https://filmfare.wwmindia.com/content/2015/Aug/sonam_1439803633_640x640.jpg",
+      "name":"Samia",
+      "age":19,
+      "location":"India"
+   },
+   {  
+      "url":"https://assets-metrostyle.abs-cbn.com/prod/metrostyle/attachments/8b0b370d-a0c8-436c-b3c4-99674ff4d7ee_img_1020.jpg",
+      "name":"Hornol",
+      "age":24,
+      "location":"Caltech"
+   },
+   {  
+      "url":"https://www.shemazing.net/wp-content/uploads/2014/06/DublinHorseShow2.jpg",
+      "name":"Korial",
+      "age":21,
+      "location":"Japan"
+   },
+   {  
+      "url":"https://www.independent.ie/incoming/393e3/34823383.ece/AUTOCROP/h530/iw%20IMG_8081.jpg",
+      "name":"Chin Si",
+      "age":23,
+      "location":"China"
+   },
+   {  
+      "url":"https://img.faballey.com/images/Product/ITP00875Z/d3.jpg",
+      "name":"SDF",
+      "age":21,
+      "location":"America"
+   }
+]

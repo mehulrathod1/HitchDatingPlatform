@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable-anydpi/ic_action_location.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/birth_bg.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/bottom_navigation_border.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/button_border.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/card_bg.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/chat_msg_bg.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/custom_edittext.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/default_dot.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/drawable-anydpi/ic_action_add.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/drawable-anydpi/ic_action_close.xml" value="0.19814814814814816" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/drawable-anydpi/ic_action_more_white.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/drawable-anydpi/ic_action_send_msg.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/drawable-anydpi/ic_option_menu.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/drawable-xxhdpi/custom_chat_border.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/drawable/ic_close.xml" value="0.2" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/filter_background.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/layout_border.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/my_chat_msg_bg.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/navigation_tab_selected.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/pou_up_bg.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/drawable/xyz.xml" value="0.2203125" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_account_settings.xml" value="0.22" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_chat_dashboard_layout.xml" value="0.25" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_choose_plan.xml" value="0.22" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_filters.xml" value="0.25" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_home.xml" value="0.18" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_last_tab_menu.xml" value="0.25" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_login.xml" value="0.25" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_match_screen.xml" value="0.11413043478260869" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_matches.xml" value="0.17" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_my_matches_new.xml" value="0.1068840579710145" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_my_profile.xml" value="0.25" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_profile_completion.xml" value="0.22" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_profile_detail_new.xml" value="0.1" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_razor_pay.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_sign_up.xml" value="0.22" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_start_verification.xml" value="0.22" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/activity_top_hitches_who_likes.xml" value="0.1" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/add_photos.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/chat_dashboare_item.xml" value="0.31179775280898875" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/chat_item.xml" value="0.1" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/chat_list_items.xml" value="0.1" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/chat_select.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/delete_account.xml" value="0.13903985507246377" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/dropdown_item.xml" value="0.1" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/layout_slider.xml" value="0.1" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/logout_pou_up.xml" value="0.10869565217391304" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/membership_item.xml" value="0.22544951590594745" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/payment_history.xml" value="0.46111111111111114" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/pop_up_block_report.xml" value="0.1" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/pyment_history_item.xml" value="0.18" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/spinner_textview.xml" value="0.11820652173913043" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/spinner_textview_for_profile.xml" value="0.1" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/tinder_card_view.xml" value="0.22" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/update_dropdown.xml" value="0.20416666666666666" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/layout/user_photos_item.xml" value="0.5" />
+        <entry key="..\:/Project/Hitch Dating App/Hitch Dating Platform/app/src/main/res/menu/dashboard_bottom_navigation_menubar.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/Dell/.gradle/caches/transforms-2/files-2.1/7da44f618a1effa667a62ae0a6dd953e/appcompat-1.3.0/res/layout/support_simple_spinner_dropdown_item.xml" value="0.13768115942028986" />
+        <entry key="..\:/Users/Dell/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_spinner_dropdown_item.xml" value="0.1068840579710145" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>

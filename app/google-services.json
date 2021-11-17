@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "321427178739",
+    "project_id": "hitch-c88fe",
+    "storage_bucket": "hitch-c88fe.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:321427178739:android:827630e3197152951ee386",
+        "android_client_info": {
+          "package_name": "com.in.hitch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "321427178739-shbfastfh1momdngi1g4ga3c4ipstijg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.in.hitch",
+            "certificate_hash": "9c67d724755d1deeb89f1a3375d65f6a39ae4d0c"
+          }
+        },
+        {
+          "client_id": "321427178739-h4s97g6cb5ql764kgq5hu8enape3veal.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvs5okpoZiKAvDu_jlKgHzxQ0r7W1XQfU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "321427178739-h4s97g6cb5ql764kgq5hu8enape3veal.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
