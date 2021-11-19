@@ -75,7 +75,7 @@ public class Activity_Home extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     CardView cv_filters, cv_notifications;
     FrameLayout source_frame, main_frameLayout;
-    private SwipePlaceHolderView mSwipeView;
+    private SwipeDirectionalView mSwipeView;
     private AdView adView;
     FrameLayout frameLayout;
     Spinner sp_sexual_orientation, sp_religion, sp_interested_in;
@@ -93,6 +93,7 @@ public class Activity_Home extends AppCompatActivity {
     List<String> sexual_id_list = new ArrayList<>();
     ProgressDialog progressDialog;
 
+
     CrystalRangeSeekbar seekbar, DistanceSeekbar;
 
     @Override
@@ -109,7 +110,7 @@ public class Activity_Home extends AppCompatActivity {
     private void init() {
 
 
-        mSwipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
+        mSwipeView = (SwipeDirectionalView) findViewById(R.id.swipeView);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         cv_filters = findViewById(R.id.account_settinngs);
         cv_notifications = findViewById(R.id.notifications);
@@ -263,7 +264,8 @@ public class Activity_Home extends AppCompatActivity {
         int height = size.y;
 
         mSwipeView.getBuilder()
-                .setSwipeType(SwipePlaceHolderView.SWIPE_TYPE_HORIZONTAL)
+                .setSwipeVerticalThreshold(Utils.dpToPx(50))
+                .setSwipeHorizontalThreshold(Utils.dpToPx(50))
                 .setDisplayViewCount(2)
                 .setIsUndoEnabled(true)
                 .setSwipeDecor(new SwipeDecor()

@@ -183,4 +183,14 @@ public interface Api {
             @Field("token") String token,
             @Field("login_user_id") String login_user_id,
             @Field("report_user_id") String report_user_id);
+
+    @Multipart
+    @POST("send_file_message.php")
+    Call<Responsee> sendFileMessage(
+            @Part("token") RequestBody token,
+            @Part("from_user_id") RequestBody from_user_id,
+            @Part("to_user_id") RequestBody to_user_id,
+            @Part MultipartBody.Part file
+
+    );
 }

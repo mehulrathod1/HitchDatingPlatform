@@ -15,6 +15,7 @@ import com.in.hitch.R;
 import com.mindorks.placeholderview.SwipeDirection;
 import com.mindorks.placeholderview.SwipeDirectionalView;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
+import com.mindorks.placeholderview.annotations.Click;
 import com.mindorks.placeholderview.annotations.Layout;
 import com.mindorks.placeholderview.annotations.Resolve;
 import com.mindorks.placeholderview.annotations.View;
@@ -67,6 +68,7 @@ public class TinderCard {
     private SwipePlaceHolderView mSwipeView;
     private OnItemClickListener mlistener;
 
+
     @SwipeView
     android.view.View SwipeView;
     Callback callback;
@@ -111,15 +113,17 @@ public class TinderCard {
         nope.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
-
                 mSwipeView.doSwipe(false);
             }
         });
+
         like.setOnClickListener(new android.view.View.OnClickListener() {
             @Override
             public void onClick(android.view.View v) {
 
                 mSwipeView.doSwipe(true);
+
+
             }
         });
         nameAgeTxt.setOnClickListener(new android.view.View.OnClickListener() {
@@ -135,6 +139,8 @@ public class TinderCard {
             @Override
             public void onClick(android.view.View v) {
                 Toast.makeText(mContext, "super Like", Toast.LENGTH_SHORT).show();
+                callback.onSwipeUp();
+
 
             }
         });
@@ -158,9 +164,18 @@ public class TinderCard {
 
     }
 
+    @Click(R.id.profileImageView)
+    public void onClick() {
+        Log.d("EVENT", "profileImageView click");
+
+    }
+
     @SwipeOutDirectional
     private void onSwipeOutDirectional(@NonNull SwipeDirection direction) {
         Log.d("DEBUG", "SwipeOutDirectional " + direction.name());
+        if (direction.getDirection() == SwipeDirection.TOP.getDirection()) {
+            callback.onSwipeUp();
+        }
     }
 
     @SwipeInDirectional
@@ -207,6 +222,7 @@ public class TinderCard {
 
     @SwipeOutState
     private void onSwipeOutState() {
+
         Log.d("EVENT", "onSwipeOutState");
     }
 

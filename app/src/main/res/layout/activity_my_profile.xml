@@ -35,8 +35,6 @@
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold" />
-
-
         </LinearLayout>
     </RelativeLayout>
 

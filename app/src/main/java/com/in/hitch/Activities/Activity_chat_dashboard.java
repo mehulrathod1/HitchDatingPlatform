@@ -56,6 +56,7 @@ import com.in.hitch.Model.CommonModel;
 import com.in.hitch.R;
 import com.in.hitch.retrofit.Api;
 import com.in.hitch.retrofit.AppConfig;
+import com.in.hitch.retrofit.Responsee;
 
 import org.apache.commons.lang3.StringEscapeUtils;
 
@@ -68,6 +69,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -485,6 +489,33 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
     }
+    private void sendFileMessage(String from_user_id,String to_user_id, File user_image) {
+
+        Api call = AppConfig.getClient("https://www.hitch.notionprojects.tech/api/").create(Api.class);
+        progressDialog.show();
+        RequestBody requestBody_token = RequestBody.create(MediaType.parse("multipart/form-data"), "123456789");
+        RequestBody requestBody_from_user_id = RequestBody.create(MediaType.parse("multipart/form-data"), from_user_id);
+        RequestBody requestBody_to_user_id = RequestBody.create(MediaType.parse("multipart/form-data"), to_user_id);
+        MultipartBody.Part message_image = null;
+        RequestBody requestBody_req_img = RequestBody.create(MediaType.parse("multipart/form-data"), user_image);
+        message_image = MultipartBody.Part.createFormData("file[]", img_file.getName(), requestBody_req_img);
+
+        call.sendFileMessage(requestBody_token, requestBody_from_user_id,requestBody_to_user_id, message_image).enqueue(new Callback<Responsee>() {
+            @Override
+            public void onResponse(Call<Responsee> call, Response<Responsee> response) {
+
+                Responsee responsee = (Responsee) response.body();
+                String s = responsee.getMessage();
+                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<Responsee> call, Throwable t) {
+            }
+        });
+    }
+
 
     @Override
     protected void onPause() {
@@ -586,6 +617,9 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                             Log.e("img_file", "onClick: " + img_file);
 
 
+                            sendFileMessage(User_Id,userId,img_file);
+                            getChatList(chatId, User_Id);
+
 //                            add_user_image(User_Id, img_file);
                         } else {
                             Toast.makeText(getApplicationContext(), "Please enter correct detail", Toast.LENGTH_SHORT).show();
@@ -624,7 +658,8 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                                 Log.e("img_file", "onClick: " + img_file);
-
+                                sendFileMessage(User_Id,userId,img_file);
+                                getChatList(chatId, User_Id);
 
 //                                add_user_image(User_Id, img_file);
                             } else {
@@ -722,6 +757,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
     }
 
     public int calculateInSampleSize(@NonNull BitmapFactory.Options options, int reqWidth, int reqHeight) {
+
         // Raw height and width of image
         int height = options.outHeight;
         int width = options.outWidth;

@@ -107,7 +107,7 @@
         android:layout_above="@+id/bottom_navigation"
         android:layout_below="@+id/location_settings">
 
-        <com.mindorks.placeholderview.SwipePlaceHolderView
+        <com.mindorks.placeholderview.SwipeDirectionalView
             android:id="@+id/swipeView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -147,9 +147,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center">
-
         </FrameLayout>
-
     </LinearLayout>
 
 </RelativeLayout>

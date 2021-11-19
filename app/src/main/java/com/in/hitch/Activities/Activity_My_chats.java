@@ -62,7 +62,6 @@ public class Activity_My_chats extends AppCompatActivity {
 
         getChatList(User_Id, "");
 
-
     }
 
 
