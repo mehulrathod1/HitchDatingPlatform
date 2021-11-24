@@ -105,12 +105,23 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/bottom_navigation"
+        android:layout_margin="@dimen/_4sdp"
+        android:orientation="vertical"
         android:layout_below="@+id/location_settings">
 
-        <com.mindorks.placeholderview.SwipeDirectionalView
+        <com.yuyakaido.android.cardstackview.CardStackView
+            android:id="@+id/card_stack_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/bottodem_navigation"
+            android:layout_below="@+id/location_settings" />
+
+
+        <com.mindorks.placeholderview.SwipePlaceHolderView
             android:id="@+id/swipeView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:visibility="gone"
             android:layout_above="@+id/bottodem_navigation"
             android:layout_below="@+id/location_settings" />
     </LinearLayout>

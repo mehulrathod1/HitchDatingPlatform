@@ -18,6 +18,8 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AccelerateInterpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -36,8 +38,10 @@ import com.android.volley.toolbox.Volley;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.in.hitch.Adapter.CardStackAdapter;
 import com.in.hitch.Model.CommonModel;
 import com.in.hitch.Model.GetUserFilterModel;
+import com.in.hitch.Model.ItemModel;
 import com.in.hitch.Model.Profile;
 import com.in.hitch.R;
 import com.in.hitch.Utils.Utils;
@@ -52,6 +56,14 @@ import com.mindorks.placeholderview.SwipeDecor;
 import com.mindorks.placeholderview.SwipeDirectionalView;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.listeners.ItemRemovedListener;
+import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
+import com.yuyakaido.android.cardstackview.CardStackView;
+import com.yuyakaido.android.cardstackview.Direction;
+import com.yuyakaido.android.cardstackview.Duration;
+import com.yuyakaido.android.cardstackview.RewindAnimationSetting;
+import com.yuyakaido.android.cardstackview.StackFrom;
+import com.yuyakaido.android.cardstackview.SwipeAnimationSetting;
+import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -61,6 +73,7 @@ import java.util.Map;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -75,7 +88,7 @@ public class Activity_Home extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     CardView cv_filters, cv_notifications;
     FrameLayout source_frame, main_frameLayout;
-    private SwipeDirectionalView mSwipeView;
+    SwipePlaceHolderView mSwipeView;
     private AdView adView;
     FrameLayout frameLayout;
     Spinner sp_sexual_orientation, sp_religion, sp_interested_in;
@@ -94,6 +107,11 @@ public class Activity_Home extends AppCompatActivity {
     ProgressDialog progressDialog;
 
 
+    private CardStackLayoutManager manager;
+    private CardStackAdapter adapter;
+    CardStackView cardStackView;
+
+
     CrystalRangeSeekbar seekbar, DistanceSeekbar;
 
     @Override
@@ -110,7 +128,7 @@ public class Activity_Home extends AppCompatActivity {
     private void init() {
 
 
-        mSwipeView = (SwipeDirectionalView) findViewById(R.id.swipeView);
+        mSwipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         cv_filters = findViewById(R.id.account_settinngs);
         cv_notifications = findViewById(R.id.notifications);
@@ -138,6 +156,109 @@ public class Activity_Home extends AppCompatActivity {
         progressDialog = new ProgressDialog(Activity_Home.this);
         progressDialog.setCancelable(false); // set cancelable to false
         progressDialog.setMessage("Please Wait"); // set message
+
+
+        cardStackView = findViewById(R.id.card_stack_view);
+        manager = new CardStackLayoutManager(this);
+        manager.setStackFrom(StackFrom.None);
+
+        manager.setVisibleCount(3);
+        manager.setTranslationInterval(8.0f);
+        manager.setScaleInterval(0.95f);
+        manager.setSwipeThreshold(0.3f);
+        manager.setMaxDegree(20.0f);
+        manager.setDirections(Direction.FREEDOM);
+        manager.setCanScrollHorizontal(true);
+        manager.setSwipeableMethod(SwipeableMethod.Manual);
+        manager.setOverlayInterpolator(new LinearInterpolator());
+        adapter = new CardStackAdapter(addList(), getApplicationContext(), new CardStackAdapter.Click() {
+            @Override
+            public void onClickItem(int position) {
+
+            }
+
+            @Override
+            public void onClickReload(int position) {
+
+                RewindAnimationSetting setting11 = new RewindAnimationSetting.Builder()
+                        .setDirection(Direction.Left)
+                        .setDuration(Duration.Normal.duration)
+                        .setInterpolator(new AccelerateInterpolator())
+                        .build();
+
+                manager.setRewindAnimationSetting(setting11);
+                manager.setCanScrollVertical(true);
+                manager.setCanScrollHorizontal(true);
+                manager.setDirections(Direction.FREEDOM);
+                manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
+                manager.setOverlayInterpolator(new AccelerateInterpolator());
+                manager.setStackFrom(StackFrom.None);
+                cardStackView.rewind();
+
+            }
+
+            @Override
+            public void onClickNope(int position) {
+
+                SwipeAnimationSetting setting11 = new SwipeAnimationSetting.Builder()
+                        .setDirection(Direction.Left)
+                        .setDuration(Duration.Normal.duration)
+                        .setInterpolator(new AccelerateInterpolator())
+                        .build();
+
+                manager.setSwipeAnimationSetting(setting11);
+                manager.setCanScrollVertical(true);
+                manager.setCanScrollHorizontal(true);
+                manager.setDirections(Direction.FREEDOM);
+                manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
+                manager.setOverlayInterpolator(new AccelerateInterpolator());
+                manager.setStackFrom(StackFrom.None);
+                cardStackView.swipe();
+            }
+
+            @Override
+            public void onClickLike(int position) {
+
+
+                SwipeAnimationSetting setting11 = new SwipeAnimationSetting.Builder()
+                        .setDirection(Direction.Right)
+                        .setDuration(Duration.Normal.duration)
+                        .setInterpolator(new AccelerateInterpolator())
+                        .build();
+
+                manager.setSwipeAnimationSetting(setting11);
+                manager.setCanScrollVertical(true);
+                manager.setCanScrollHorizontal(true);
+                manager.setDirections(Direction.FREEDOM);
+                manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
+                manager.setOverlayInterpolator(new AccelerateInterpolator());
+                manager.setStackFrom(StackFrom.None);
+                cardStackView.swipe();
+            }
+
+            @Override
+            public void onClickSuperLike(int position) {
+
+
+                SwipeAnimationSetting setting11 = new SwipeAnimationSetting.Builder()
+                        .setDirection(Direction.Top)
+                        .setDuration(Duration.Normal.duration)
+                        .setInterpolator(new AccelerateInterpolator())
+                        .build();
+
+                manager.setSwipeAnimationSetting(setting11);
+                manager.setCanScrollVertical(true);
+                manager.setCanScrollHorizontal(true);
+                manager.setDirections(Direction.FREEDOM);
+                manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
+                manager.setOverlayInterpolator(new AccelerateInterpolator());
+                manager.setStackFrom(StackFrom.None);
+                cardStackView.swipe();
+            }
+        });
+        cardStackView.setLayoutManager(manager);
+        cardStackView.setAdapter(adapter);
+        cardStackView.setItemAnimator(new DefaultItemAnimator());
 
 
         btn_apply.setOnClickListener(new View.OnClickListener() {
@@ -211,12 +332,15 @@ public class Activity_Home extends AppCompatActivity {
 
                 switch (item.getItemId()) {
                     case R.id.home:
+
                         break;
                     case R.id.matches:
+
                         Intent i = new Intent(Activity_Home.this, Activity_top_hitches.class);
                         startActivity(i);
                         break;
                     case R.id.chats:
+
                         i = new Intent(Activity_Home.this, Activity_My_chats.class);
                         startActivity(i);
                         break;
@@ -252,6 +376,8 @@ public class Activity_Home extends AppCompatActivity {
         cv_notifications.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
                 Intent i = new Intent(Activity_Home.this, Activity_Notifications.class);
                 startActivity(i);
 
@@ -264,8 +390,6 @@ public class Activity_Home extends AppCompatActivity {
         int height = size.y;
 
         mSwipeView.getBuilder()
-                .setSwipeVerticalThreshold(Utils.dpToPx(50))
-                .setSwipeHorizontalThreshold(Utils.dpToPx(50))
                 .setDisplayViewCount(2)
                 .setIsUndoEnabled(true)
                 .setSwipeDecor(new SwipeDecor()
@@ -692,6 +816,23 @@ public class Activity_Home extends AppCompatActivity {
         };
         queue.add(request);
     }
+
+    private List<ItemModel> addList() {
+        List<ItemModel> items = new ArrayList<>();
+        items.add(new ItemModel(R.drawable.sample1, "Markonah", "24", "Jember"));
+        items.add(new ItemModel(R.drawable.sample2, "Marpuah", "20", "Malang"));
+        items.add(new ItemModel(R.drawable.sample3, "Sukijah", "27", "Jonggol"));
+        items.add(new ItemModel(R.drawable.sample4, "Markobar", "19", "Bandung"));
+        items.add(new ItemModel(R.drawable.sample5, "Marmut", "25", "Hutan"));
+
+        items.add(new ItemModel(R.drawable.sample1, "Markonah", "24", "Jember"));
+        items.add(new ItemModel(R.drawable.sample2, "Marpuah", "20", "Malang"));
+        items.add(new ItemModel(R.drawable.sample3, "Sukijah", "27", "Jonggol"));
+        items.add(new ItemModel(R.drawable.sample4, "Markobar", "19", "Bandung"));
+        items.add(new ItemModel(R.drawable.sample5, "Marmut", "25", "Hutan"));
+        return items;
+    }
+
 
     @Override
     public void onBackPressed() {

@@ -43,6 +43,7 @@ public class Activity_Notifications extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         adapter = new NotificationAdapter(list, getApplicationContext(), new NotificationAdapter.Click() {
             @Override
             public void onItemClick(int position) {
