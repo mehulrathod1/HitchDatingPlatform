@@ -130,18 +130,24 @@
 
     </LinearLayout>
 
+
+
     <FrameLayout
         android:id="@+id/left_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/overlay_black">
 
-        <ImageView
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_arrow_forward_black_24dp" />
-
+            android:textSize="@dimen/_32sdp"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/_35sdp"
+            android:layout_gravity="right"
+            android:textColor="@android:color/holo_red_light"
+            android:text="NOPE"/>
     </FrameLayout>
 
     <FrameLayout
@@ -150,26 +156,32 @@
         android:layout_height="match_parent"
         android:background="@drawable/overlay_black">
 
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_arrow_back_black_24dp" />
-
+            android:textSize="@dimen/_32sdp"
+            android:textStyle="bold"
+            android:layout_margin="@dimen/_35sdp"
+            android:textColor="@android:color/holo_green_light"
+            android:text="LIKE"/>
     </FrameLayout>
 
     <FrameLayout
         android:id="@+id/top_overlay"
+        android:layout_marginTop="@dimen/_100sdp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/overlay_black">
+        >
 
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_arrow_downward_black_24dp" />
-
+            android:textSize="@dimen/_32sdp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="@dimen/_35sdp"
+            android:textColor="@android:color/holo_blue_bright"
+            android:text="Super Like"/>
     </FrameLayout>
 
     <FrameLayout
@@ -178,11 +190,6 @@
         android:layout_height="match_parent"
         android:background="@drawable/overlay_black">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_arrow_upward_black_24dp" />
 
     </FrameLayout>
 

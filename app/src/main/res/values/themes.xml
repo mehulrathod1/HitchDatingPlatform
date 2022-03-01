@@ -17,6 +17,7 @@
         <item name="android:autofilledHighlight">@android:color/transparent</item>
 
     </style>
+
     <style name="CommentDialogTheme" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/CommentDialogStyle</item>
     </style>
@@ -34,7 +35,7 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
-    <style name="DialogTheme" >
+    <style name="DialogTheme">
         <item name="colorAccent">@color/md_pink_300</item>
         <item name="android:gravity">center</item>
     </style>

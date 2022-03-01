@@ -60,7 +60,6 @@ import retrofit2.Response;
 
 public class Activity_Add_photos extends AppCompatActivity {
 
-
     File photoFile, img_file;
     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
     public String photoFileName = "IMG_" + timeStamp + ".jpg";
@@ -70,6 +69,7 @@ public class Activity_Add_photos extends AppCompatActivity {
     private static final int MY_Gallery_REQUEST_CODE = 101;
     public final String APP_TAG = "hitch";
     Button done;
+
     RecyclerView add_image_recycler;
     AddImageAdapter adapter;
     ProgressDialog progressDialog;
@@ -175,6 +175,7 @@ public class Activity_Add_photos extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
         super.onActivityResult(requestCode, resultCode, data);
         Bitmap bitmap = null;
 

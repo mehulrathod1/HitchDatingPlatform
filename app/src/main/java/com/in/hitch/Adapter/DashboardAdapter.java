@@ -147,7 +147,6 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     @Override
     public long getItemId(int position) {
 
-
         return position;
     }
 

@@ -25,12 +25,15 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     Context context;
     Click click;
 
-
-    public interface Click{
+    public interface Click {
         void onClickItem(int position);
+
         void onClickReload(int position);
+
         void onClickNope(int position);
+
         void onClickLike(int position);
+
         void onClickSuperLike(int position);
     }
 
@@ -39,8 +42,6 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
         this.context = context;
         this.click = click;
     }
-
-
 
     @NonNull
     @Override
@@ -94,8 +95,8 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
         return items.size();
     }
 
-    class ViewHolder extends RecyclerView.ViewHolder{
-        ImageView image,reload,nope,star,like,power;
+    class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView image, reload, nope, star, like, power;
         TextView nama, usia, kota;
 
 

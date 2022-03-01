@@ -77,6 +77,8 @@ public class Activity_Profile_completion extends AppCompatActivity {
         init();
 
         Log.e("User_Id", "onCreate: " + User_Id);
+
+
     }
 
     private void init() {
@@ -93,7 +95,6 @@ public class Activity_Profile_completion extends AppCompatActivity {
         edt_month = findViewById(R.id.edt_month);
         edt_year = findViewById(R.id.edt_year);
         sp_religion = findViewById(R.id.sp_religion);
-
 
         gender_list = new ArrayList<>();
         interest_list = new ArrayList<>();
@@ -627,6 +628,7 @@ public class Activity_Profile_completion extends AppCompatActivity {
                             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
                                 try {
+
                                     JSONObject Object = jsonArray.getJSONObject(position);
                                     String sp_sexual_orientation = Object.getString("id");
                                     Sexual_Id = sp_sexual_orientation;

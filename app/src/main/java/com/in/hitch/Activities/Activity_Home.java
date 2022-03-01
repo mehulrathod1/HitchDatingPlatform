@@ -174,7 +174,8 @@ public class Activity_Home extends AppCompatActivity {
         adapter = new CardStackAdapter(addList(), getApplicationContext(), new CardStackAdapter.Click() {
             @Override
             public void onClickItem(int position) {
-
+                Intent i = new Intent(Activity_Home.this, Activity_Profile_details.class);
+                startActivity(i);
             }
 
             @Override
@@ -429,7 +430,6 @@ public class Activity_Home extends AppCompatActivity {
                     alert.show();
 
                     btn_continue_hitches.setOnClickListener(new View.OnClickListener() {
-                        @Override
                         public void onClick(View v) {
                             alert.dismiss();
                         }

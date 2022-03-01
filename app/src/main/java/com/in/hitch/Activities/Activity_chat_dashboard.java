@@ -107,6 +107,8 @@ public class Activity_chat_dashboard extends AppCompatActivity {
     Handler handler = new Handler();
     Runnable runnable;
     long delay = 1000;
+    int chatListSize = 0;
+
 
     PopupWindow popupWindow;
 
@@ -129,7 +131,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         init();
         setData();
         getChatList(chatId, User_Id);
-//        scheduleSendLocation();
+        scheduleSendLocation();
     }
 
     private void init() {
@@ -238,7 +240,6 @@ public class Activity_chat_dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String message = edt_chat.getText().toString();
-
                 String toServerUnicodeEncoded = StringEscapeUtils.escapeJava(message);
 
                 Log.e(TAG, "onClick: " + message);
@@ -267,7 +268,6 @@ public class Activity_chat_dashboard extends AppCompatActivity {
 
             }
         });
-
         msg_replay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -363,10 +363,10 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                 list.clear();
                 Log.e("onResponse", "onResponse: " + model.getMessage());
                 List<ChatDashboardModel.ChatDashboardList> data = model.getChatDataList();
+
                 for (int i = 0; i < data.size(); i++) {
 
                     ChatDashboardModel.ChatDashboardList chatModelData = data.get(i);
-
 
                     ChatDashboardModel.ChatDashboardList chatItem = new ChatDashboardModel.ChatDashboardList(
                             chatModelData.getMsg_id(),
@@ -379,23 +379,55 @@ public class Activity_chat_dashboard extends AppCompatActivity {
 
                     list.add(chatItem);
                     Log.e(TAG, "onResponse: " + chatItem.getMessage());
-
                 }
                 adapter.notifyDataSetChanged();
                 recyclerView.scrollToPosition(adapter.getItemCount() - 1);
+                Log.e(TAG, "onResponse: " + adapter.getItemCount());
+            }
 
-                Log.e(",c,c,c", "onResponse: " + adapter.getItemCount());
+            @Override
+            public void onFailure(Call<ChatDashboardModel> call, Throwable t) {
+            }
+        });
+    }
 
+    public void getDummyChatList(String chat_id, String user_id) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+
+
+        call.getChat(Token, chat_id, user_id).enqueue(new Callback<ChatDashboardModel>() {
+            @Override
+            public void onResponse(Call<ChatDashboardModel> call, Response<ChatDashboardModel> response) {
+                ChatDashboardModel model = response.body();
+                list.clear();
+                Log.e("onResponse", "onResponse: " + model.getMessage());
+                List<ChatDashboardModel.ChatDashboardList> data = model.getChatDataList();
+
+                for (int i = 0; i < data.size(); i++) {
+
+                    ChatDashboardModel.ChatDashboardList chatModelData = data.get(i);
+
+                    ChatDashboardModel.ChatDashboardList chatItem = new ChatDashboardModel.ChatDashboardList(
+                            chatModelData.getMsg_id(),
+                            chatModelData.getUser_id(),
+                            chatModelData.getImage(),
+                            chatModelData.getUsername(),
+                            chatModelData.getMessage(),
+                            chatModelData.getTime(),
+                            chatModelData.getType());
+
+                    list.add(chatItem);
+                    Log.e(TAG, "onResponse: " + chatItem.getMessage());
+                }
 
             }
 
             @Override
             public void onFailure(Call<ChatDashboardModel> call, Throwable t) {
-
             }
         });
     }
-
 
     public void sendTextMessage(String from_user_id, String to_user_id, String message) {
 
@@ -489,7 +521,8 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
     }
-    private void sendFileMessage(String from_user_id,String to_user_id, File user_image) {
+
+    private void sendFileMessage(String from_user_id, String to_user_id, File user_image) {
 
         Api call = AppConfig.getClient("https://www.hitch.notionprojects.tech/api/").create(Api.class);
         progressDialog.show();
@@ -500,7 +533,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         RequestBody requestBody_req_img = RequestBody.create(MediaType.parse("multipart/form-data"), user_image);
         message_image = MultipartBody.Part.createFormData("file[]", img_file.getName(), requestBody_req_img);
 
-        call.sendFileMessage(requestBody_token, requestBody_from_user_id,requestBody_to_user_id, message_image).enqueue(new Callback<Responsee>() {
+        call.sendFileMessage(requestBody_token, requestBody_from_user_id, requestBody_to_user_id, message_image).enqueue(new Callback<Responsee>() {
             @Override
             public void onResponse(Call<Responsee> call, Response<Responsee> response) {
 
@@ -516,7 +549,6 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onPause() {
         handler.removeCallbacks(runnable); //stop handler when activity not visible super.onPause();
@@ -528,13 +560,22 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             public void run() {
 
-//                getChatList2(chatId, User_Id);
-//                int x = realTimeList.size();
-//                int y = list.size();
-//                if (x > y) {
-//                    realTimeList = list;
+                getDummyChatList(chatId, User_Id);
+                int s = list.size();
 
-                getChatList(chatId, User_Id);
+
+                if (chatListSize == 0) {
+
+                    getChatList(chatId, User_Id);
+                    chatListSize = list.size() + 1;
+                }
+                if (chatListSize == s) {
+
+                    getChatList(chatId, User_Id);
+                    chatListSize = list.size() + 1;
+                }
+
+
 //                }
                 handler.postDelayed(this, delay);
 
@@ -553,6 +594,9 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
+
+
+    // add image & change
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -617,7 +661,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                             Log.e("img_file", "onClick: " + img_file);
 
 
-                            sendFileMessage(User_Id,userId,img_file);
+                            sendFileMessage(User_Id, userId, img_file);
                             getChatList(chatId, User_Id);
 
 //                            add_user_image(User_Id, img_file);
@@ -658,7 +702,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                                 Log.e("img_file", "onClick: " + img_file);
-                                sendFileMessage(User_Id,userId,img_file);
+                                sendFileMessage(User_Id, userId, img_file);
                                 getChatList(chatId, User_Id);
 
 //                                add_user_image(User_Id, img_file);
@@ -676,8 +720,6 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         }
 
     }
-
-    // add image & change
 
     public void onLaunchCamera() {
 

@@ -85,8 +85,8 @@ public class Activity_My_chats extends AppCompatActivity {
                 if (searchText.getText().toString().equals(null)) {
 
                 } else {
-                    String text = searchText.getText().toString();
 
+                    String text = searchText.getText().toString();
                     search.setVisibility(View.GONE);
                     cancelSearch.setVisibility(View.VISIBLE);
                     getChatList(User_Id, text);

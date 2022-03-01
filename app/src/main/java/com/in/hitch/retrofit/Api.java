@@ -124,7 +124,6 @@ public interface Api {
     @FormUrlEncoded
     @POST("get_chat.php")
     Call<ChatDashboardModel> getChat(
-
             @Field("token") String token,
             @Field("chat_id") String chat_id,
             @Field("userid") String userid);
