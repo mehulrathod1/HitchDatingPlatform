@@ -18,7 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Activity_profile_menu extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    TextView tv_manage_profile, tv_payment_history, tv_my_metches, tv_upgrade_membership, tv_logout, tv_account_delete;
+    TextView tv_manage_profile, tv_payment_history, tv_my_metches, tv_upgrade_membership, tv_logout, tv_account_delete,
+            tv_terms_of_services, tv_privacy_policy;
     PopupWindow dialog;
 
     @Override
@@ -41,6 +42,8 @@ public class Activity_profile_menu extends AppCompatActivity {
         tv_logout = findViewById(R.id.logout);
         tv_upgrade_membership = findViewById(R.id.upgrade_membership);
         tv_account_delete = findViewById(R.id.delete_account);
+        tv_privacy_policy = findViewById(R.id.privacy_policy);
+        tv_terms_of_services = findViewById(R.id.terms_of_services);
 
         tv_manage_profile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +53,16 @@ public class Activity_profile_menu extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+        tv_my_metches.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(Activity_profile_menu.this, Activity_My_Matches.class);
+                startActivity(i);
+            }
+        });
+
         tv_upgrade_membership.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,11 +80,21 @@ public class Activity_profile_menu extends AppCompatActivity {
             }
         });
 
-        tv_my_metches.setOnClickListener(new View.OnClickListener() {
+        tv_terms_of_services.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(Activity_profile_menu.this, Activity_My_Matches.class);
+                Intent i = new Intent(Activity_profile_menu.this, ActivityTerms.class);
+                startActivity(i);
+            }
+        });
+
+
+        tv_privacy_policy.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(Activity_profile_menu.this, ActivityPrivacy.class);
                 startActivity(i);
             }
         });
@@ -104,16 +127,19 @@ public class Activity_profile_menu extends AppCompatActivity {
                         Intent i = new Intent(Activity_profile_menu.this, Activity_Home.class);
                         startActivity(i);
                         finish();
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.matches:
                         i = new Intent(Activity_profile_menu.this, Activity_top_hitches.class);
                         startActivity(i);
                         finish();
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.chats:
                         i = new Intent(Activity_profile_menu.this, Activity_My_chats.class);
                         startActivity(i);
                         finish();
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.account:
                         break;
@@ -125,9 +151,14 @@ public class Activity_profile_menu extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        Intent intent;
+        intent = new Intent(getApplicationContext(), Activity_Home.class);
+        startActivity(intent);
         finish();
-        Intent i = new Intent(Activity_profile_menu.this, Activity_Home.class);
-        startActivity(i);
+        overridePendingTransition(0, 0);
+        super.onBackPressed();
+
     }
+
 }

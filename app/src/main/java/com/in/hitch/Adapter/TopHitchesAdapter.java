@@ -21,6 +21,7 @@ public class TopHitchesAdapter extends RecyclerView.Adapter<TopHitchesAdapter.Vi
     Context context;
     WhoLikeYouAdapter.Click click;
 
+
     public TopHitchesAdapter(List<TopHitchesModel> list, Context context, WhoLikeYouAdapter.Click click) {
         this.list = list;
         this.context = context;

@@ -62,8 +62,7 @@ public class Activity_Delete_account extends AppCompatActivity {
         deleteBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Activity_profile_menu.class);
-                startActivity(intent);
+                finish();
             }
         });
     }

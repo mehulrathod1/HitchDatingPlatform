@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.in.hitch.Model.ItemModel;
+import com.in.hitch.Model.ProfileCardModel;
 import com.in.hitch.R;
 import com.squareup.picasso.Picasso;
 
@@ -21,7 +22,7 @@ import java.util.List;
 
 public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.ViewHolder> {
 
-    private List<ItemModel> items;
+    private List<ProfileCardModel.ProfileCard> items;
     Context context;
     Click click;
 
@@ -35,9 +36,11 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
         void onClickLike(int position);
 
         void onClickSuperLike(int position);
+
+        void onClickFavourite(int position);
     }
 
-    public CardStackAdapter(List<ItemModel> items, Context context, Click click) {
+    public CardStackAdapter(List<ProfileCardModel.ProfileCard> items, Context context, Click click) {
         this.items = items;
         this.context = context;
         this.click = click;
@@ -53,7 +56,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        ItemModel itemModel = items.get(position);
+        ProfileCardModel.ProfileCard itemModel = items.get(position);
         holder.setData(items.get(position));
 
 
@@ -70,13 +73,13 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
                 click.onClickReload(position);
             }
         });
-        holder.nope.setOnClickListener(new View.OnClickListener() {
+        holder.UnLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 click.onClickNope(position);
             }
         });
-        holder.star.setOnClickListener(new View.OnClickListener() {
+        holder.SuperLike.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 click.onClickSuperLike(position);
@@ -88,6 +91,12 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
                 click.onClickLike(position);
             }
         });
+        holder.favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                click.onClickFavourite(position);
+            }
+        });
     }
 
     @Override
@@ -96,7 +105,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView image, reload, nope, star, like, power;
+        ImageView image, reload, UnLike, SuperLike, like, favourite;
         TextView nama, usia, kota;
 
 
@@ -108,29 +117,29 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
             kota = itemView.findViewById(R.id.item_city);
 
             reload = itemView.findViewById(R.id.reload);
-            nope = itemView.findViewById(R.id.nope);
-            star = itemView.findViewById(R.id.star);
+            UnLike = itemView.findViewById(R.id.nope);
+            SuperLike = itemView.findViewById(R.id.power);
             like = itemView.findViewById(R.id.like);
-            power = itemView.findViewById(R.id.power);
+            favourite = itemView.findViewById(R.id.star);
         }
 
-        void setData(ItemModel data) {
+        void setData(ProfileCardModel.ProfileCard data) {
             Picasso.get()
-                    .load(data.getImage())
+                    .load(data.getProfile())
                     .fit()
                     .centerCrop()
                     .into(image);
-            nama.setText(data.getNama());
-            usia.setText(data.getUsia());
-            kota.setText(data.getKota());
+            nama.setText(data.getUser_name());
+            usia.setText(data.getAge());
+            kota.setText("");
         }
     }
 
-    public List<ItemModel> getItems() {
-        return items;
-    }
-
-    public void setItems(List<ItemModel> items) {
-        this.items = items;
-    }
+//    public List<ItemModel> getItems() {
+//        return items;
+//    }
+//
+//    public void setItems(List<ItemModel> items) {
+//        this.items = items;
+//    }
 }

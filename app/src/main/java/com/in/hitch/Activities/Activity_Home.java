@@ -43,7 +43,9 @@ import com.in.hitch.Model.CommonModel;
 import com.in.hitch.Model.GetUserFilterModel;
 import com.in.hitch.Model.ItemModel;
 import com.in.hitch.Model.Profile;
+import com.in.hitch.Model.ProfileCardModel;
 import com.in.hitch.R;
+import com.in.hitch.Utils.Glob;
 import com.in.hitch.Utils.Utils;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
@@ -106,6 +108,7 @@ public class Activity_Home extends AppCompatActivity {
     List<String> sexual_id_list = new ArrayList<>();
     ProgressDialog progressDialog;
 
+    List<ProfileCardModel.ProfileCard> profileCardModelList = new ArrayList<>();
 
     private CardStackLayoutManager manager;
     private CardStackAdapter adapter;
@@ -120,6 +123,7 @@ public class Activity_Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
         init();
+        getProfileCard(Token, "48");
 
 
 //        getUserFilter(User_Id);
@@ -171,95 +175,6 @@ public class Activity_Home extends AppCompatActivity {
         manager.setCanScrollHorizontal(true);
         manager.setSwipeableMethod(SwipeableMethod.Manual);
         manager.setOverlayInterpolator(new LinearInterpolator());
-        adapter = new CardStackAdapter(addList(), getApplicationContext(), new CardStackAdapter.Click() {
-            @Override
-            public void onClickItem(int position) {
-                Intent i = new Intent(Activity_Home.this, Activity_Profile_details.class);
-                startActivity(i);
-            }
-
-            @Override
-            public void onClickReload(int position) {
-
-                RewindAnimationSetting setting11 = new RewindAnimationSetting.Builder()
-                        .setDirection(Direction.Left)
-                        .setDuration(Duration.Normal.duration)
-                        .setInterpolator(new AccelerateInterpolator())
-                        .build();
-
-                manager.setRewindAnimationSetting(setting11);
-                manager.setCanScrollVertical(true);
-                manager.setCanScrollHorizontal(true);
-                manager.setDirections(Direction.FREEDOM);
-                manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
-                manager.setOverlayInterpolator(new AccelerateInterpolator());
-                manager.setStackFrom(StackFrom.None);
-                cardStackView.rewind();
-
-            }
-
-            @Override
-            public void onClickNope(int position) {
-
-                SwipeAnimationSetting setting11 = new SwipeAnimationSetting.Builder()
-                        .setDirection(Direction.Left)
-                        .setDuration(Duration.Normal.duration)
-                        .setInterpolator(new AccelerateInterpolator())
-                        .build();
-
-                manager.setSwipeAnimationSetting(setting11);
-                manager.setCanScrollVertical(true);
-                manager.setCanScrollHorizontal(true);
-                manager.setDirections(Direction.FREEDOM);
-                manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
-                manager.setOverlayInterpolator(new AccelerateInterpolator());
-                manager.setStackFrom(StackFrom.None);
-                cardStackView.swipe();
-            }
-
-            @Override
-            public void onClickLike(int position) {
-
-
-                SwipeAnimationSetting setting11 = new SwipeAnimationSetting.Builder()
-                        .setDirection(Direction.Right)
-                        .setDuration(Duration.Normal.duration)
-                        .setInterpolator(new AccelerateInterpolator())
-                        .build();
-
-                manager.setSwipeAnimationSetting(setting11);
-                manager.setCanScrollVertical(true);
-                manager.setCanScrollHorizontal(true);
-                manager.setDirections(Direction.FREEDOM);
-                manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
-                manager.setOverlayInterpolator(new AccelerateInterpolator());
-                manager.setStackFrom(StackFrom.None);
-                cardStackView.swipe();
-            }
-
-            @Override
-            public void onClickSuperLike(int position) {
-
-
-                SwipeAnimationSetting setting11 = new SwipeAnimationSetting.Builder()
-                        .setDirection(Direction.Top)
-                        .setDuration(Duration.Normal.duration)
-                        .setInterpolator(new AccelerateInterpolator())
-                        .build();
-
-                manager.setSwipeAnimationSetting(setting11);
-                manager.setCanScrollVertical(true);
-                manager.setCanScrollHorizontal(true);
-                manager.setDirections(Direction.FREEDOM);
-                manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
-                manager.setOverlayInterpolator(new AccelerateInterpolator());
-                manager.setStackFrom(StackFrom.None);
-                cardStackView.swipe();
-            }
-        });
-        cardStackView.setLayoutManager(manager);
-        cardStackView.setAdapter(adapter);
-        cardStackView.setItemAnimator(new DefaultItemAnimator());
 
 
         btn_apply.setOnClickListener(new View.OnClickListener() {
@@ -339,15 +254,24 @@ public class Activity_Home extends AppCompatActivity {
 
                         Intent i = new Intent(Activity_Home.this, Activity_top_hitches.class);
                         startActivity(i);
+                        finish();
+                        overridePendingTransition(0, 0);
+
                         break;
                     case R.id.chats:
 
                         i = new Intent(Activity_Home.this, Activity_My_chats.class);
                         startActivity(i);
+                        finish();
+                        overridePendingTransition(0, 0);
+
                         break;
                     case R.id.account:
                         i = new Intent(Activity_Home.this, Activity_profile_menu.class);
                         startActivity(i);
+                        finish();
+                        overridePendingTransition(0, 0);
+
                         break;
                 }
                 return true;
@@ -373,7 +297,6 @@ public class Activity_Home extends AppCompatActivity {
                 dialog.dismiss();
             }
         });
-
         cv_notifications.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -384,6 +307,7 @@ public class Activity_Home extends AppCompatActivity {
 
             }
         });
+
         Display display = getWindowManager().getDefaultDisplay();
         Point size = new Point();
         display.getSize(size);
@@ -394,7 +318,6 @@ public class Activity_Home extends AppCompatActivity {
                 .setDisplayViewCount(2)
                 .setIsUndoEnabled(true)
                 .setSwipeDecor(new SwipeDecor()
-
                         .setViewWidth((int) (0.96 * width))
                         .setViewHeight((int) (0.75 * height))
                         .setPaddingTop(20)
@@ -606,7 +529,6 @@ public class Activity_Home extends AppCompatActivity {
 
     private void get_sexual_option() {
 
-
         String url = "https://www.hitch.notionprojects.tech/api/get_sexual_option.php";
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         progressDialog.show();
@@ -817,20 +739,219 @@ public class Activity_Home extends AppCompatActivity {
         queue.add(request);
     }
 
-    private List<ItemModel> addList() {
-        List<ItemModel> items = new ArrayList<>();
-        items.add(new ItemModel(R.drawable.sample1, "Markonah", "24", "Jember"));
-        items.add(new ItemModel(R.drawable.sample2, "Marpuah", "20", "Malang"));
-        items.add(new ItemModel(R.drawable.sample3, "Sukijah", "27", "Jonggol"));
-        items.add(new ItemModel(R.drawable.sample4, "Markobar", "19", "Bandung"));
-        items.add(new ItemModel(R.drawable.sample5, "Marmut", "25", "Hutan"));
+    private void getProfileCard(String token, String userId) {
 
-        items.add(new ItemModel(R.drawable.sample1, "Markonah", "24", "Jember"));
-        items.add(new ItemModel(R.drawable.sample2, "Marpuah", "20", "Malang"));
-        items.add(new ItemModel(R.drawable.sample3, "Sukijah", "27", "Jonggol"));
-        items.add(new ItemModel(R.drawable.sample4, "Markobar", "19", "Bandung"));
-        items.add(new ItemModel(R.drawable.sample5, "Marmut", "25", "Hutan"));
-        return items;
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+        progressDialog.show();
+
+        call.getProfileCard(token, userId).enqueue(new Callback<ProfileCardModel>() {
+            @Override
+            public void onResponse(Call<ProfileCardModel> call, Response<ProfileCardModel> response) {
+
+                ProfileCardModel profileCardModel = response.body();
+
+                List<ProfileCardModel.ProfileCard> dataList = profileCardModel.getProfileCardList();
+
+                for (int i = 0; i < dataList.size(); i++) {
+
+                    ProfileCardModel.ProfileCard model = dataList.get(i);
+
+                    ProfileCardModel.ProfileCard data = new ProfileCardModel.ProfileCard(
+                            model.getId(),
+                            model.getUser_name(),
+                            model.getProfile(),
+                            model.getAge(),
+                            model.getJob_title(),
+                            model.getLiked(),
+                            model.getFavorite(),
+                            model.getSuperLike()
+                    );
+
+                    profileCardModelList.add(data);
+
+                    adapter = new CardStackAdapter(profileCardModelList, getApplicationContext(), new CardStackAdapter.Click() {
+                        @Override
+                        public void onClickItem(int position) {
+                            Intent i = new Intent(Activity_Home.this, Activity_Profile_details.class);
+                            startActivity(i);
+                        }
+
+                        @Override
+                        public void onClickReload(int position) {
+
+                            RewindAnimationSetting setting11 = new RewindAnimationSetting.Builder()
+                                    .setDirection(Direction.Left)
+                                    .setDuration(Duration.Normal.duration)
+                                    .setInterpolator(new AccelerateInterpolator())
+                                    .build();
+
+                            manager.setRewindAnimationSetting(setting11);
+                            manager.setCanScrollVertical(true);
+                            manager.setCanScrollHorizontal(true);
+                            manager.setDirections(Direction.FREEDOM);
+                            manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
+                            manager.setOverlayInterpolator(new AccelerateInterpolator());
+                            manager.setStackFrom(StackFrom.None);
+                            cardStackView.rewind();
+
+                        }
+
+                        @Override
+                        public void onClickNope(int position) {
+
+                            SwipeAnimationSetting setting11 = new SwipeAnimationSetting.Builder()
+                                    .setDirection(Direction.Left)
+                                    .setDuration(Duration.Normal.duration)
+                                    .setInterpolator(new AccelerateInterpolator())
+                                    .build();
+
+                            manager.setSwipeAnimationSetting(setting11);
+                            manager.setCanScrollVertical(true);
+                            manager.setCanScrollHorizontal(true);
+                            manager.setDirections(Direction.FREEDOM);
+                            manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
+                            manager.setOverlayInterpolator(new AccelerateInterpolator());
+                            manager.setStackFrom(StackFrom.None);
+                            cardStackView.swipe();
+                        }
+
+                        @Override
+                        public void onClickLike(int position) {
+
+
+                            SwipeAnimationSetting setting11 = new SwipeAnimationSetting.Builder()
+                                    .setDirection(Direction.Right)
+                                    .setDuration(Duration.Normal.duration)
+                                    .setInterpolator(new AccelerateInterpolator())
+                                    .build();
+
+                            manager.setSwipeAnimationSetting(setting11);
+                            manager.setCanScrollVertical(true);
+                            manager.setCanScrollHorizontal(true);
+                            manager.setDirections(Direction.FREEDOM);
+                            manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
+                            manager.setOverlayInterpolator(new AccelerateInterpolator());
+                            manager.setStackFrom(StackFrom.None);
+                            cardStackView.swipe();
+
+                            addLike(Token, "48", profileCardModelList.get(position).getId());
+                        }
+
+                        @Override
+                        public void onClickSuperLike(int position) {
+
+
+                            SwipeAnimationSetting setting11 = new SwipeAnimationSetting.Builder()
+                                    .setDirection(Direction.Top)
+                                    .setDuration(Duration.Normal.duration)
+                                    .setInterpolator(new AccelerateInterpolator())
+                                    .build();
+
+                            manager.setSwipeAnimationSetting(setting11);
+                            manager.setCanScrollVertical(true);
+                            manager.setCanScrollHorizontal(true);
+                            manager.setDirections(Direction.FREEDOM);
+                            manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
+                            manager.setOverlayInterpolator(new AccelerateInterpolator());
+                            manager.setStackFrom(StackFrom.None);
+                            cardStackView.swipe();
+
+                            addSupperLike(Token, "48", profileCardModelList.get(position).getId());
+                        }
+
+                        @Override
+                        public void onClickFavourite(int position) {
+
+
+                            addToFavourite(Token, "48", profileCardModelList.get(position).getId());
+
+                        }
+                    });
+
+
+                    cardStackView.setLayoutManager(manager);
+                    cardStackView.setAdapter(adapter);
+                    cardStackView.setItemAnimator(new DefaultItemAnimator());
+
+                    progressDialog.dismiss();
+
+                    Log.e("profileCardModelList", "onResponse: " + model.getAge() + profileCardModelList.size());
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<ProfileCardModel> call, Throwable t) {
+                progressDialog.dismiss();
+                Log.e("profileCardModelList", "onResponse: " + t.getMessage());
+            }
+        });
+
+    }
+
+    private void addLike(String token, String login_user_id, String like_user_id) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+
+        call.addLike(token, login_user_id, like_user_id).enqueue(new Callback<CommonModel>() {
+            @Override
+            public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
+
+                CommonModel commonModel = response.body();
+                Toast.makeText(Activity_Home.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<CommonModel> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+    private void addSupperLike(String token, String login_user_id, String supper_like_user_id) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+
+        call.addSupperLike(token, login_user_id, supper_like_user_id).enqueue(new Callback<CommonModel>() {
+            @Override
+            public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
+
+
+                CommonModel commonModel = response.body();
+                Toast.makeText(Activity_Home.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<CommonModel> call, Throwable t) {
+
+            }
+        });
+
+    }
+
+
+    private void addToFavourite(String token, String login_user_id, String favorite_user_id) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+
+        call.addToFavourite(token, login_user_id, favorite_user_id).enqueue(new Callback<CommonModel>() {
+            @Override
+            public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
+
+                CommonModel commonModel = response.body();
+                Toast.makeText(Activity_Home.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onFailure(Call<CommonModel> call, Throwable t) {
+
+            }
+        });
     }
 
 

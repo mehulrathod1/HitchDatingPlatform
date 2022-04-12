@@ -145,8 +145,7 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
         editProfileBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Activity_profile_menu.class);
-                startActivity(intent);
+               finish();
             }
         });
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {

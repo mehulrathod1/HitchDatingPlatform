@@ -71,8 +71,7 @@ public class Activity_payment_history extends AppCompatActivity {
         paymentHistoryBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Activity_profile_menu.class);
-                startActivity(intent);
+               finish();
             }
         });
 

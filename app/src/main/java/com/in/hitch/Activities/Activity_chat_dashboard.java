@@ -181,8 +181,6 @@ public class Activity_chat_dashboard extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(Activity_chat_dashboard.this, Activity_My_chats.class);
-                startActivity(i);
                 finish();
 
             }
@@ -574,7 +572,6 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                     getChatList(chatId, User_Id);
                     chatListSize = list.size() + 1;
                 }
-
 
 //                }
                 handler.postDelayed(this, delay);

@@ -107,22 +107,25 @@ public class Activity_Choose_plan extends AppCompatActivity {
         membershipBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Activity_profile_menu.class);
-                startActivity(intent);
+               finish();
             }
         });
 
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+viewPager.setCurrentItem(getItem(+1), true);
 
-
-                purchasePlane(User_Id, position);
+//                purchasePlane(User_Id, position);
 
             }
         });
 
 
+
+    }
+    private int getItem(int i) {
+        return viewPager.getCurrentItem() + i;
     }
 
     @Override

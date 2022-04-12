@@ -320,6 +320,5 @@ public class Activity_Verification extends AppCompatActivity {
             }
         });
 
-
     }
 }

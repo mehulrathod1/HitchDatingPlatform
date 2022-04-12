@@ -72,7 +72,7 @@ public class Activity_My_chats extends AppCompatActivity {
         cancelSearch = findViewById(R.id.cancelSearch);
 
         recyclerView = (RecyclerView) findViewById(R.id.ChatList);
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigationn);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottom_navigation);
 
         progressDialog = new ProgressDialog(Activity_My_chats.this);
         progressDialog.setCancelable(false);
@@ -116,11 +116,13 @@ public class Activity_My_chats extends AppCompatActivity {
                         Intent i = new Intent(getApplicationContext(), Activity_Home.class);
                         startActivity(i);
                         finish();
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.matches:
                         i = new Intent(getApplicationContext(), Activity_top_hitches.class);
                         startActivity(i);
                         finish();
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.chats:
 
@@ -129,6 +131,7 @@ public class Activity_My_chats extends AppCompatActivity {
                         i = new Intent(getApplicationContext(), Activity_profile_menu.class);
                         startActivity(i);
                         finish();
+                        overridePendingTransition(0, 0);
                         break;
                 }
                 return true;
@@ -213,9 +216,14 @@ public class Activity_My_chats extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        Intent intent;
+        intent = new Intent(getApplicationContext(), Activity_Home.class);
+        startActivity(intent);
         finish();
-        Intent i = new Intent(Activity_My_chats.this, Activity_Home.class);
-        startActivity(i);
+        overridePendingTransition(0, 0);
+        super.onBackPressed();
+
     }
+
 }

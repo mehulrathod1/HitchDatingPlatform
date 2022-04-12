@@ -28,7 +28,6 @@ import java.util.List;
 public class Activity_top_hitches extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
-    LinearLayout ll_top_hitches, ll_who_likes_you;
     TextView tv_top_hitches, tv_who_likes_you;
 
     RecyclerView topHitchesRecycle;
@@ -51,23 +50,12 @@ public class Activity_top_hitches extends AppCompatActivity {
         init();
         whoLikesRecycler();
 
-//        girl.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//                Intent intent = new Intent(getApplicationContext(), Activity_Profile_details.class);
-//                startActivity(intent);
-//
-//            }
-//        });
     }
 
     private void init() {
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
 
-//        ll_top_hitches = findViewById(R.id.top_hitches);
-//        ll_who_likes_you = findViewById(R.id.who_likes_you);
         tv_top_hitches = findViewById(R.id.tv_top_hitches);
         tv_who_likes_you = findViewById(R.id.tv_who_likes_you);
         tv_who_likes_you.setOnClickListener(new View.OnClickListener() {
@@ -76,12 +64,8 @@ public class Activity_top_hitches extends AppCompatActivity {
 
 
                 whoLikesRecycler();
-//                ll_top_hitches.setVisibility(View.GONE);
-//                ll_who_likes_you.setVisibility(View.VISIBLE);
                 tv_who_likes_you.setTextColor(getResources().getColor(R.color.black));
                 tv_top_hitches.setTextColor(getResources().getColor(R.color.md_grey_500));
-//                tv_who_likes_you.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));
-//                tv_top_hitches.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
 
             }
         });
@@ -90,12 +74,8 @@ public class Activity_top_hitches extends AppCompatActivity {
             public void onClick(View v) {
 
                 topRecycler();
-//                ll_top_hitches.setVisibility(View.VISIBLE);
-//                ll_who_likes_you.setVisibility(View.GONE);
                 tv_top_hitches.setTextColor(getResources().getColor(R.color.black));
                 tv_who_likes_you.setTextColor(getResources().getColor(R.color.md_grey_500));
-//                tv_top_hitches.setTypeface(Typeface.create("sans-serif-black", Typeface.NORMAL));
-//                tv_who_likes_you.setTypeface(Typeface.create("sans-serif", Typeface.NORMAL));
             }
         });
 
@@ -109,6 +89,7 @@ public class Activity_top_hitches extends AppCompatActivity {
                         Intent i = new Intent(Activity_top_hitches.this, Activity_Home.class);
                         startActivity(i);
                         finish();
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.matches:
                         break;
@@ -116,11 +97,13 @@ public class Activity_top_hitches extends AppCompatActivity {
                         i = new Intent(Activity_top_hitches.this, Activity_My_chats.class);
                         startActivity(i);
                         finish();
+                        overridePendingTransition(0, 0);
                         break;
                     case R.id.account:
                         i = new Intent(Activity_top_hitches.this, Activity_profile_menu.class);
                         startActivity(i);
                         finish();
+                        overridePendingTransition(0, 0);
                         break;
                 }
                 return true;
@@ -183,13 +166,16 @@ public class Activity_top_hitches extends AppCompatActivity {
         list.add(model);
     }
 
-
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+
+        Intent intent;
+        intent = new Intent(getApplicationContext(), Activity_Home.class);
+        startActivity(intent);
         finish();
-        Intent i = new Intent(Activity_top_hitches.this, Activity_Home.class);
-        startActivity(i);
+        overridePendingTransition(0, 0);
+        super.onBackPressed();
+
     }
 
 

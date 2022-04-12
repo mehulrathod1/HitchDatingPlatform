@@ -74,8 +74,7 @@ public class Activity_My_Matches extends AppCompatActivity {
         myMatchesBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Activity_profile_menu.class);
-                startActivity(intent);
+              finish();
             }
         });
 

@@ -6,6 +6,8 @@ import com.in.hitch.Model.CommonModel;
 import com.in.hitch.Model.GetUserFilterModel;
 import com.in.hitch.Model.GetUserImageModel;
 import com.in.hitch.Model.MembershipPlaneModel;
+import com.in.hitch.Model.NotificationModel;
+import com.in.hitch.Model.ProfileCardModel;
 import com.in.hitch.Model.PurchasePlaneModel;
 import com.in.hitch.Model.TransactionModel;
 
@@ -192,4 +194,44 @@ public interface Api {
             @Part MultipartBody.Part file
 
     );
+
+
+    @FormUrlEncoded
+    @POST("home.php")
+    Call<ProfileCardModel> getProfileCard(
+            @Field("token") String token,
+            @Field("userid") String user_id);
+
+
+    @FormUrlEncoded
+    @POST("like_user.php")
+    Call<CommonModel> addLike(
+            @Field("token") String token,
+            @Field("login_user_id") String login_user_id,
+            @Field("like_user_id") String like_user_id
+    );
+
+    @FormUrlEncoded
+    @POST("superlike_user.php")
+    Call<CommonModel> addSupperLike(
+            @Field("token") String token,
+            @Field("login_user_id") String login_user_id,
+            @Field("superlike_user_id") String superlike_user_id
+    );
+
+    @FormUrlEncoded
+    @POST("favorite_user.php")
+    Call<CommonModel> addToFavourite(
+            @Field("token") String token,
+            @Field("login_user_id") String login_user_id,
+            @Field("favorite_user_id") String favorite_user_id
+    );
+
+
+    @FormUrlEncoded
+    @POST("notifications.php")
+    Call<NotificationModel> getNotification(
+            @Field("token") String token,
+            @Field("userid") String user_id);
+
 }
