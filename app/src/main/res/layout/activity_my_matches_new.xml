@@ -35,7 +35,7 @@
                 android:text="My Matches"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/montserrat_bold"/>
         </LinearLayout>
     </RelativeLayout>
 

@@ -6,6 +6,8 @@ import com.in.hitch.Model.CommonModel;
 import com.in.hitch.Model.GetUserFilterModel;
 import com.in.hitch.Model.GetUserImageModel;
 import com.in.hitch.Model.MembershipPlaneModel;
+import com.in.hitch.Model.MyMatchesModel;
+import com.in.hitch.Model.MyProfileModel;
 import com.in.hitch.Model.NotificationModel;
 import com.in.hitch.Model.ProfileCardModel;
 import com.in.hitch.Model.PurchasePlaneModel;
@@ -233,5 +235,18 @@ public interface Api {
     Call<NotificationModel> getNotification(
             @Field("token") String token,
             @Field("userid") String user_id);
+
+
+    @FormUrlEncoded
+    @POST("get_matches.php")
+    Call<MyMatchesModel> getMyMatches(
+            @Field("token") String token,
+            @Field("userid") String user_id);
+
+    @FormUrlEncoded
+    @POST("get_my_profile.php")
+    Call<MyProfileModel> getMyProfile(
+            @Field("token") String token,
+            @Field("user_id") String user_id);
 
 }

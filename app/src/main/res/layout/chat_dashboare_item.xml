@@ -69,13 +69,14 @@
                         android:layout_gravity="left"
                         android:layout_marginLeft="@dimen/_20sdp"
                         android:background="@drawable/chat_msg_bg"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_regular"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingTop="@dimen/_5sdp"
                         android:paddingRight="@dimen/_10sdp"
                         android:paddingBottom="@dimen/_5sdp"
                         android:text=""
                         android:textColor="#4F4B4D"
+
                         android:textSize="@dimen/_12sdp" />
 
                     <TextView
@@ -84,7 +85,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_20sdp"
                         android:layout_marginTop="@dimen/_2sdp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_regular"
                         android:gravity="center"
                         android:text="02:26 PM"
                         android:textColor="@color/black"
@@ -147,7 +148,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/my_chat_msg_bg"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_regular"
                         android:paddingLeft="@dimen/_10sdp"
                         android:paddingTop="@dimen/_5sdp"
                         android:paddingRight="@dimen/_10sdp"
@@ -161,7 +162,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_2sdp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_regular"
                         android:gravity="right"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_8sdp" />

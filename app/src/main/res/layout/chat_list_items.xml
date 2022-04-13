@@ -26,7 +26,7 @@
                 android:layout_marginRight="@dimen/_15sdp"
                 android:background="@drawable/custom_edittext"
                 android:ems="10"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/montserrat_semi_bold"
                 android:hint="Search User"
                 android:inputType="text"
                 android:paddingLeft="@dimen/_10sdp"
@@ -88,7 +88,7 @@
                 android:id="@+id/message"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/montserrat_regular"
                 android:padding="10dp"
                 android:text="message..."
                 android:textSize="16dp" />

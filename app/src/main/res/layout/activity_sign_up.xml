@@ -43,7 +43,7 @@
                     android:text="@string/Sign_Up"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_24sdp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:visibility="visible" />
 
                 <LinearLayout
@@ -62,7 +62,7 @@
                         android:text="@string/Contact_Number"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_16sdp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:visibility="visible" />
 
                     <LinearLayout
@@ -86,14 +86,13 @@
                             android:layout_height="match_parent"
                             android:layout_weight="1.2"
                             android:backgroundTint="@color/md_white_1000"
-                            android:fontFamily="sans-serif"
+                            android:fontFamily="@font/montserrat_semi_bold"
                             android:gravity="left"
                             android:maxLength="10"
                             android:hint="@string/Enter_Contact_number"
                             android:inputType="phone"
                             android:textColor="@color/white"
-                            android:textSize="@dimen/_14sdp"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/_14sdp" />
 
                     </LinearLayout>
 
@@ -108,7 +107,7 @@
                     android:layout_marginTop="@dimen/_30sdp"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:background="@drawable/button_border"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:text="@string/Get_OTP"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@color/black"
@@ -123,7 +122,7 @@
                     android:layout_marginRight="@dimen/_15sdp"
                     android:layout_marginBottom="@dimen/_18sdp"
                     android:gravity="center"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:text="@string/Sign_Up_Message"
                     android:textColor="@color/md_white_1000"
                     android:textSize="@dimen/_12sdp"
@@ -139,7 +138,7 @@
                     android:text="@string/Sign_Up_With"
                     android:textColor="@color/md_white_1000"
                     android:textSize="@dimen/_15sdp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:textStyle="bold"
                     android:visibility="visible" />
 
@@ -179,7 +178,7 @@
                                     android:gravity="center"
                                     android:paddingLeft="@dimen/_5sdp"
                                     android:text="@string/Sign_Up_fb"
-                                    android:fontFamily="sans-serif"
+                                    android:fontFamily="@font/montserrat_semi_bold"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_16sdp" />
 
@@ -210,7 +209,7 @@
                                     android:gravity="center"
                                     android:paddingLeft="@dimen/_10sdp"
                                     android:text="@string/Sign_Up_Google"
-                                    android:fontFamily="sans-serif"
+                                    android:fontFamily="@font/montserrat_semi_bold"
                                     android:textColor="@color/black"
                                     android:textSize="@dimen/_16sdp" />
 

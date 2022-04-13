@@ -34,7 +34,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/montserrat_bold"
                 android:gravity="center"
                 android:text="Booby Brown, 26"
                 android:textColor="@color/black"
@@ -45,7 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_4sdp"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/montserrat_regular"
                 android:gravity="center"
                 android:text="App Developer at It company"
                 android:textColor="@color/black"
@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_5sdp"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/montserrat_regular"
                 android:gravity="center"
                 android:text="Sikkim Manipal University"
                 android:textColor="@color/black"
@@ -88,12 +88,11 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:drawableLeft="@drawable/editprofile"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_bold"
                     android:padding="@dimen/_8sdp"
                     android:text="Edit Profile"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
                     android:visibility="visible" />
 
                 <TextView
@@ -103,7 +102,7 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:drawableLeft="@drawable/fairtrade"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_bold"
                     android:padding="@dimen/_8sdp"
                     android:text="My Matches"
                     android:textColor="@color/black"
@@ -118,12 +117,11 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:drawableLeft="@drawable/badge"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_bold"
                     android:padding="@dimen/_8sdp"
                     android:text="Upgrade Membership"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
                     android:visibility="visible" />
 
                 <TextView
@@ -133,12 +131,11 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:drawableLeft="@drawable/transaction"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_bold"
                     android:padding="@dimen/_8sdp"
                     android:text="Payment History"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
                     android:visibility="visible" />
 
                 <TextView
@@ -148,13 +145,11 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:drawableLeft="@drawable/info"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_bold"
                     android:padding="@dimen/_8sdp"
                     android:text="Tearms of Services"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
-
                     android:visibility="visible" />
 
                 <TextView
@@ -164,12 +159,11 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:drawableLeft="@drawable/info"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_bold"
                     android:padding="@dimen/_8sdp"
                     android:text="Privacy Policy"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
                     android:visibility="visible" />
 
                 <TextView
@@ -179,12 +173,11 @@
                     android:layout_marginLeft="@dimen/_10sdp"
                     android:drawableLeft="@drawable/logout"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_bold"
                     android:padding="@dimen/_8sdp"
                     android:text="Logout"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
                     android:visibility="visible" />
 
                 <TextView
@@ -195,12 +188,11 @@
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:drawableLeft="@drawable/removeuser"
                     android:drawablePadding="@dimen/_10sdp"
-                    android:fontFamily="sans-serif"
                     android:padding="@dimen/_10ssp"
                     android:text="Delete Account"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_14sdp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:visibility="visible" />
             </LinearLayout>
 

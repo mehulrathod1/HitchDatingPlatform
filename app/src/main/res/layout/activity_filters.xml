@@ -39,7 +39,7 @@
                     android:text="Filters"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_18sdp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:visibility="visible" />
 
                 <ImageView
@@ -67,7 +67,7 @@
                     android:text="Select Sexual Orientation"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:visibility="visible" />
 
                 <Spinner
@@ -104,7 +104,7 @@
                     android:text="Interested in"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:visibility="visible" />
 
                 <Spinner
@@ -140,7 +140,7 @@
                     android:text="Religion"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:visibility="visible" />
 
                 <Spinner
@@ -177,7 +177,7 @@
                     android:text="Select Age"
                     android:textColor="@color/white"
                     android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:visibility="visible" />
 
                 <LinearLayout
@@ -194,7 +194,7 @@
                         android:text="0"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:visibility="visible" />
 
                     <TextView
@@ -217,7 +217,7 @@
                         android:text="0"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:visibility="visible" />
                 </LinearLayout>
 
@@ -275,7 +275,7 @@
                         android:text="0"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:visibility="visible" />
 
                     <TextView
@@ -285,7 +285,7 @@
                         android:text="KM"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:visibility="visible" />
 
 
@@ -298,7 +298,7 @@
                         android:text="to"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:visibility="visible" />
 
                     <TextView
@@ -309,7 +309,7 @@
                         android:text="0"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:visibility="visible" />
 
                     <TextView
@@ -319,7 +319,7 @@
                         android:text="KM"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_14sdp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:visibility="visible" />
 
 
@@ -362,7 +362,7 @@
                     android:layout_marginRight="@dimen/_15sdp"
                     android:layout_weight="1"
                     android:background="@drawable/filter_button_bg"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_bold"
                     android:text="Reset"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@color/black"
@@ -378,7 +378,7 @@
                     android:layout_marginRight="@dimen/_15sdp"
                     android:layout_weight="1"
                     android:background="@drawable/button_border"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_bold"
                     android:text="Apply"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@color/black"

@@ -8,4 +8,5 @@
     android:ellipsize="marquee"
     android:textSize="@dimen/_14sdp"
     android:padding="@dimen/_8sdp"
+    android:fontFamily="@font/montserrat_regular"
     android:singleLine="true" />

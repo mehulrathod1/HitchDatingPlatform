@@ -4,5 +4,6 @@
     android:layout_height="wrap_content"
     android:textColor="@color/md_white_1000"
     android:textSize="@dimen/_14sdp"
+    android:fontFamily="@font/montserrat_semi_bold"
     android:text="assss">
 </TextView>

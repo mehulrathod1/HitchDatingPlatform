@@ -4,8 +4,12 @@ import static com.in.hitch.Utils.Glob.Token;
 import static com.in.hitch.Utils.Glob.User_Id;
 import static com.in.hitch.Utils.Glob.base_url;
 
+import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,6 +23,7 @@ import com.in.hitch.retrofit.Api;
 import com.in.hitch.retrofit.AppConfig;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,7 +76,7 @@ public class Activity_payment_history extends AppCompatActivity {
         paymentHistoryBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               finish();
+                finish();
             }
         });
 

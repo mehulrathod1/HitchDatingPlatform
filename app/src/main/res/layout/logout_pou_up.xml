@@ -18,17 +18,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
             android:background="@drawable/pou_up_bg"
-            android:padding="@dimen/_10ssp">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/_10ssp"
+                android:layout_marginTop="@dimen/_14sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:fontFamily="@font/montserrat_semi_bold"
                 android:gravity="center"
-                android:padding="@dimen/_6sdp"
                 android:text="are you sure you want to logout from this device?"
                 android:textColor="@color/md_grey_500"
                 android:textSize="@dimen/_10sdp"
@@ -37,18 +37,21 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:layout_marginBottom="4dp"
                 android:background="@color/md_grey_400" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
                 android:gravity="center"
                 android:text="Logout"
-                android:padding="@dimen/_6sdp"
                 android:textColor="@color/md_red_A400"
                 android:textSize="@dimen/_18sdp"
-                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_bold"
                 android:visibility="visible" />
 
         </LinearLayout>
@@ -56,18 +59,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/pou_up_bg"
-            android:layout_marginTop="@dimen/_10sdp">
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/pou_up_bg">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
                 android:gravity="center"
-                android:padding="@dimen/_10sdp"
-                android:text="Cancle"
+                android:text="Cancel"
                 android:textColor="@color/md_blue_A400"
                 android:textSize="@dimen/_18sdp"
-                android:textStyle="bold"
+                android:fontFamily="@font/montserrat_bold"
                 android:visibility="visible" />
 
         </LinearLayout>

@@ -105,7 +105,7 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView image, reload, UnLike, SuperLike, like, favourite;
+        ImageView image, reload, UnLike, SuperLike, like, favourite,verifyIcon;
         TextView nama, usia, kota;
 
 
@@ -121,6 +121,9 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
             SuperLike = itemView.findViewById(R.id.power);
             like = itemView.findViewById(R.id.like);
             favourite = itemView.findViewById(R.id.star);
+            verifyIcon = itemView.findViewById(R.id.verifyIcon);
+            verifyIcon.setVisibility(View.GONE);
+
         }
 
         void setData(ProfileCardModel.ProfileCard data) {
@@ -131,7 +134,14 @@ public class CardStackAdapter extends RecyclerView.Adapter<CardStackAdapter.View
                     .into(image);
             nama.setText(data.getUser_name());
             usia.setText(data.getAge());
-            kota.setText("");
+            kota.setText(data.getCurrent_location());
+
+            if (data.getIsVerify().equals("y")){
+                verifyIcon.setVisibility(View.VISIBLE);
+            }
+            if (data.getIsVerify().equals("n")){
+                verifyIcon.setVisibility(View.GONE);
+            }
         }
     }
 

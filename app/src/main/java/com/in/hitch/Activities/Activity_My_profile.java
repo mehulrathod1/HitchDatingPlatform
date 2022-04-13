@@ -16,7 +16,9 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -37,7 +39,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.in.hitch.Model.CommonModel;
+import com.in.hitch.Model.MyMatchesModel;
+import com.in.hitch.Model.MyProfileModel;
 import com.in.hitch.R;
+import com.in.hitch.Utils.Glob;
 import com.in.hitch.retrofit.Api;
 import com.in.hitch.retrofit.AppConfig;
 
@@ -100,6 +105,7 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
         edt_school_name = findViewById(R.id.edt_school_name);
 
         init();
+        getMyProfile(Token, "48");
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -145,7 +151,7 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
         editProfileBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               finish();
+                finish();
             }
         });
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
@@ -500,6 +506,34 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
 
             }
         });
+    }
+
+
+    private void getMyProfile(String token, String userId) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+        progressDialog.show();
+
+
+        call.getMyProfile(token, userId).enqueue(new Callback<MyProfileModel>() {
+            @Override
+            public void onResponse(Call<MyProfileModel> call, Response<MyProfileModel> response) {
+
+                MyProfileModel myMatchesModel = response.body();
+
+                MyProfileModel.ProfileData model = myMatchesModel.getProfileData();
+
+                Log.e("onResponse", "onResponse: " + model.getBirthday());
+
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<MyProfileModel> call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
+
     }
 
 }

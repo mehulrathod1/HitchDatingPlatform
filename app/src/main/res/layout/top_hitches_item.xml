@@ -46,9 +46,9 @@
                         android:layout_height="wrap_content"
                         android:text="Jennifer, 25"
                         android:textColor="@color/black"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:textSize="@dimen/_12ssp"
-                        android:textStyle="bold" />
+                         />
 
                     <TextView
                         android:id="@+id/TopHitchesDistance"
@@ -57,7 +57,7 @@
                         android:text="Artist"
                         android:textColor="@color/md_grey_500"
                         android:textSize="@dimen/_10ssp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_regular"
                         android:textStyle="normal" />
                 </LinearLayout>
             </androidx.cardview.widget.CardView>

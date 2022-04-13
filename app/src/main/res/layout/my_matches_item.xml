@@ -57,7 +57,7 @@
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12ssp"
                     android:text="Charllie Hamilton"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:layout_height="wrap_content"/>
                 <TextView
                     android:id="@+id/matchesDistance"
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:textColor="@color/md_grey_500"
                     android:textSize="@dimen/_10ssp"
-                    android:textStyle="normal"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:text="50 Km away"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>

@@ -48,7 +48,7 @@
                         android:text="@string/OTP_Verification"
                         android:textColor="@color/white"
                         android:textSize="@dimen/_24sdp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_bold"
                         android:visibility="visible" />
 
                     <LinearLayout
@@ -64,11 +64,10 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/_8sdp"
                             android:layout_marginBottom="@dimen/_15sdp"
-                            android:fontFamily="sans-serif"
+                            android:fontFamily="@font/montserrat_semi_bold"
                             android:text="@string/Enter_otp"
                             android:textColor="@color/white"
                             android:textSize="@dimen/_16sdp"
-                            android:textStyle="bold"
                             android:visibility="visible" />
 
                         <LinearLayout
@@ -83,13 +82,12 @@
                                 android:layout_marginRight="@dimen/_7sdp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/md_white_1000"
-                                android:fontFamily="sans-serif"
+                                android:fontFamily="@font/montserrat_semi_bold"
                                 android:gravity="center"
                                 android:inputType="number"
                                 android:maxLength="1"
                                 android:textColor="@color/white"
-                                android:textSize="@dimen/_16sdp"
-                                android:textStyle="bold" />
+                                android:textSize="@dimen/_16sdp" />
 
                             <EditText
                                 android:id="@+id/otp2"
@@ -99,13 +97,13 @@
                                 android:layout_marginRight="@dimen/_7sdp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/md_white_1000"
-                                android:fontFamily="sans-serif"
+                                android:fontFamily="@font/montserrat_semi_bold"
                                 android:gravity="center"
                                 android:inputType="number"
                                 android:maxLength="1"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_16sdp"
-                                android:textStyle="bold" />
+                                />
 
                             <EditText
                                 android:id="@+id/otp3"
@@ -115,13 +113,13 @@
                                 android:layout_marginRight="@dimen/_7sdp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/md_white_1000"
-                                android:fontFamily="sans-serif"
+                                android:fontFamily="@font/montserrat_semi_bold"
                                 android:gravity="center"
                                 android:inputType="number"
                                 android:maxLength="1"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_16sdp"
-                                android:textStyle="bold" />
+                                />
 
                             <EditText
                                 android:id="@+id/otp4"
@@ -130,13 +128,13 @@
                                 android:layout_marginLeft="@dimen/_7sdp"
                                 android:layout_weight="1"
                                 android:backgroundTint="@color/md_white_1000"
-                                android:fontFamily="sans-serif"
+                                android:fontFamily="@font/montserrat_semi_bold"
                                 android:gravity="center"
                                 android:inputType="number"
                                 android:maxLength="1"
                                 android:textColor="@color/white"
                                 android:textSize="@dimen/_16sdp"
-                                android:textStyle="bold" />
+                                 />
 
                         </LinearLayout>
 
@@ -151,8 +149,8 @@
                         android:layout_marginBottom="20dp"
                         android:text="@string/Enter_Digit"
                         android:textColor="@color/md_white_1000"
-                        android:textSize="@dimen/_12sdp"
-                        android:textStyle="bold"
+                        android:textSize="@dimen/_11sdp"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:visibility="visible" />
 
                     <Button
@@ -164,7 +162,7 @@
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_15sdp"
                         android:background="@drawable/button_border"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:text="@string/Verify_otp"
                         android:textAppearance="?android:textAppearanceMedium"
                         android:textColor="@color/black"
@@ -190,7 +188,7 @@
                             android:text="Didn't receive the OTP? "
                             android:textColor="@color/white"
                             android:textSize="@dimen/_12sdp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_semi_bold"
                             android:visibility="visible" />
 
                         <TextView
@@ -205,7 +203,7 @@
                             android:text="@string/Resend_otp"
                             android:textColor="@color/black"
                             android:textSize="@dimen/_14sdp"
-                            android:textStyle="bold"
+                            android:fontFamily="@font/montserrat_bold"
                             android:visibility="visible" />
 
                     </LinearLayout>

@@ -34,7 +34,6 @@ public class Activity_Notifications extends AppCompatActivity {
     NotificationAdapter adapter;
     ImageView notificationBack;
     List<NotificationModel.NotificationData> notificationList = new ArrayList<>();
-
     ProgressDialog progressDialog;
 
 

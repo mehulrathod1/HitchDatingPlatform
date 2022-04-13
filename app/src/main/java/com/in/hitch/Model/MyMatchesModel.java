@@ -1,45 +1,122 @@
 package com.in.hitch.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class MyMatchesModel {
-    int matchImage,matchesLike;
-    String matchesName,matchesDistance;
 
-    public int getMatchImage() {
-        return matchImage;
+    @SerializedName("status")
+    @Expose
+    String status;
+
+    @SerializedName("message")
+    @Expose
+    String message;
+
+    @SerializedName("data")
+    @Expose
+    List<MatchesData> matchesData = new ArrayList<>();
+
+    public String getStatus() {
+        return status;
     }
 
-    public void setMatchImage(int matchImage) {
-        this.matchImage = matchImage;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public int getMatchesLike() {
-        return matchesLike;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMatchesLike(int matchesLike) {
-        this.matchesLike = matchesLike;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public String getMatchesName() {
-        return matchesName;
+    public List<MatchesData> getMatchesData() {
+        return matchesData;
     }
 
-    public void setMatchesName(String matchesName) {
-        this.matchesName = matchesName;
+    public void setMatchesData(List<MatchesData> matchesData) {
+        this.matchesData = matchesData;
     }
 
-    public String getMatchesDistance() {
-        return matchesDistance;
-    }
+    public static class MatchesData {
 
-    public void setMatchesDistance(String matchesDistance) {
-        this.matchesDistance = matchesDistance;
-    }
+        @SerializedName("user_id")
+        @Expose
+        String user_id;
 
-    public MyMatchesModel(int matchImage, int matchesLike, String matchesName, String matchesDistance) {
-        this.matchImage = matchImage;
-        this.matchesLike = matchesLike;
-        this.matchesName = matchesName;
-        this.matchesDistance = matchesDistance;
+
+        @SerializedName("image")
+        @Expose
+        String image;
+
+
+        @SerializedName("title")
+        @Expose
+        String title;
+
+
+        @SerializedName("km_diff")
+        @Expose
+        String km_diff;
+
+
+
+        @SerializedName("liked")
+        @Expose
+        String liked;
+
+        public MatchesData(String user_id, String image, String title, String km_diff, String liked) {
+            this.user_id = user_id;
+            this.image = image;
+            this.title = title;
+            this.km_diff = km_diff;
+            this.liked = liked;
+        }
+
+        public String getUser_id() {
+            return user_id;
+        }
+
+        public void setUser_id(String user_id) {
+            this.user_id = user_id;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public void setTitle(String title) {
+            this.title = title;
+        }
+
+        public String getKm_diff() {
+            return km_diff;
+        }
+
+        public void setKm_diff(String km_diff) {
+            this.km_diff = km_diff;
+        }
+
+        public String getLiked() {
+            return liked;
+        }
+
+        public void setLiked(String liked) {
+            this.liked = liked;
+        }
     }
 }

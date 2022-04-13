@@ -83,8 +83,15 @@ public class ProfileCardModel {
         @Expose
         String superLike;
 
+        @SerializedName("current_location")
+        @Expose
+        String current_location;
 
-        public ProfileCard(String id, String user_name, String profile, String age, String job_title, String liked, String favorite, String superLike) {
+        @SerializedName("isVerify")
+        @Expose
+        String isVerify;
+
+        public ProfileCard(String id, String user_name, String profile, String age, String job_title, String liked, String favorite, String superLike, String current_location, String isVerify) {
             this.id = id;
             this.user_name = user_name;
             this.profile = profile;
@@ -93,6 +100,24 @@ public class ProfileCardModel {
             this.liked = liked;
             this.favorite = favorite;
             this.superLike = superLike;
+            this.current_location = current_location;
+            this.isVerify = isVerify;
+        }
+
+        public String getCurrent_location() {
+            return current_location;
+        }
+
+        public void setCurrent_location(String current_location) {
+            this.current_location = current_location;
+        }
+
+        public String getIsVerify() {
+            return isVerify;
+        }
+
+        public void setIsVerify(String isVerify) {
+            this.isVerify = isVerify;
         }
 
         public String getId() {

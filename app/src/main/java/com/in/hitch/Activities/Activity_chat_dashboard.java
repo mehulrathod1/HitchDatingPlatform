@@ -69,6 +69,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -89,8 +90,9 @@ public class Activity_chat_dashboard extends AppCompatActivity {
     public final String APP_TAG = "hitch";
 
 
-    ImageView img_back, userImage, replay_cancel, img_mic, img_chat_send, img_option, select_from_gallery, pik_from_camera;
+    ImageView img_back, replay_cancel, img_mic, img_chat_send, img_option, select_from_gallery, pik_from_camera;
     EditText edt_chat;
+    ImageView userImage;
     TextView userName, msg_replay, msg_delete, msg_copy, replay_to, replay_to_msg;
 
     public String TAG = "Activity_chat_dashboard";

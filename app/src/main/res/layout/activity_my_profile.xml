@@ -34,7 +34,7 @@
                 android:text="Edit Profile"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
-                android:textStyle="bold" />
+                android:fontFamily="@font/montserrat_bold" />
         </LinearLayout>
     </RelativeLayout>
 
@@ -109,7 +109,7 @@
                     android:text="Booby Brown, 26"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:visibility="visible" />
 
             </LinearLayout>
@@ -133,11 +133,10 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/_2sdp"
                         android:layout_marginTop="10dp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:text="Job/Business Title"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
-                        android:textStyle="bold"
                         android:visibility="visible" />
 
                     <EditText
@@ -145,7 +144,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:backgroundTint="@color/black"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_regular"
                         android:hint="Add job/business title"
                         android:inputType="text"
                         android:textColor="@color/black"
@@ -167,7 +166,7 @@
                         android:layout_marginLeft="@dimen/_2sdp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="@dimen/_7sdp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:text="Company"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
@@ -180,7 +179,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/_7sdp"
                         android:backgroundTint="@color/black"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_regular"
                         android:gravity="left"
                         android:hint="Add Company Name"
                         android:inputType="text"
@@ -203,11 +202,10 @@
                         android:layout_marginLeft="@dimen/_2sdp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="@dimen/_7sdp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:text="School/University Name"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
-                        android:textStyle="bold"
                         android:visibility="visible" />
 
                     <EditText
@@ -216,7 +214,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/_7sdp"
                         android:backgroundTint="@color/black"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_regular"
                         android:gravity="left"
                         android:hint="Add School/University name"
                         android:inputType="text"
@@ -239,11 +237,10 @@
                         android:layout_marginLeft="@dimen/_2sdp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="@dimen/_7sdp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:text="Current Location(Living in)"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
-                        android:textStyle="bold"
                         android:visibility="visible" />
 
                     <EditText
@@ -252,7 +249,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/_7sdp"
                         android:backgroundTint="@color/black"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_regular"
                         android:gravity="left"
                         android:hint="Add location"
                         android:inputType="text"
@@ -275,11 +272,10 @@
                         android:layout_marginLeft="@dimen/_2sdp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="@dimen/_7sdp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:text="Gender"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
-                        android:textStyle="bold"
                         android:visibility="visible" />
 
                     <Spinner
@@ -314,7 +310,7 @@
                         android:text="Select Sexual Orientation"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
-                        android:textStyle="bold"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:visibility="visible" />
 
                     <Spinner
@@ -346,24 +342,24 @@
                         android:layout_marginLeft="@dimen/_2sdp"
                         android:layout_marginTop="@dimen/_10sdp"
                         android:layout_marginRight="@dimen/_7sdp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:text="Manage Profile"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
-                        android:textStyle="bold"
                         android:visibility="visible" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:weightSum="5"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/_7sdp"
-                            android:layout_weight="1"
-                            android:fontFamily="sans-serif"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/montserrat_regular"
                             android:padding="@dimen/_5sdp"
                             android:text="Don't show my age"
                             android:textColor="@color/black"
@@ -373,7 +369,7 @@
                         <Switch
                             android:id="@+id/ageSwitch"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:checked="true"
                             android:thumbTint="@color/md_green_500"
@@ -384,14 +380,15 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:weightSum="5"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginRight="@dimen/_7sdp"
-                            android:layout_weight="1.5"
-                            android:fontFamily="sans-serif"
+                            android:layout_weight="4"
+                            android:fontFamily="@font/montserrat_regular"
                             android:padding="@dimen/_5sdp"
                             android:text="Don't show my distance"
                             android:textColor="@color/black"
@@ -401,11 +398,14 @@
                         <Switch
                             android:id="@+id/distanceSwitch"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="0.5"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
                             android:checked="true"
                             android:thumbTint="@color/md_green_500"
-                            android:trackTint="@color/md_green_500" />
+                            android:trackTint="@color/md_green_500"
+                            >
+
+                        </Switch>
 
                     </LinearLayout>
 
@@ -424,11 +424,10 @@
                         android:layout_marginLeft="@dimen/_2sdp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="@dimen/_7sdp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_semi_bold"
                         android:text="Connect to Instagram"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_18sdp"
-                        android:textStyle="bold"
                         android:visibility="visible" />
 
                     <TextView
@@ -437,7 +436,7 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         android:drawableStart="@drawable/instagram"
                         android:drawablePadding="@dimen/_5sdp"
-                        android:fontFamily="sans-serif"
+                        android:fontFamily="@font/montserrat_regular"
                         android:padding="@dimen/_5sdp"
                         android:text="click to connect your Instagram account"
                         android:textColor="@color/black"
@@ -457,12 +456,11 @@
                     android:layout_marginBottom="@dimen/_20sdp"
                     android:background="@drawable/button_border"
                     android:backgroundTint="@color/md_pink_100"
-                    android:fontFamily="sans-serif"
+                    android:fontFamily="@font/montserrat_bold"
                     android:text="Update Profile"
                     android:textAppearance="?android:textAppearanceMedium"
                     android:textColor="@color/black"
-                    android:textSize="@dimen/_16sdp"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/_16sdp" />
 
             </LinearLayout>
 

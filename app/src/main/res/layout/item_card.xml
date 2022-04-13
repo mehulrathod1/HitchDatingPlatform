@@ -39,26 +39,31 @@
                 android:shadowDy="4"
                 android:shadowRadius="1"
                 android:text="@string/Sign_Up_Google"
+                android:fontFamily="@font/montserrat_bold"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/_24sdp"
+                android:textSize="@dimen/_20sdp"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/item_age"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/_8sdp"
                 android:shadowColor="@color/black"
                 android:shadowDx="4"
                 android:shadowDy="4"
+                android:padding="@dimen/_2sdp"
                 android:shadowRadius="1"
+                android:gravity="center_vertical"
                 android:text="@string/Sign_Up_Google"
+                android:fontFamily="@font/montserrat_semi_bold"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/_16sdp" />
+                android:textSize="@dimen/_13sdp" />
 
             <ImageView
+                android:id="@+id/verifyIcon"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_gravity="center_vertical"
                 android:src="@drawable/verify" />
@@ -81,8 +86,8 @@
                 android:shadowRadius="1"
                 android:text="@string/Sign_Up_Google"
                 android:textColor="@android:color/white"
-                android:textSize="@dimen/_14sdp"
-                android:textStyle="bold" />
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/montserrat_semi_bold" />
 
         </LinearLayout>
 
@@ -146,6 +151,7 @@
             android:textStyle="bold"
             android:layout_margin="@dimen/_35sdp"
             android:layout_gravity="right"
+            android:fontFamily="@font/montserrat_bold"
             android:textColor="@android:color/holo_red_light"
             android:text="NOPE"/>
     </FrameLayout>
@@ -163,6 +169,7 @@
             android:textStyle="bold"
             android:layout_margin="@dimen/_35sdp"
             android:textColor="@android:color/holo_green_light"
+            android:fontFamily="@font/montserrat_bold"
             android:text="LIKE"/>
     </FrameLayout>
 
@@ -181,6 +188,7 @@
             android:layout_gravity="center_horizontal"
             android:layout_margin="@dimen/_35sdp"
             android:textColor="@android:color/holo_blue_bright"
+            android:fontFamily="@font/montserrat_bold"
             android:text="Super Like"/>
     </FrameLayout>
 

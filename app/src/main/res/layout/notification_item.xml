@@ -38,7 +38,8 @@
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_toRightOf="@+id/notificationItemImagee"
             android:maxLines="2"
-            android:text="Lorem ipsum dolor sit er elite lamet,consecetetaur."
+            android:text=""
+            android:fontFamily="@font/montserrat_regular"
             android:textSize="18sp" />
 
         <TextView
@@ -50,13 +51,14 @@
             android:layout_marginTop="10dp"
             android:layout_marginRight="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_5sdp"
+            android:fontFamily="@font/montserrat_regular"
             android:text="28/12/2080" />
 
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_below="@+id/date"
+            android:layout_below="@+id/notificationItemImagee"
             android:layout_marginLeft="@dimen/_10sdp"
             android:layout_marginRight="@dimen/_10sdp"
             android:background="#A9A9A9" />

@@ -12,10 +12,10 @@
     <!--    Sign Up-->
     <string name="Sign_Up">Sign Up</string>
     <string name="Contact_Number">Contact Number</string>
-    <string name="Enter_Contact_number">Enter Contact number</string>
+    <string name="Enter_Contact_number">Enter number</string>
     <string name="Get_OTP">Get OTP</string>
     <string name="Sign_Up_Message">We will send one time password to your mobile number. Message and data rate may apply.</string>
-    <string name="Sign_Up_With">___________ Or Sign up with ___________</string>
+    <string name="Sign_Up_With">---------- Or Sign up with ----------</string>
     <string name="Sign_Up_fb">Facebook</string>
     <string name="Sign_Up_Google">Google</string>
 

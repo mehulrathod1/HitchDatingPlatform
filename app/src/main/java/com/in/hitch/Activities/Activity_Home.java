@@ -7,10 +7,18 @@ import static com.in.hitch.Utils.Glob.Token;
 import static com.in.hitch.Utils.Glob.User_Id;
 import static com.in.hitch.Utils.Glob.base_url;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
+import android.content.pm.PackageManager;
 import android.graphics.Point;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -38,6 +46,16 @@ import com.android.volley.toolbox.Volley;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarChangeListener;
 import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListener;
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.ResolvableApiException;
+import com.google.android.gms.location.LocationListener;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.in.hitch.Adapter.CardStackAdapter;
 import com.in.hitch.Model.CommonModel;
 import com.in.hitch.Model.GetUserFilterModel;
@@ -67,14 +85,17 @@ import com.yuyakaido.android.cardstackview.StackFrom;
 import com.yuyakaido.android.cardstackview.SwipeAnimationSetting;
 import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 
 import org.json.JSONArray;
@@ -113,9 +134,13 @@ public class Activity_Home extends AppCompatActivity {
     private CardStackLayoutManager manager;
     private CardStackAdapter adapter;
     CardStackView cardStackView;
-
-
     CrystalRangeSeekbar seekbar, DistanceSeekbar;
+
+    private LocationManager locationManager;
+
+    private LocationRequest locationRequest;
+    private static final int REQUEST_CHECK_SETTINGS = 10001;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +151,7 @@ public class Activity_Home extends AppCompatActivity {
         getProfileCard(Token, "48");
 
 
+        turnOnGps();
 //        getUserFilter(User_Id);
     }
 
@@ -764,7 +790,9 @@ public class Activity_Home extends AppCompatActivity {
                             model.getJob_title(),
                             model.getLiked(),
                             model.getFavorite(),
-                            model.getSuperLike()
+                            model.getSuperLike(),
+                            model.getCurrent_location(),
+                            model.getIsVerify()
                     );
 
                     profileCardModelList.add(data);
@@ -955,9 +983,55 @@ public class Activity_Home extends AppCompatActivity {
     }
 
 
+    private void turnOnGps() {
+
+        locationRequest = LocationRequest.create();
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(2000);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest);
+        builder.setAlwaysShow(true);
+
+        Task<LocationSettingsResponse> result = LocationServices.getSettingsClient(getApplicationContext())
+                .checkLocationSettings(builder.build());
+
+        result.addOnCompleteListener(new OnCompleteListener<LocationSettingsResponse>() {
+            @Override
+            public void onComplete(@NonNull Task<LocationSettingsResponse> task) {
+
+                try {
+                    LocationSettingsResponse response = task.getResult(ApiException.class);
+                    Toast.makeText(Activity_Home.this, "GPS is already tured on", Toast.LENGTH_SHORT).show();
+
+                } catch (ApiException e) {
+
+                    switch (e.getStatusCode()) {
+                        case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
+
+                            try {
+                                ResolvableApiException resolvableApiException = (ResolvableApiException) e;
+                                resolvableApiException.startResolutionForResult(Activity_Home.this, REQUEST_CHECK_SETTINGS);
+                            } catch (IntentSender.SendIntentException ex) {
+                                ex.printStackTrace();
+                            }
+                            break;
+
+                        case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
+                            //Device does not have location
+                            break;
+                    }
+                }
+            }
+        });
+    }
+
+
     @Override
     public void onBackPressed() {
         finishAffinity();
         super.onBackPressed();
     }
+
 }
