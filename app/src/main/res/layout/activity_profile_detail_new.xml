@@ -51,52 +51,56 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/userName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:drawableEnd="@drawable/chatting"
+                    android:fontFamily="@font/montserrat_bold"
                     android:gravity="left"
                     android:paddingRight="@dimen/_15sdp"
                     android:text="Booby Brown, 26"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_18sdp"
-                    android:textStyle="bold"
                     android:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/manage_profile"
+                    android:id="@+id/gender"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/gender_profile"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:text="women"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp"
                     android:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/my_matches"
+                    android:id="@+id/profession"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/job_profile"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:text="Graphic Designer"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp"
                     android:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/upgrade_membership"
+                    android:id="@+id/universityName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/edu_profile"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:text="Sikkim Manipal University"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp"
@@ -104,13 +108,14 @@
 
 
                 <TextView
-                    android:id="@+id/LivesIn"
+                    android:id="@+id/location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/home_profile"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:text="Ahmedabad,Gujarat"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp"
@@ -118,13 +123,14 @@
 
 
                 <TextView
-                    android:id="@+id/payment_history"
+                    android:id="@+id/distance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_20sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:drawableLeft="@drawable/location_profile"
                     android:drawablePadding="@dimen/_10sdp"
+                    android:fontFamily="@font/montserrat_semi_bold"
                     android:text="10 Kilometer away"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_15sdp"
@@ -137,11 +143,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/_10sdp"
                 android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat_bold"
                 android:padding="@dimen/_5sdp"
                 android:text="Instagram Photos"
                 android:textColor="@color/black"
                 android:textSize="@dimen/_18sdp"
-                android:textStyle="bold"
                 android:visibility="visible" />
 
             <HorizontalScrollView

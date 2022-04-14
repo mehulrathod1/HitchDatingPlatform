@@ -19,10 +19,15 @@ import java.util.List;
 public class TopHitchesAdapter extends RecyclerView.Adapter<TopHitchesAdapter.ViewHolder> {
     List<TopHitchesModel> list = new ArrayList<>();
     Context context;
-    WhoLikeYouAdapter.Click click;
+    Click click;
 
 
-    public TopHitchesAdapter(List<TopHitchesModel> list, Context context, WhoLikeYouAdapter.Click click) {
+    public interface Click {
+
+        void onItemClick(int position);
+    }
+
+    public TopHitchesAdapter(List<TopHitchesModel> list, Context context, Click click) {
         this.list = list;
         this.context = context;
         this.click = click;
@@ -48,6 +53,14 @@ public class TopHitchesAdapter extends RecyclerView.Adapter<TopHitchesAdapter.Vi
 
         holder.TopHitchesName.setText(model.getTopHitchesName());
         holder.TopHitchesDistance.setText(model.getTopHitchesDistance());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                click.onItemClick(position);
+            }
+        });
     }
 
     @Override
@@ -57,7 +70,7 @@ public class TopHitchesAdapter extends RecyclerView.Adapter<TopHitchesAdapter.Vi
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView TopHitchesProfile;
-        TextView TopHitchesName,TopHitchesDistance;
+        TextView TopHitchesName, TopHitchesDistance;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -67,8 +80,6 @@ public class TopHitchesAdapter extends RecyclerView.Adapter<TopHitchesAdapter.Vi
 
             TopHitchesName = itemView.findViewById(R.id.TopHitchesName);
             TopHitchesDistance = itemView.findViewById(R.id.TopHitchesDistance);
-
-
 
 
         }

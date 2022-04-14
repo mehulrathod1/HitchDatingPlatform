@@ -12,11 +12,12 @@ import static com.in.hitch.Utils.Glob.get_gender_option_url;
 import static com.in.hitch.Utils.Glob.get_interest_option_url;
 import static com.in.hitch.Utils.Glob.get_religion_option_url;
 import static com.in.hitch.Utils.Glob.get_sexual_option_url;
-import static com.in.hitch.Utils.Glob.profile_completion_url;
+
 
 import android.app.DatePickerDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -325,6 +326,11 @@ public class Activity_Profile_completion extends AppCompatActivity {
 
                 progressDialog.dismiss();
 
+                SharedPreferences sharedPreferences = getSharedPreferences("MyPref", 0);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("key", User_Id);
+                editor.commit();
+
                 Intent i = new Intent(Activity_Profile_completion.this, Activity_Home.class);
                 startActivity(i);
                 finish();
@@ -336,62 +342,6 @@ public class Activity_Profile_completion extends AppCompatActivity {
 
             }
         });
-    }
-
-    private void profile_Completion(String token, String user_id, String first_name,
-                                    String last_name, String email,
-                                    String birthday, String gender_id,
-                                    String interest_id, String religion_id,
-                                    String sexual_id) {
-
-
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        progressDialog.show();
-        StringRequest request = new StringRequest(Request.Method.POST, profile_completion_url, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e("xxxx", "onResponse: " + response);
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    String message = jsonObject.getString("message");
-                    Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
-
-                    progressDialog.dismiss();
-                    Intent i = new Intent(Activity_Profile_completion.this, Activity_Home.class);
-                    startActivity(i);
-                    finish();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // method to handle errors.
-                Toast.makeText(getApplicationContext(), "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
-            }
-
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("token", token);
-                params.put("user_id", user_id);
-                params.put("first_name", first_name);
-                params.put("last_name", last_name);
-                params.put("email", email);
-                params.put("birthday", birthday);
-                params.put("gender_id", gender_id);
-                params.put("interest_id", interest_id);
-                params.put("religion_id", religion_id);
-                params.put("sexual_id", sexual_id);
-                return params;
-            }
-        };
-        queue.add(request);
     }
 
 

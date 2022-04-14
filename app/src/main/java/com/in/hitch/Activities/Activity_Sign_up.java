@@ -2,7 +2,7 @@ package com.in.hitch.Activities;
 
 import static com.in.hitch.Utils.Glob.Mobile_No;
 import static com.in.hitch.Utils.Glob.User_Id;
-import static com.in.hitch.Utils.Glob.login_url;
+import static com.in.hitch.Utils.Glob.base_url;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,14 +13,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import com.hbb20.CountryCodePicker;
+import com.in.hitch.Model.CommonModel;
+import com.in.hitch.Model.LoginModel;
 import com.in.hitch.R;
+import com.in.hitch.Utils.Glob;
+import com.in.hitch.retrofit.Api;
+import com.in.hitch.retrofit.AppConfig;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,6 +29,10 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Activity_Sign_up extends AppCompatActivity {
 
@@ -68,7 +72,7 @@ public class Activity_Sign_up extends AppCompatActivity {
                 } else {
                     Log.e("login", "onClick: " + "+" + sprCode.getSelectedCountryCode());
                     Mobile_No = mobile_no.getText().toString();
-                    login("+" + sprCode.getSelectedCountryCode(), mobile_no.getText().toString());
+                    login(Glob.Token, "+" + sprCode.getSelectedCountryCode(), mobile_no.getText().toString());
 //                    login(Token, "+" + sprCode.getSelectedCountryCode(), mobile_no.getText().toString());
 
 
@@ -76,71 +80,39 @@ public class Activity_Sign_up extends AppCompatActivity {
             }
         });
     }
-//    public void login(String token, String country_code, String mobile_no) {
-//
-//        Api call = AppConfig.getClient(base_url).create(Api.class);
-//        progressDialog.show();
-//        call.login(token, country_code, mobile_no).enqueue(new Callback<CommonModel>() {
-//            @Override
-//            public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
-//
-//                CommonModel commonModel = response.body();
-//
-//                Log.e("commonModel", "onResponse: " + commonModel.getStatus());
-//                Log.e("commonModel", "onResponse: " + commonModel.getMessage());
-//                progressDialog.dismiss();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<CommonModel> call, Throwable t) {
-//
-//            }
-//        });
-//    }
 
-    private void login(String country_code, String mobile_no) {
+    public void login(String token, String country_code, String mobile_no) {
 
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        Api call = AppConfig.getClient(base_url).create(Api.class);
         progressDialog.show();
 
-        StringRequest request = new StringRequest(Request.Method.POST, login_url, new com.android.volley.Response.Listener<String>() {
+        call.login(token, country_code, mobile_no).enqueue(new Callback<LoginModel>() {
             @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONObject Object = jsonObject.getJSONObject("data");
+            public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
 
-                    Log.e("user_id", "onResponse: " + Object.getString("user_id"));
-                    User_Id = Object.getString("user_id");
-                    Log.e("user_id", "onResponse: " + User_Id);
-                    Toast.makeText(getApplicationContext(), "" + jsonObject.getString("message"), Toast.LENGTH_SHORT).show();
-                    Log.e("message", "onResponse: " + jsonObject.getString("message"));
-                    progressDialog.dismiss();
+                LoginModel loginModel = response.body();
 
-                    Intent i = new Intent(Activity_Sign_up.this, Activity_Verification.class);
-                    startActivity(i);
-                    finish();
+                LoginModel.LoginData model = loginModel.getLoginData();
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+
+                User_Id = model.getUser_id();
+                Toast.makeText(Activity_Sign_up.this, "" + loginModel.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e("user_id", "onResponse: " + User_Id);
+
+                progressDialog.dismiss();
+
+                Intent i = new Intent(Activity_Sign_up.this, Activity_Verification.class);
+                startActivity(i);
+                finish();
+
+
             }
-        }, new com.android.volley.Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                // method to handle errors.
-                Toast.makeText(getApplicationContext(), "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<LoginModel> call, Throwable t) {
+
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("token", "123456789");
-                params.put("country_code", country_code);
-                params.put("mobile_no", mobile_no);
-                return params;
-            }
-        };
-        queue.add(request);
+        });
     }
+
 }

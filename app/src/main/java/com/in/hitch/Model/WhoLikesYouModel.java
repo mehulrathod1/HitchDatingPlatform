@@ -1,55 +1,118 @@
 package com.in.hitch.Model;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class WhoLikesYouModel {
 
-    int topHitchesProfile, topHitchesCancel, topHitchesLike;
-    String topHitchesName, topHitchesDistance;
+    @SerializedName("status")
+    @Expose
+    String status;
 
-    public int getTopHitchesProfile() {
-        return topHitchesProfile;
+    @SerializedName("message")
+    @Expose
+    String message;
+
+    @SerializedName("data")
+    @Expose
+    List<WhoLikesYou> chatDataList = new ArrayList<>();
+
+    public String getStatus() {
+        return status;
     }
 
-    public void setTopHitchesProfile(int topHitchesProfile) {
-        this.topHitchesProfile = topHitchesProfile;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    public int getTopHitchesCancel() {
-        return topHitchesCancel;
+    public String getMessage() {
+        return message;
     }
 
-    public void setTopHitchesCancel(int topHitchesCancel) {
-        this.topHitchesCancel = topHitchesCancel;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public int getTopHitchesLike() {
-        return topHitchesLike;
+    public List<WhoLikesYou> getChatDataList() {
+        return chatDataList;
     }
 
-    public void setTopHitchesLike(int topHitchesLike) {
-        this.topHitchesLike = topHitchesLike;
+    public void setChatDataList(List<WhoLikesYou> chatDataList) {
+        this.chatDataList = chatDataList;
     }
 
-    public String getTopHitchesName() {
-        return topHitchesName;
-    }
+    public static class WhoLikesYou {
 
-    public void setTopHitchesName(String topHitchesName) {
-        this.topHitchesName = topHitchesName;
-    }
+        @SerializedName("first_name")
+        @Expose
+        String first_name;
 
-    public String getTopHitchesDistance() {
-        return topHitchesDistance;
-    }
+        @SerializedName("last_name")
+        @Expose
+        String last_name;
 
-    public void setTopHitchesDistance(String topHitchesDistance) {
-        this.topHitchesDistance = topHitchesDistance;
-    }
 
-    public WhoLikesYouModel(int topHitchesProfile, int topHitchesCancel, int topHitchesLike, String topHitchesName, String topHitchesDistance) {
-        this.topHitchesProfile = topHitchesProfile;
-        this.topHitchesCancel = topHitchesCancel;
-        this.topHitchesLike = topHitchesLike;
-        this.topHitchesName = topHitchesName;
-        this.topHitchesDistance = topHitchesDistance;
+        @SerializedName("age")
+        @Expose
+        String age;
+
+        @SerializedName("km_diff")
+        @Expose
+        String km_diff;
+
+        @SerializedName("image")
+        @Expose
+        String image;
+
+        public WhoLikesYou(String first_name, String last_name, String age, String km_diff, String image) {
+            this.first_name = first_name;
+            this.last_name = last_name;
+            this.age = age;
+            this.km_diff = km_diff;
+            this.image = image;
+        }
+
+        public String getFirst_name() {
+            return first_name;
+        }
+
+        public void setFirst_name(String first_name) {
+            this.first_name = first_name;
+        }
+
+        public String getLast_name() {
+            return last_name;
+        }
+
+        public void setLast_name(String last_name) {
+            this.last_name = last_name;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
+        }
+
+        public String getKm_diff() {
+            return km_diff;
+        }
+
+        public void setKm_diff(String km_diff) {
+            this.km_diff = km_diff;
+        }
+
+        public String getImage() {
+            return image;
+        }
+
+        public void setImage(String image) {
+            this.image = image;
+        }
     }
 }

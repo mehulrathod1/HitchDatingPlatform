@@ -35,7 +35,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     private GoogleApiClient mGoogleApiClient;
     private int RC_SIGN_IN = 9000;
     private String TAG = "LandingActivity";
-    String loginId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +43,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
         getSupportActionBar().hide();
         init();
 
-        SharedPreferences prefs = getSharedPreferences("MyPref", 0);
-        loginId = prefs.getString("key", "null");
-        Log.e("getSharedPreferences", "onCreate: " + loginId);
 
 
         KeyHashes.Key(this);
@@ -168,13 +164,6 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.O
     @Override
     protected void onStart() {
 
-        if (loginId.equals("null")) {
-        } else {
-            Glob.User_Id = loginId;
-            Intent i = new Intent(MainActivity.this, Activity_Home.class);
-            startActivity(i);
-            finish();
-        }
         super.onStart();
     }
 }

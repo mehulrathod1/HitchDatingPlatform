@@ -2,9 +2,11 @@ package com.in.hitch.Activities;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 import static com.in.hitch.Utils.Glob.Mobile_No;
+import static com.in.hitch.Utils.Glob.Token;
 import static com.in.hitch.Utils.Glob.User_Id;
-import static com.in.hitch.Utils.Glob.resend_otp_url;
-import static com.in.hitch.Utils.Glob.verify_otp_url;
+import static com.in.hitch.Utils.Glob.base_url;
+
+
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -26,7 +28,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.in.hitch.Model.CommonModel;
+import com.in.hitch.Model.VerifyOtpModel;
 import com.in.hitch.R;
+import com.in.hitch.Utils.Glob;
+import com.in.hitch.retrofit.Api;
+import com.in.hitch.retrofit.AppConfig;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,6 +42,10 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class Activity_Verification extends AppCompatActivity {
 
@@ -53,10 +64,7 @@ public class Activity_Verification extends AppCompatActivity {
         getSupportActionBar().hide();
         init();
 
-        sharedPreferences = getSharedPreferences("MyPref", 0);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.putString("key", User_Id);
-        editor.commit();
+
 
     }
 
@@ -83,8 +91,9 @@ public class Activity_Verification extends AppCompatActivity {
 
                 String Otp = otp1.getText().toString() + otp2.getText().toString() + otp3.getText().toString() + otp4.getText().toString();
                 Log.e("TAG", "onClick: " + Otp);
-                sendOtp(User_Id, Otp);
+//                sendOtp(User_Id, Otp);
 
+                verifyOtp(Token, User_Id, Otp);
 
             }
         });
@@ -93,7 +102,7 @@ public class Activity_Verification extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.e("userid", "onClick: " + User_Id);
-                resendOtp(User_Id);
+                resendOtp(Token, User_Id);
             }
         });
 
@@ -101,113 +110,89 @@ public class Activity_Verification extends AppCompatActivity {
         textChange();
     }
 
-    private void sendOtp(String user_id, String otp) {
 
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
 
+
+    private void verifyOtp(String token, String user_id, String otp) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
         progressDialog.show();
-        StringRequest request = new StringRequest(Request.Method.POST, verify_otp_url, new com.android.volley.Response.Listener<String>() {
+
+        call.verifyOtp(token, user_id, otp).enqueue(new Callback<VerifyOtpModel>() {
             @Override
-            public void onResponse(String response) {
+            public void onResponse(Call<VerifyOtpModel> call, Response<VerifyOtpModel> response) {
 
-                try {
+                VerifyOtpModel verifyOtpModel = response.body();
 
-                    JSONObject jsonObject = new JSONObject(response);
-                    String asa = jsonObject.getString("message");
-                    if (jsonObject.getString("status").equals("false")) {
-                        Toast.makeText(getApplicationContext(), "" + asa, Toast.LENGTH_SHORT).show();
-                        Log.e("message", "onResponse: " + jsonObject.getString("message"));
-                        progressDialog.dismiss();
+                VerifyOtpModel.VerifyData model = verifyOtpModel.getVerifyData();
 
-                    }
+                if (response.isSuccessful()){
+                if (model.getIs_mobile_verify().equals("y") && model.getIs_completed_profile().equals("n")) {
+                    Toast.makeText(getApplicationContext(), "" + verifyOtpModel.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+                    Intent i = new Intent(Activity_Verification.this, Activity_Profile_completion.class);
+                    startActivity(i);
+                    finish();
 
-                    JSONObject Object = jsonObject.getJSONObject("data");
-                    String is_mobile_verfied = Object.getString("is_mobile_verfied");
-                    String is_completed_profile = Object.getString("is_completed_profile");
-                    Log.e("is_completed_profile", "onResponse: " + is_completed_profile);
-
-                    if (is_mobile_verfied.equals("y") && is_completed_profile.equals("n")) {
-                        Toast.makeText(getApplicationContext(), "" + asa, Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                        Intent i = new Intent(Activity_Verification.this, Activity_Profile_completion.class);
-                        startActivity(i);
-                        finish();
-//
-                    }
-                    if (is_mobile_verfied.equals("y") && is_completed_profile.equals("y")) {
-//                    if (is_completed_profile.equals("y")) {
-                        Toast.makeText(getApplicationContext(), "" + asa, Toast.LENGTH_SHORT).show();
-                        progressDialog.dismiss();
-                        Intent i = new Intent(Activity_Verification.this, Activity_Home.class);
-                        startActivity(i);
-                        finish();
-                    }
-
-//                    Log.e("verify", "onResponse: " + is_verify_otp + is_completed_profile);
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
+                if (model.getIs_mobile_verify().equals("y") && model.getIs_completed_profile().equals("y")) {
+                    Toast.makeText(getApplicationContext(), "" + verifyOtpModel.getMessage(), Toast.LENGTH_SHORT).show();
+                    progressDialog.dismiss();
+
+
+                    SharedPreferences sharedPreferences = getSharedPreferences("MyPref", 0);
+                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                    editor.putString("key", User_Id);
+                    editor.commit();
+
+                    Intent i = new Intent(Activity_Verification.this, Activity_Home.class);
+                    startActivity(i);
+                    finish();
+                }
+                }
+                else {
+
+                    progressDialog.dismiss();
+
+                }
+
+
             }
-        }, new com.android.volley.Response.ErrorListener() {
+
             @Override
-            public void onErrorResponse(VolleyError error) {
-                // method to handle errors.
-                Toast.makeText(getApplicationContext(), "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
+            public void onFailure(Call<VerifyOtpModel> call, Throwable t) {
+
+
+                progressDialog.dismiss();
+
+                Toast.makeText(getApplicationContext(), "" +"OTP invalid", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void resendOtp(String token, String userId) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+        progressDialog.show();
+
+        call.resendOtp(token, userId).enqueue(new Callback<CommonModel>() {
+            @Override
+            public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
+
+                CommonModel commonModel = response.body();
+
+                Toast.makeText(Activity_Verification.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<CommonModel> call, Throwable t) {
                 progressDialog.dismiss();
 
             }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("token", "123456789");
-                params.put("user_id", user_id);
-                params.put("otp", otp);
-                return params;
-            }
-        };
-        queue.add(request);
-    }
-
-    private void resendOtp(String userId) {
-
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        progressDialog.show();
-        StringRequest request = new StringRequest(Request.Method.POST, resend_otp_url, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    Log.d("message", "onResponse: " + jsonObject.getString("status"));
-                    String message = jsonObject.getString("message");
-                    Toast.makeText(getApplicationContext(), "" + message, Toast.LENGTH_SHORT).show();
-                    Log.d("message", "onResponse: " + jsonObject.getString("message"));
-                    progressDialog.dismiss();
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // method to handle errors.
-                Toast.makeText(getApplicationContext(), "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("token", "123456789");
-                params.put("user_id", userId);
-                return params;
-            }
-        };
-        queue.add(request);
+        });
     }
 
     public void textChange() {

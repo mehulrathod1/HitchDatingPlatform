@@ -83,28 +83,19 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
     List<String> sexualIdList = new ArrayList<>();
 
     Switch ageSwitch, distanceSwitch;
-    String showMyAge, showMyDistance;
+    String showMyAge, showMyDistance,gender_id;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_profile);
-
-
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        getSupportActionBar().setDisplayShowHomeEnabled(true);
-//        setTitle("Profile");
-
-
         getSupportActionBar().hide();
 
-        editProfileBack = findViewById(R.id.editProfileBack);
-        edt_job_title = findViewById(R.id.edt_job_title);
-        edt_city_name = findViewById(R.id.edt_city_name);
-        edt_company_name = findViewById(R.id.edt_company_name);
-        edt_school_name = findViewById(R.id.edt_school_name);
 
         init();
+        get_sexual_option();
+        get_Gender_Option();
         getMyProfile(Token, "48");
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -118,27 +109,22 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
 
     private void init() {
 
-
+        editProfileBack = findViewById(R.id.editProfileBack);
+        edt_job_title = findViewById(R.id.edt_job_title);
+        edt_city_name = findViewById(R.id.edt_city_name);
+        edt_company_name = findViewById(R.id.edt_company_name);
+        edt_school_name = findViewById(R.id.edt_school_name);
         sp_sexual_orientation = findViewById(R.id.sp_sexual_orientation);
         sp_gender = findViewById(R.id.sp_gender);
         cv_add_photos = findViewById(R.id.cv_add_photos);
         btnUpdateProfile = findViewById(R.id.btnUpdateProfile);
-
         distanceSwitch = findViewById(R.id.distanceSwitch);
         ageSwitch = findViewById(R.id.ageSwitch);
-
-
         gender_list = new ArrayList<>();
         sexual_orientation_list = new ArrayList<>();
-
-
         progressDialog = new ProgressDialog(Activity_My_profile.this);
         progressDialog.setCancelable(false); // set cancelable to false
         progressDialog.setMessage("Please Wait"); // set message
-
-
-        get_sexual_option();
-        get_Gender_Option();
         cv_add_photos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -154,12 +140,10 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
                 finish();
             }
         });
+
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                dt_job_title,edt_city_name,edt_company_name,edt_school_name;
-
 
                 if (ageSwitch.isChecked()) {
                     showMyAge = "y";
@@ -197,6 +181,7 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
 
             }
         });
+
     }
 
 
@@ -395,6 +380,10 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
 
                             }
                         });
+
+
+
+
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -417,65 +406,6 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
         queue.add(request);
     }
 
-    private void UpdateProfile(String token, String user_id, String job_title,
-                               String company_name, String school_name,
-                               String current_location, String latitude,
-                               String longitude, String gender_id,
-                               String sexual_id, String show_my_age,
-                               String show_my_distance) {
-
-
-        String url = "https://www.hitch.notionprojects.tech/api/update_profile.php";
-        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest request = new StringRequest(Request.Method.POST, url, new com.android.volley.Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Log.e("xxxx", "onResponse: " + response);
-
-                try {
-                    JSONObject jsonObject = new JSONObject(response);
-                    JSONArray jsonArray = jsonObject.getJSONArray("data");
-
-                    String mesage = jsonObject.getString("message");
-                    Toast.makeText(getApplicationContext(), mesage, Toast.LENGTH_SHORT).show();
-                    for (int i = 0; i < jsonArray.length(); i++) {
-//                        JSONObject Object = jsonArray.getJSONObject(i);
-
-
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }, new com.android.volley.Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // method to handle errors.
-                Toast.makeText(getApplicationContext(), "Fail to get response = " + error, Toast.LENGTH_SHORT).show();
-            }
-
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("token", "123456789");
-                params.put("user_id", "47");
-                params.put("job_title", "Developer");
-                params.put("company_name", "Notion");
-                params.put("school_name", "Highschool");
-                params.put("current_location", "Rajkot");
-                params.put("latitude", "89555.90");
-                params.put("longitude", "54545.45");
-                params.put("gender_id", "1");
-                params.put("sexual_id", "1");
-                params.put("show_my_age", "y");
-                params.put("show_my_distance", "n");
-                return params;
-            }
-        };
-        queue.add(request);
-    }
 
 
     public void updateProfile(String user_id, String job_title,
@@ -524,6 +454,25 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
                 MyProfileModel.ProfileData model = myMatchesModel.getProfileData();
 
                 Log.e("onResponse", "onResponse: " + model.getBirthday());
+
+
+                edt_job_title.setText(model.getJob_title());
+                edt_company_name.setText(model.getCompany_name());
+                edt_school_name.setText(model.getSchool_name());
+                edt_city_name.setText(model.getCurrent_location());
+
+
+                if (model.getShow_my_age().equals("y")) {
+                    ageSwitch.setChecked(true);
+                }else {
+                    ageSwitch.setChecked(false);
+                }
+                if (model.getShow_my_distance().equals("y")){
+                    distanceSwitch.setChecked(true);
+                }
+                else {
+                    distanceSwitch.setChecked(false);
+                }
 
                 progressDialog.dismiss();
             }

@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
 import android.text.method.CharacterPickerDialog;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -22,11 +23,15 @@ import com.in.hitch.Adapter.SliderPagerAdapter;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.in.hitch.Model.CommonModel;
+import com.in.hitch.Model.ProfileCardModel;
+import com.in.hitch.Model.ProfileDetailModel;
 import com.in.hitch.R;
+import com.in.hitch.Utils.Glob;
 import com.in.hitch.retrofit.Api;
 import com.in.hitch.retrofit.AppConfig;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -43,12 +48,14 @@ public class Activity_Profile_details extends AppCompatActivity {
     private ViewPager vp_slider;
     private LinearLayout ll_dots;
     SliderPagerAdapter sliderPagerAdapter;
-    ArrayList<String> slider_image_list;
     private TextView[] dots;
     int page_position = 0;
     RelativeLayout rl_main;
     TextView reportUser, blockUser, cancel;
     ProgressDialog progressDialog;
+    TextView userName, gender, profession, universityName, location, distance;
+
+    ArrayList<ProfileDetailModel.ProfileDetail.ImageList> imageLists = new ArrayList<>();
 
 
     @Override
@@ -61,11 +68,13 @@ public class Activity_Profile_details extends AppCompatActivity {
         init();
         addBottomDots(0);
 
+        getProfileDetail(Token, "59", "53");
+
         final Handler handler = new Handler();
 
         final Runnable update = new Runnable() {
             public void run() {
-                if (page_position == slider_image_list.size()) {
+                if (page_position == imageLists.size()) {
                     page_position = 0;
                 } else {
                     page_position = page_position + 1;
@@ -88,10 +97,17 @@ public class Activity_Profile_details extends AppCompatActivity {
 
     private void init() {
 
+
+        userName = findViewById(R.id.userName);
+        gender = findViewById(R.id.gender);
+        profession = findViewById(R.id.profession);
+        universityName = findViewById(R.id.universityName);
+        location = findViewById(R.id.location);
+        distance = findViewById(R.id.distance);
+
         vp_slider = (ViewPager) findViewById(R.id.vp_slider);
         ll_dots = (LinearLayout) findViewById(R.id.ll_dots);
 
-        slider_image_list = new ArrayList<>();
 
 
         rl_main = findViewById(R.id.main_layout);
@@ -101,30 +117,6 @@ public class Activity_Profile_details extends AppCompatActivity {
         progressDialog.setMessage("Please Wait"); // set message
 
 
-        slider_image_list.add("https://wallpaperaccess.com/full/297372.jpg");
-        slider_image_list.add("https://www.teahub.io/photos/full/68-683520_beautiful-girl-wallpapers-hd.jpg");
-        slider_image_list.add("https://wallpaperaccess.com/full/1198406.jpg");
-        slider_image_list.add("https://www.wallpaperuse.com/wallp/50-509102_m.jpg");
-
-        sliderPagerAdapter = new SliderPagerAdapter(Activity_Profile_details.this, slider_image_list);
-        vp_slider.setAdapter(sliderPagerAdapter);
-
-        vp_slider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                addBottomDots(position);
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
     }
 
     @Override
@@ -183,7 +175,7 @@ public class Activity_Profile_details extends AppCompatActivity {
     }
 
     private void addBottomDots(int currentPage) {
-        dots = new TextView[slider_image_list.size()];
+        dots = new TextView[imageLists.size()];
 
         ll_dots.removeAllViews();
         for (int i = 0; i < dots.length; i++) {
@@ -230,8 +222,6 @@ public class Activity_Profile_details extends AppCompatActivity {
     }
 
     public void blockUser(String user_id, String report_user_id) {
-
-
         Api call = AppConfig.getClient(base_url).create(Api.class);
         progressDialog.show();
         call.blockUser(Token, user_id, report_user_id).enqueue(new Callback<CommonModel>() {
@@ -252,6 +242,78 @@ public class Activity_Profile_details extends AppCompatActivity {
             }
         });
 
+
+    }
+
+
+    private void getProfileDetail(String token, String user_id, String profile_id) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+        progressDialog.show();
+
+        call.getProfileDetail(token, user_id, profile_id).enqueue(new Callback<ProfileDetailModel>() {
+            @Override
+            public void onResponse(Call<ProfileDetailModel> call, Response<ProfileDetailModel> response) {
+
+                ProfileDetailModel profileDetailMode = response.body();
+
+                ProfileDetailModel.ProfileDetail model = profileDetailMode.getProfileDetail();
+
+
+                userName.setText(model.getFirst_name() + " , " + model.getAge());
+                gender.setText(model.getGender());
+                profession.setText(model.getJob_title());
+                universityName.setText(model.getSchool_name());
+                location.setText(model.getCurrent_location());
+                distance.setText(model.getKm_diff());
+
+
+
+
+                List<ProfileDetailModel.ProfileDetail.ImageList> image = model.getImageLists();
+                for (int j =0;j<image.size();j++){
+
+                    ProfileDetailModel.ProfileDetail.ImageList data = image.get(j);
+
+                    ProfileDetailModel.ProfileDetail.ImageList a = new ProfileDetailModel.ProfileDetail.ImageList(
+                            data.getImage_name()
+                    );
+
+                    imageLists.add(a);
+                    Log.e("imageLists", "onResponse: "+a.getImage_name());
+                }
+
+
+
+                sliderPagerAdapter = new SliderPagerAdapter(Activity_Profile_details.this, imageLists);
+                vp_slider.setAdapter(sliderPagerAdapter);
+
+                vp_slider.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                    @Override
+                    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                    }
+
+                    @Override
+                    public void onPageSelected(int position) {
+                        addBottomDots(position);
+                    }
+
+                    @Override
+                    public void onPageScrollStateChanged(int state) {
+
+                    }
+                });
+
+                progressDialog.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<ProfileDetailModel> call, Throwable t) {
+
+                progressDialog.dismiss();
+            }
+        });
 
     }
 }

@@ -1,5 +1,6 @@
 package com.in.hitch.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,19 +11,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.in.hitch.Model.WhoLikesYouModel;
 import com.in.hitch.R;
+import com.in.hitch.Utils.Glob;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class WhoLikeYouAdapter extends RecyclerView.Adapter<WhoLikeYouAdapter.ViewHolder> {
 
-    List<WhoLikesYouModel> list = new ArrayList<>();
+    List<WhoLikesYouModel.WhoLikesYou> list = new ArrayList<>();
     Context context;
     Click click;
 
-    public WhoLikeYouAdapter(List<WhoLikesYouModel> list, Context context, Click click) {
+    public WhoLikeYouAdapter(List<WhoLikesYouModel.WhoLikesYou> list, Context context, Click click) {
         this.list = list;
         this.context = context;
         this.click = click;
@@ -30,6 +33,10 @@ public class WhoLikeYouAdapter extends RecyclerView.Adapter<WhoLikeYouAdapter.Vi
 
     public interface Click {
         void onItemClick(int position);
+
+        void onItemLike(int position);
+
+        void onItemRemove(int position);
     }
 
     @NonNull
@@ -42,21 +49,36 @@ public class WhoLikeYouAdapter extends RecyclerView.Adapter<WhoLikeYouAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull WhoLikeYouAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull WhoLikeYouAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        WhoLikesYouModel model = list.get(position);
+        WhoLikesYouModel.WhoLikesYou model = list.get(position);
 
-        holder.topHitchesProfile.setImageResource(model.getTopHitchesProfile());
 
-        holder.topHitchesCancel.setImageResource(model.getTopHitchesCancel());
-        holder.topHitchesLike.setImageResource(model.getTopHitchesLike());
-        holder.topHitchesName.setText(model.getTopHitchesName());
-        holder.topHitchesDistance.setText(model.getTopHitchesDistance());
+        holder.topHitchesName.setText(model.getFirst_name()+", "+model.getAge());
+        holder.topHitchesDistance.setText(model.getKm_diff() + " KM");
+
+        Glide.with(context).load(model.getImage()).into(holder.topHitchesProfile);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 click.onItemClick(position);
+                click.onItemClick(position);
+            }
+        });
+
+        holder.topHitchesLike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                click.onItemLike(position);
+            }
+        });
+
+        holder.topHitchesCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                click.onItemRemove(position);
             }
         });
 

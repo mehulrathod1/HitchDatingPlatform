@@ -7,19 +7,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.in.hitch.Model.ProfileDetailModel;
 import com.in.hitch.R;
+import com.in.hitch.Utils.Glob;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.viewpager.widget.PagerAdapter;
 
 public class SliderPagerAdapter extends PagerAdapter {
     private LayoutInflater layoutInflater;
     Activity activity;
-    ArrayList<String> image_arraylist;
+    ArrayList<ProfileDetailModel.ProfileDetail.ImageList> image_arraylist;
 
-    public SliderPagerAdapter(Activity activity, ArrayList<String> image_arraylist) {
+
+
+    public SliderPagerAdapter(Activity activity, ArrayList<ProfileDetailModel.ProfileDetail.ImageList> image_arraylist) {
         this.activity = activity;
         this.image_arraylist = image_arraylist;
     }
@@ -27,11 +32,14 @@ public class SliderPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         layoutInflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         View view = layoutInflater.inflate(R.layout.layout_slider, container, false);
+
         ImageView im_slider = (ImageView) view.findViewById(R.id.im_slider);
+
+        ProfileDetailModel.ProfileDetail.ImageList model = image_arraylist.get(position);
+
         Picasso.get()
-                .load(image_arraylist.get(position))
+                .load(model.getImage_name())
                 .placeholder(R.drawable.ic_action_close) // optional
                 .error(R.mipmap.ic_launcher)         // optional
                 .into(im_slider);

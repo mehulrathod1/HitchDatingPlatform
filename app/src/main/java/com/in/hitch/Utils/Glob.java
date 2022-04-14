@@ -18,13 +18,9 @@ public class Glob {
 
     public static String base_url = "https://www.hitch.notionprojects.tech/api/";
 
-    public static String login_url = base_url + "login.php";
-    public static String verify_otp_url = base_url + "verify_otp.php";
-    public static String resend_otp_url = base_url + "resend_otp.php";
     public static String get_gender_option_url = base_url + "get_gender_option.php";
     public static String get_interest_option_url = base_url + "get_interest_option.php";
     public static String get_religion_option_url = base_url + "get_religion_option.php";
     public static String get_sexual_option_url = base_url + "get_sexual_option.php";
-    public static String profile_completion_url = base_url + "profile_completion.php";
 
 }

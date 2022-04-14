@@ -5,13 +5,17 @@ import com.in.hitch.Model.ChatModel;
 import com.in.hitch.Model.CommonModel;
 import com.in.hitch.Model.GetUserFilterModel;
 import com.in.hitch.Model.GetUserImageModel;
+import com.in.hitch.Model.LoginModel;
 import com.in.hitch.Model.MembershipPlaneModel;
 import com.in.hitch.Model.MyMatchesModel;
 import com.in.hitch.Model.MyProfileModel;
 import com.in.hitch.Model.NotificationModel;
 import com.in.hitch.Model.ProfileCardModel;
+import com.in.hitch.Model.ProfileDetailModel;
 import com.in.hitch.Model.PurchasePlaneModel;
 import com.in.hitch.Model.TransactionModel;
+import com.in.hitch.Model.VerifyOtpModel;
+import com.in.hitch.Model.WhoLikesYouModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,10 +44,29 @@ public interface Api {
 
     @FormUrlEncoded
     @POST("login.php")
-    Call<CommonModel> login(
+    Call<LoginModel> login(
             @Field("token") String token,
             @Field("country_code") String country_code,
             @Field("mobile_no") String mobile_no
+
+    );
+
+    @FormUrlEncoded
+    @POST("verify_otp.php")
+    Call<VerifyOtpModel> verifyOtp(
+
+            @Field("token") String token,
+            @Field("user_id") String user_id,
+            @Field("otp") String otp
+
+    );
+
+    @FormUrlEncoded
+    @POST("resend_otp.php")
+    Call<CommonModel> resendOtp(
+
+            @Field("token") String token,
+            @Field("user_id") String user_id
 
     );
 
@@ -248,5 +271,20 @@ public interface Api {
     Call<MyProfileModel> getMyProfile(
             @Field("token") String token,
             @Field("user_id") String user_id);
+
+
+    @FormUrlEncoded
+    @POST("who_liked_user.php")
+    Call<WhoLikesYouModel> getWhoLikeYou(
+            @Field("token") String token,
+            @Field("user_id") String user_id);
+
+
+    @FormUrlEncoded
+    @POST("get_user_profile_details.php")
+    Call<ProfileDetailModel> getProfileDetail(
+            @Field("token") String token,
+            @Field("user_id") String user_id,
+            @Field("profile_id") String profile_id);
 
 }
