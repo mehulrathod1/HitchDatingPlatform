@@ -900,7 +900,6 @@ public class Activity_Home extends AppCompatActivity {
                     cardStackView.setLayoutManager(manager);
                     cardStackView.setAdapter(adapter);
                     cardStackView.setItemAnimator(new DefaultItemAnimator());
-
                     progressDialog.dismiss();
 
                     Log.e("profileCardModelList", "onResponse: " + model.getAge() + profileCardModelList.size());
@@ -1026,7 +1025,6 @@ public class Activity_Home extends AppCompatActivity {
             }
         });
     }
-
 
     @Override
     public void onBackPressed() {

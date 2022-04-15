@@ -45,7 +45,7 @@ public class Activity_top_hitches extends AppCompatActivity {
     public List<WhoLikesYouModel.WhoLikesYou> list = new ArrayList<>();
 
     TopHitchesAdapter topHitchesAdapter;
-    List<TopHitchesModel> topHitchesModelList = new ArrayList<>();
+    List<WhoLikesYouModel.WhoLikesYou> topHitchesModelList = new ArrayList<>();
 
 
     ProgressDialog progressDialog;
@@ -90,9 +90,9 @@ public class Activity_top_hitches extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                topRecycler();
                 tv_top_hitches.setTextColor(getResources().getColor(R.color.black));
                 tv_who_likes_you.setTextColor(getResources().getColor(R.color.md_grey_500));
+                getTopHitches(Glob.Token, "48");
             }
         });
 
@@ -157,7 +157,6 @@ public class Activity_top_hitches extends AppCompatActivity {
 
     private void topRecycler() {
 
-        topRecyclerData();
 
         topHitchesAdapter = new TopHitchesAdapter(topHitchesModelList, getApplicationContext(), new TopHitchesAdapter.Click() {
             @Override
@@ -167,24 +166,11 @@ public class Activity_top_hitches extends AppCompatActivity {
         });
 
         topHitchesRecycle.setLayoutManager(new GridLayoutManager(this, 2));
+        adapter.notifyDataSetChanged();
         topHitchesRecycle.setAdapter(topHitchesAdapter);
 
     }
 
-    private void topRecyclerData() {
-        TopHitchesModel model = new TopHitchesModel(R.drawable.my_profile, "Jennifer, 25", "50 KM");
-
-        topHitchesModelList.add(model);
-        topHitchesModelList.add(model);
-        topHitchesModelList.add(model);
-        topHitchesModelList.add(model);
-        topHitchesModelList.add(model);
-        topHitchesModelList.add(model);
-        topHitchesModelList.add(model);
-        topHitchesModelList.add(model);
-        topHitchesModelList.add(model);
-
-    }
 
 
     private void getWhoLikeYou(String token, String user_id) {
@@ -213,6 +199,47 @@ public class Activity_top_hitches extends AppCompatActivity {
                     list.add(data);
                 }
                 whoLikesRecycler();
+                progressDialog.dismiss();
+
+
+            }
+
+            @Override
+            public void onFailure(Call<WhoLikesYouModel> call, Throwable t) {
+
+                progressDialog.dismiss();
+            }
+        });
+
+
+    }
+
+    private void getTopHitches(String token, String user_id) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+        progressDialog.show();
+
+        call.getTopHitches(token, user_id).enqueue(new Callback<WhoLikesYouModel>() {
+            @Override
+            public void onResponse(Call<WhoLikesYouModel> call, Response<WhoLikesYouModel> response) {
+
+                WhoLikesYouModel whoLikesYouModel = response.body();
+
+                topHitchesModelList.clear();
+                List<WhoLikesYouModel.WhoLikesYou> dataList = whoLikesYouModel.getChatDataList();
+
+                for (int i = 0; i < dataList.size(); i++) {
+
+                    WhoLikesYouModel.WhoLikesYou model = dataList.get(i);
+
+                    WhoLikesYouModel.WhoLikesYou data = new WhoLikesYouModel.WhoLikesYou(
+                            model.getFirst_name(), model.getLast_name(),
+                            model.getAge(), model.getKm_diff(),
+                            model.getImage()
+                    );
+                    topHitchesModelList.add(data);
+                }
+                topRecycler();
                 progressDialog.dismiss();
 
 

@@ -87,13 +87,31 @@ public interface Api {
 
     @Multipart
     @POST("add_image.php")
-    Call<Responsee> abc(
+    Call<Responsee> addImage(
 
             @Part("token") RequestBody token,
             @Part("user_id") RequestBody user_id,
             @Part MultipartBody.Part image
 
     );
+
+    @Multipart
+    @POST("edit_image.php")
+    Call<CommonModel> editImage(
+
+            @Part("token") RequestBody token,
+            @Part("user_id") RequestBody user_id,
+            @Part MultipartBody.Part image
+
+    );
+
+    @FormUrlEncoded
+    @POST("delete_user_image.php")
+    Call<CommonModel> deleteUserImage(
+
+            @Field("token") String token,
+            @Field("user_id") String user_id,
+            @Field("image_id") String image_id);
 
     @FormUrlEncoded
     @POST("get_user_image.php")
@@ -264,7 +282,15 @@ public interface Api {
     @POST("get_matches.php")
     Call<MyMatchesModel> getMyMatches(
             @Field("token") String token,
-            @Field("userid") String user_id);
+            @Field("user_id") String user_id);
+
+
+    @FormUrlEncoded
+    @POST("get_favorite_list.php")
+    Call<MyMatchesModel> getFavorite(
+            @Field("token") String token,
+            @Field("user_id") String user_id);
+
 
     @FormUrlEncoded
     @POST("get_my_profile.php")
@@ -279,6 +305,12 @@ public interface Api {
             @Field("token") String token,
             @Field("user_id") String user_id);
 
+
+    @FormUrlEncoded
+    @POST("top_hitch.php")
+    Call<WhoLikesYouModel> getTopHitches(
+            @Field("token") String token,
+            @Field("user_id") String user_id);
 
     @FormUrlEncoded
     @POST("get_user_profile_details.php")

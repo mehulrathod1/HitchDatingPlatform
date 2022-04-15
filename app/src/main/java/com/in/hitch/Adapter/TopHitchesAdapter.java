@@ -1,5 +1,6 @@
 package com.in.hitch.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +11,16 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.in.hitch.Model.TopHitchesModel;
+import com.in.hitch.Model.WhoLikesYouModel;
 import com.in.hitch.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TopHitchesAdapter extends RecyclerView.Adapter<TopHitchesAdapter.ViewHolder> {
-    List<TopHitchesModel> list = new ArrayList<>();
+    List<WhoLikesYouModel.WhoLikesYou> list = new ArrayList<>();
     Context context;
     Click click;
 
@@ -27,7 +30,7 @@ public class TopHitchesAdapter extends RecyclerView.Adapter<TopHitchesAdapter.Vi
         void onItemClick(int position);
     }
 
-    public TopHitchesAdapter(List<TopHitchesModel> list, Context context, Click click) {
+    public TopHitchesAdapter(List<WhoLikesYouModel.WhoLikesYou> list, Context context, Click click) {
         this.list = list;
         this.context = context;
         this.click = click;
@@ -46,13 +49,15 @@ public class TopHitchesAdapter extends RecyclerView.Adapter<TopHitchesAdapter.Vi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TopHitchesAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull TopHitchesAdapter.ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
-        TopHitchesModel model = list.get(position);
-        holder.TopHitchesProfile.setImageResource(model.getTopHitchesProfile());
+        WhoLikesYouModel.WhoLikesYou model = list.get(position);
 
-        holder.TopHitchesName.setText(model.getTopHitchesName());
-        holder.TopHitchesDistance.setText(model.getTopHitchesDistance());
+
+        Glide.with(context).load(model.getImage()).into(holder.TopHitchesProfile);
+
+        holder.TopHitchesName.setText(model.getFirst_name()+", "+model.getAge());
+        holder.TopHitchesDistance.setText(model.getKm_diff() + " KM");
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

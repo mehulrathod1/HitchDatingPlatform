@@ -27,8 +27,10 @@ import android.widget.Toast;
 
 
 import com.in.hitch.Adapter.AddImageAdapter;
+import com.in.hitch.Model.CommonModel;
 import com.in.hitch.Model.GetUserImageModel;
 import com.in.hitch.R;
+import com.in.hitch.Utils.Glob;
 import com.in.hitch.retrofit.Api;
 import com.in.hitch.retrofit.AppConfig;
 import com.in.hitch.retrofit.Responsee;
@@ -118,9 +120,8 @@ public class Activity_Add_photos extends AppCompatActivity {
         addImageBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Activity_My_profile.class);
-                startActivity(intent);
 
+                finish();
 
             }
         });
@@ -259,10 +260,6 @@ public class Activity_Add_photos extends AppCompatActivity {
                             } else {
                                 Toast.makeText(getApplicationContext(), "Please enter correct detail", Toast.LENGTH_SHORT).show();
                             }
-
-//                            change_profile_photo.setImageBitmap(bitmap);
-//                            Log.e("TAG", "onActivityResult: " + photoFile.getAbsolutePath());
-
                         }
                         break;
                 }
@@ -416,15 +413,33 @@ public class Activity_Add_photos extends AppCompatActivity {
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if (options[i].equals("Edit")) {
 
-                            Toast.makeText(getApplicationContext(), "edit", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "" + data.get(position).isId(), Toast.LENGTH_SHORT).show();
+
+                            final String[] options = {"Camera", "Add From Gallery", "Cancel"};
+                            final AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Add_photos.this);
+                            builder.setCancelable(false);
+                            builder.setItems(options, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    if (options[i].equals("Camera")) {
+                                        onLaunchCamera();
+                                    } else if (options[i].equals("Add From Gallery")) {
+                                        openMediaContent();
+                                    }
+                                }
+                            });
+                            builder.show();
+
+
                         } else if (options[i].equals("Delete")) {
-                            Toast.makeText(getApplicationContext(), "delete", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "" + data.get(position).isId(), Toast.LENGTH_SHORT).show();
+
+                            deleteUserImage(Token, User_Id, data.get(position).isId());
                         }
                     }
                 });
                 builder.show();
 
-                Toast.makeText(getApplicationContext(), "" + data.get(position).isId(), Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -443,7 +458,7 @@ public class Activity_Add_photos extends AppCompatActivity {
         RequestBody requestBody_req_img = RequestBody.create(MediaType.parse("multipart/form-data"), user_image);
         payment_image = MultipartBody.Part.createFormData("image[]", img_file.getName(), requestBody_req_img);
 
-        call.abc(requestBody_token, requestBody_flat_id, payment_image).enqueue(new Callback<Responsee>() {
+        call.addImage(requestBody_token, requestBody_flat_id, payment_image).enqueue(new Callback<Responsee>() {
             @Override
             public void onResponse(Call<Responsee> call, Response<Responsee> response) {
 
@@ -457,6 +472,66 @@ public class Activity_Add_photos extends AppCompatActivity {
             public void onFailure(Call<Responsee> call, Throwable t) {
             }
         });
+    }
+
+    private void editImage(String token, String userId, File user_image) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+        progressDialog.show();
+        RequestBody requestBody_token = RequestBody.create(MediaType.parse("multipart/form-data"), token);
+        RequestBody requestBody_user_id = RequestBody.create(MediaType.parse("multipart/form-data"), userId);
+        MultipartBody.Part edit_image = null;
+        RequestBody requestBody_req_img = RequestBody.create(MediaType.parse("multipart/form-data"), user_image);
+        edit_image = MultipartBody.Part.createFormData("image", img_file.getName(), requestBody_req_img);
+
+
+        call.editImage(requestBody_token, requestBody_user_id, edit_image).enqueue(new Callback<CommonModel>() {
+            @Override
+            public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
+
+
+                CommonModel commonModel = response.body();
+                Toast.makeText(getApplicationContext(), commonModel.getMessage(), Toast.LENGTH_SHORT).show();
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<CommonModel> call, Throwable t) {
+
+                progressDialog.dismiss();
+            }
+        });
+
+
+    }
+
+    private void deleteUserImage(String token, String user_id, String image_id) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+        progressDialog.show();
+
+        call.deleteUserImage(token, user_id, image_id).enqueue(new Callback<CommonModel>() {
+            @Override
+            public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
+
+                CommonModel commonModel = response.body();
+
+                Toast.makeText(Activity_Add_photos.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
+
+                progressDialog.dismiss();
+
+            }
+
+            @Override
+            public void onFailure(Call<CommonModel> call, Throwable t) {
+
+                progressDialog.dismiss();
+
+            }
+        });
+
+
     }
 
 }

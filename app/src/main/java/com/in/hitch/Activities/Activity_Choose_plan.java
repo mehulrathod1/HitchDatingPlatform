@@ -107,23 +107,22 @@ public class Activity_Choose_plan extends AppCompatActivity {
         membershipBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               finish();
+                finish();
             }
         });
 
         purchase.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-viewPager.setCurrentItem(getItem(+1), true);
+//                viewPager.setCurrentItem(getItem(+1), true);
 
-//                purchasePlane(User_Id, position);
+                purchasePlane(User_Id, position);
 
             }
         });
 
-
-
     }
+
     private int getItem(int i) {
         return viewPager.getCurrentItem() + i;
     }

@@ -124,10 +124,12 @@ public class Activity_My_Matches extends AppCompatActivity {
 
                     MyMatchesModel.MatchesData data = new MyMatchesModel.MatchesData(
                             model.getUser_id(),
-                            model.getImage(),
                             model.getTitle(),
+                            model.getLast_name(),
+                            model.getAge(),
                             model.getKm_diff(),
-                            model.getLiked()
+                            model.getImage()
+
                     );
 
                     list.add(data);

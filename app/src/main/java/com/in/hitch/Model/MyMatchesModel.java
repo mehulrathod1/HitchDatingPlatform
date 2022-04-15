@@ -51,14 +51,19 @@ public class MyMatchesModel {
         String user_id;
 
 
-        @SerializedName("image")
-        @Expose
-        String image;
 
-
-        @SerializedName("title")
+        @SerializedName("first_name")
         @Expose
         String title;
+
+        @SerializedName("last_name")
+        @Expose
+        String last_name;
+
+
+        @SerializedName("age")
+        @Expose
+        String age;
 
 
         @SerializedName("km_diff")
@@ -66,17 +71,34 @@ public class MyMatchesModel {
         String km_diff;
 
 
-
-        @SerializedName("liked")
+        @SerializedName("image")
         @Expose
-        String liked;
+        String image;
 
-        public MatchesData(String user_id, String image, String title, String km_diff, String liked) {
+
+        public MatchesData(String user_id, String title, String last_name, String age, String km_diff, String image) {
             this.user_id = user_id;
-            this.image = image;
             this.title = title;
+            this.last_name = last_name;
+            this.age = age;
             this.km_diff = km_diff;
-            this.liked = liked;
+            this.image = image;
+        }
+
+        public String getLast_name() {
+            return last_name;
+        }
+
+        public void setLast_name(String last_name) {
+            this.last_name = last_name;
+        }
+
+        public String getAge() {
+            return age;
+        }
+
+        public void setAge(String age) {
+            this.age = age;
         }
 
         public String getUser_id() {
@@ -111,12 +133,6 @@ public class MyMatchesModel {
             this.km_diff = km_diff;
         }
 
-        public String getLiked() {
-            return liked;
-        }
 
-        public void setLiked(String liked) {
-            this.liked = liked;
-        }
     }
 }
