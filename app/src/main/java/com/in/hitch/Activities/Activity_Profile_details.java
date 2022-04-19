@@ -4,6 +4,7 @@ import static com.in.hitch.Utils.Glob.Token;
 import static com.in.hitch.Utils.Glob.base_url;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -67,6 +68,9 @@ public class Activity_Profile_details extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         init();
         addBottomDots(0);
+
+
+        Intent intent = getIntent();
 
         getProfileDetail(Token, "59", "53");
 

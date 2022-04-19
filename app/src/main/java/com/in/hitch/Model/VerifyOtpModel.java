@@ -53,6 +53,14 @@ public class VerifyOtpModel {
         @Expose
         String is_completed_profile;
 
+        @SerializedName("is_membership")
+        @Expose
+        String is_membership;
+
+        @SerializedName("plan_name")
+        @Expose
+        String plan_name;
+
         public String getIs_mobile_verify() {
             return is_mobile_verify;
         }
@@ -67,6 +75,22 @@ public class VerifyOtpModel {
 
         public void setIs_completed_profile(String is_completed_profile) {
             this.is_completed_profile = is_completed_profile;
+        }
+
+        public String getIs_membership() {
+            return is_membership;
+        }
+
+        public void setIs_membership(String is_membership) {
+            this.is_membership = is_membership;
+        }
+
+        public String getPlan_name() {
+            return plan_name;
+        }
+
+        public void setPlan_name(String plan_name) {
+            this.plan_name = plan_name;
         }
     }
 }

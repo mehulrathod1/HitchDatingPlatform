@@ -5,6 +5,7 @@ public class Glob {
     public static String Token = "123456789";
 
     public static String User_Id;
+    public static String Plane_Name;
     public static String Mobile_No;
     public static String Gender_Id;
     public static String Religion_Id;

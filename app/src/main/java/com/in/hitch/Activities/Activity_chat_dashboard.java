@@ -375,7 +375,8 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                             chatModelData.getUsername(),
                             chatModelData.getMessage(),
                             chatModelData.getTime(),
-                            chatModelData.getType());
+                            chatModelData.getType(),
+                            chatModelData.getMsg_type());
 
                     list.add(chatItem);
                     Log.e(TAG, "onResponse: " + chatItem.getMessage());
@@ -415,7 +416,8 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                             chatModelData.getUsername(),
                             chatModelData.getMessage(),
                             chatModelData.getTime(),
-                            chatModelData.getType());
+                            chatModelData.getType(),
+                            chatModelData.getMsg_type());
 
                     list.add(chatItem);
                     Log.e(TAG, "onResponse: " + chatItem.getMessage());
@@ -461,6 +463,8 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                 msgLayout.setVisibility(View.VISIBLE);
                 replayLayout.setVisibility(View.GONE);
                 selected_msg_id.equals(selected_msg);
+
+
                 getChatList(chatId, User_Id);
 
                 Toast.makeText(getApplicationContext(), "" + model.getMessage(), Toast.LENGTH_SHORT).show();
@@ -531,7 +535,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         RequestBody requestBody_to_user_id = RequestBody.create(MediaType.parse("multipart/form-data"), to_user_id);
         MultipartBody.Part message_image = null;
         RequestBody requestBody_req_img = RequestBody.create(MediaType.parse("multipart/form-data"), user_image);
-        message_image = MultipartBody.Part.createFormData("file[]", img_file.getName(), requestBody_req_img);
+        message_image = MultipartBody.Part.createFormData("file", img_file.getName(), requestBody_req_img);
 
         call.sendFileMessage(requestBody_token, requestBody_from_user_id, requestBody_to_user_id, message_image).enqueue(new Callback<Responsee>() {
             @Override

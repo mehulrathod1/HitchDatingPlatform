@@ -74,6 +74,12 @@ public class ChatDashboardModel {
         @Expose
         String type;
 
+        @SerializedName("msg_type")
+        @Expose
+        String msg_type;
+
+
+
         public String getMsg_id() {
             return msg_id;
         }
@@ -130,7 +136,16 @@ public class ChatDashboardModel {
             this.type = type;
         }
 
-        public ChatDashboardList(String msg_id, String user_id, String image, String username, String message, String time, String type) {
+
+        public String getMsg_type() {
+            return msg_type;
+        }
+
+        public void setMsg_type(String msg_type) {
+            this.msg_type = msg_type;
+        }
+
+        public ChatDashboardList(String msg_id, String user_id, String image, String username, String message, String time, String type, String msg_type) {
             this.msg_id = msg_id;
             this.user_id = user_id;
             this.image = image;
@@ -138,6 +153,7 @@ public class ChatDashboardModel {
             this.message = message;
             this.time = time;
             this.type = type;
+            this.msg_type = msg_type;
         }
     }
 }

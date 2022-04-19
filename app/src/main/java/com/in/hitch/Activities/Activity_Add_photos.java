@@ -66,7 +66,8 @@ public class Activity_Add_photos extends AppCompatActivity {
     String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
     public String photoFileName = "IMG_" + timeStamp + ".jpg";
     Uri img_url;
-    public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
+    public static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 10;
+    public static int OPEN_MEDIA_CONTENT = 20;
     private static final int MY_CAMERA_REQUEST_CODE = 100;
     private static final int MY_Gallery_REQUEST_CODE = 101;
     public final String APP_TAG = "hitch";
@@ -76,6 +77,7 @@ public class Activity_Add_photos extends AppCompatActivity {
     AddImageAdapter adapter;
     ProgressDialog progressDialog;
     ImageView addImage, addImageBack;
+    String user_image_id;
 
 
     List<GetUserImageModel.GetImageModel> data = new ArrayList<>();
@@ -183,10 +185,8 @@ public class Activity_Add_photos extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             try {
                 switch (requestCode) {
-                    case 1034:
+                    case 10:
                         bitmap = BitmapFactory.decodeFile(photoFile.getAbsolutePath());
-//                        change_profile_photo.setImageBitmap(bitmap);
-//                        Log.e("TAG", "onActivityResult: " + photoFile.getAbsolutePath());
                         String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new
                                 Date());
                         img_file = new File(getApplicationContext().getCacheDir(), "IMG_" + timeStamp + ".jpg");
@@ -221,7 +221,45 @@ public class Activity_Add_photos extends AppCompatActivity {
                             Toast.makeText(getApplicationContext(), "Please enter correct detail", Toast.LENGTH_SHORT).show();
                         }
                         break;
-                    case 2:
+
+                    case 12:
+
+                        timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new
+                                Date());
+                        img_file = new File(getApplicationContext().getCacheDir(), "IMG_" + timeStamp + ".jpg");
+
+                        bitmap = null;
+
+                        try {
+                            if (img_url != null) {
+                                bitmap = getBitmap(img_url);
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+
+                        if (bitmap != null) {
+                            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+                            byte[] bitmapdata = bos.toByteArray();
+
+                            try {
+                                FileOutputStream fos = new FileOutputStream(img_file);
+                                fos.write(bitmapdata);
+                                fos.flush();
+                                fos.close();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                            Log.e("img_file", "onClick: " + img_file);
+
+                            editImage(Glob.Token, User_Id, user_image_id, img_file);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Please enter correct detail", Toast.LENGTH_SHORT).show();
+                        }
+                        break;
+
+                    case 20:
                         if (data.getData() != null) {
 //                            post();
                             bitmap = getBitmap(data.getData());
@@ -262,6 +300,50 @@ public class Activity_Add_photos extends AppCompatActivity {
                             }
                         }
                         break;
+
+                    case 14:
+
+                        if (data.getData() != null) {
+//                            post();
+                            bitmap = getBitmap(data.getData());
+                            img_url = data.getData();
+
+                            timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new
+                                    Date());
+                            img_file = new File(getApplicationContext().getCacheDir(), "IMG_" + timeStamp + ".jpg");
+
+                            bitmap = null;
+
+                            try {
+                                if (img_url != null) {
+                                    bitmap = getBitmap(img_url);
+                                }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                            if (bitmap != null) {
+                                ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 100 /*ignored for PNG*/, bos);
+                                byte[] bitmapdata = bos.toByteArray();
+
+                                try {
+                                    FileOutputStream fos = new FileOutputStream(img_file);
+                                    fos.write(bitmapdata);
+                                    fos.flush();
+                                    fos.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                Log.e("img_file", "onClick: " + img_file);
+
+                                editImage(Glob.Token, User_Id, user_image_id, img_file);
+                            } else {
+                                Toast.makeText(getApplicationContext(), "Please enter correct detail", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        break;
+
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -324,7 +406,7 @@ public class Activity_Add_photos extends AppCompatActivity {
             intent.putExtra(MediaStore.EXTRA_OUTPUT, tempFileUri);
         }
 
-        startActivityForResult(Intent.createChooser(intent, "Select Picture"), 2);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), OPEN_MEDIA_CONTENT);
     }
 
     public Bitmap getBitmap(final Uri selectedimg) throws IOException {
@@ -372,6 +454,7 @@ public class Activity_Add_photos extends AppCompatActivity {
             public void onResponse(Call<GetUserImageModel> call, Response<GetUserImageModel> response) {
 
                 GetUserImageModel getUserImageModel = response.body();
+                data.clear();
                 List<GetUserImageModel.GetImageModel> models = getUserImageModel.getList();
 
                 for (int i = 0; i < models.size(); i++) {
@@ -405,6 +488,8 @@ public class Activity_Add_photos extends AppCompatActivity {
             @Override
             public void onAddImageClick(int position) {
 
+                user_image_id = data.get(position).isId();
+
                 final String[] options = {"Edit", "Delete", "Cancel"};
                 final AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Add_photos.this);
                 builder.setCancelable(false);
@@ -415,6 +500,7 @@ public class Activity_Add_photos extends AppCompatActivity {
 
                             Toast.makeText(getApplicationContext(), "" + data.get(position).isId(), Toast.LENGTH_SHORT).show();
 
+
                             final String[] options = {"Camera", "Add From Gallery", "Cancel"};
                             final AlertDialog.Builder builder = new AlertDialog.Builder(Activity_Add_photos.this);
                             builder.setCancelable(false);
@@ -422,8 +508,11 @@ public class Activity_Add_photos extends AppCompatActivity {
                                 @Override
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     if (options[i].equals("Camera")) {
+
+                                        CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 12;
                                         onLaunchCamera();
                                     } else if (options[i].equals("Add From Gallery")) {
+                                        OPEN_MEDIA_CONTENT = 14;
                                         openMediaContent();
                                     }
                                 }
@@ -465,6 +554,7 @@ public class Activity_Add_photos extends AppCompatActivity {
                 Responsee responsee = (Responsee) response.body();
                 String s = responsee.getMessage();
                 Toast.makeText(getApplicationContext(), s, Toast.LENGTH_SHORT).show();
+                getUserImage(User_Id);
                 progressDialog.dismiss();
             }
 
@@ -474,26 +564,29 @@ public class Activity_Add_photos extends AppCompatActivity {
         });
     }
 
-    private void editImage(String token, String userId, File user_image) {
+    private void editImage(String token, String userId, String image_id, File user_image) {
 
         Api call = AppConfig.getClient(base_url).create(Api.class);
         progressDialog.show();
         RequestBody requestBody_token = RequestBody.create(MediaType.parse("multipart/form-data"), token);
         RequestBody requestBody_user_id = RequestBody.create(MediaType.parse("multipart/form-data"), userId);
+        RequestBody requestBody_image_id = RequestBody.create(MediaType.parse("multipart/form-data"), image_id);
         MultipartBody.Part edit_image = null;
         RequestBody requestBody_req_img = RequestBody.create(MediaType.parse("multipart/form-data"), user_image);
         edit_image = MultipartBody.Part.createFormData("image", img_file.getName(), requestBody_req_img);
 
 
-        call.editImage(requestBody_token, requestBody_user_id, edit_image).enqueue(new Callback<CommonModel>() {
+        call.editImage(requestBody_token, requestBody_user_id, requestBody_image_id, edit_image).enqueue(new Callback<CommonModel>() {
             @Override
             public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
 
 
                 CommonModel commonModel = response.body();
                 Toast.makeText(getApplicationContext(), commonModel.getMessage(), Toast.LENGTH_SHORT).show();
+                getUserImage(User_Id);
                 progressDialog.dismiss();
-
+                CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 10;
+                OPEN_MEDIA_CONTENT = 20;
             }
 
             @Override
@@ -518,7 +611,7 @@ public class Activity_Add_photos extends AppCompatActivity {
                 CommonModel commonModel = response.body();
 
                 Toast.makeText(Activity_Add_photos.this, "" + commonModel.getMessage(), Toast.LENGTH_SHORT).show();
-
+                getUserImage(User_Id);
                 progressDialog.dismiss();
 
             }

@@ -73,6 +73,7 @@ public class Activity_profile_menu extends AppCompatActivity {
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("key", User_Id);
                 editor.remove("key");
+                editor.remove("PlaneName");
                 editor.apply();
                 editor.commit();
 

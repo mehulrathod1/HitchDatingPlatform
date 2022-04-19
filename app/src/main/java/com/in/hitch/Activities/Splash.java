@@ -1,5 +1,7 @@
 package com.in.hitch.Activities;
 
+import static com.in.hitch.Utils.Glob.Plane_Name;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -16,7 +18,7 @@ public class Splash extends AppCompatActivity {
 
 
     Handler handler;
-    String loginId;
+    String loginId,plane_name;
 
 
     @Override
@@ -27,8 +29,9 @@ public class Splash extends AppCompatActivity {
 
         SharedPreferences prefs = getSharedPreferences("MyPref", 0);
         loginId = prefs.getString("key", "null");
-        Log.e("getSharedPreferences", "onCreate: " + loginId);
-
+        plane_name = prefs.getString("PlaneName","null");
+        Plane_Name = plane_name;
+        Log.e("getSharedPreferences", "onCreate: " + plane_name);
 
         if (loginId.equals("null")) {
             move(MainActivity.class);
@@ -36,8 +39,6 @@ public class Splash extends AppCompatActivity {
             Glob.User_Id = loginId;
             move(Activity_Home.class);
         }
-
-
     }
 
 

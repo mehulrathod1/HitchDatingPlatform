@@ -1,5 +1,6 @@
 package com.in.hitch.Activities;
 
+import static com.in.hitch.Utils.Glob.Plane_Name;
 import static com.in.hitch.Utils.Glob.Token;
 import static com.in.hitch.Utils.Glob.Update_Gender_Id;
 import static com.in.hitch.Utils.Glob.Update_Sexual_Id;
@@ -98,6 +99,16 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
         get_Gender_Option();
         getMyProfile(Token, "48");
 
+
+        if (Plane_Name.equals("Platinum")){
+            ageSwitch.setClickable(true);
+            distanceSwitch.setClickable(true);
+        }
+        else {
+            ageSwitch.setClickable(false);
+            distanceSwitch.setClickable(false);
+        }
+
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
@@ -125,6 +136,7 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
         progressDialog = new ProgressDialog(Activity_My_profile.this);
         progressDialog.setCancelable(false); // set cancelable to false
         progressDialog.setMessage("Please Wait"); // set message
+
         cv_add_photos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -140,6 +152,9 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
                 finish();
             }
         });
+
+
+
 
         btnUpdateProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -406,8 +421,6 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
         queue.add(request);
     }
 
-
-
     public void updateProfile(String user_id, String job_title,
                               String company_name, String school_name,
                               String current_location, String latitude,
@@ -437,7 +450,6 @@ public class Activity_My_profile extends AppCompatActivity implements LocationLi
             }
         });
     }
-
 
     private void getMyProfile(String token, String userId) {
 

@@ -69,7 +69,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
                 .load(model.getImage())
                 .into(holder.userImage);
 
-        if (model.getType().equals("received")) {
+        if (model.getType().equals("received") && model.getMsg_type().equals("text")) {
 
 //            StringEscapeUtils.unescapeJava(serverResponse);
             holder.receivedMessage.setText(StringEscapeUtils.unescapeJava(model.getMessage()));
@@ -79,13 +79,26 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
 
 
         }
-        if (model.getType().equals("sent")) {
+        if (model.getType().equals("sent") && model.getMsg_type().equals("text")) {
 
             holder.send_message.setText(StringEscapeUtils.unescapeJava(model.getMessage()));
 
 //            holder.send_message.setText(model.getMessage());
             holder.sendMessageTime.setText(model.getTime());
             holder.first_chat.setVisibility(View.GONE);
+        }
+        if (model.getMsg_type().equals("file")) {
+
+            holder.receivedMessage.setVisibility(View.GONE);
+            holder.send_message.setVisibility(View.GONE);
+
+
+            holder.sendImage.setVisibility(View.VISIBLE);
+
+            Glide.with(context)
+                    .load(model.getMessage())
+                    .into(holder.sendImage);
+
         }
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
@@ -127,6 +140,7 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
         TextView receivedMessage, receivedMessageTime, send_message, sendMessageTime;
         RelativeLayout first_chat, second_chat;
         LinearLayout date_layout, receivedLayout, sendLayout;
+        ImageView sendImage, receivedImage;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -141,6 +155,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
             second_chat = itemView.findViewById(R.id.second_chat);
             receivedLayout = itemView.findViewById(R.id.receivedLayout);
             sendLayout = itemView.findViewById(R.id.sendLayout);
+            receivedImage = itemView.findViewById(R.id.receivedImage);
+            sendImage = itemView.findViewById(R.id.sendImage);
         }
     }
 

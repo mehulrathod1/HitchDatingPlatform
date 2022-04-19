@@ -101,6 +101,7 @@ public interface Api {
 
             @Part("token") RequestBody token,
             @Part("user_id") RequestBody user_id,
+            @Part("image_id") RequestBody image_id,
             @Part MultipartBody.Part image
 
     );

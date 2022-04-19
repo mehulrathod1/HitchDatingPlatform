@@ -77,6 +77,7 @@ import com.mindorks.placeholderview.SwipeDirectionalView;
 import com.mindorks.placeholderview.SwipePlaceHolderView;
 import com.mindorks.placeholderview.listeners.ItemRemovedListener;
 import com.yuyakaido.android.cardstackview.CardStackLayoutManager;
+import com.yuyakaido.android.cardstackview.CardStackListener;
 import com.yuyakaido.android.cardstackview.CardStackView;
 import com.yuyakaido.android.cardstackview.Direction;
 import com.yuyakaido.android.cardstackview.Duration;
@@ -107,6 +108,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class Activity_Home extends AppCompatActivity {
+
 
     BottomNavigationView bottomNavigationView;
     CardView cv_filters, cv_notifications;
@@ -801,6 +803,7 @@ public class Activity_Home extends AppCompatActivity {
                         @Override
                         public void onClickItem(int position) {
                             Intent i = new Intent(Activity_Home.this, Activity_Profile_details.class);
+                            i.putExtra("userId",profileCardModelList.get(position).getId());
                             startActivity(i);
                         }
 
@@ -902,7 +905,7 @@ public class Activity_Home extends AppCompatActivity {
                     cardStackView.setItemAnimator(new DefaultItemAnimator());
                     progressDialog.dismiss();
 
-                    Log.e("profileCardModelList", "onResponse: " + model.getAge() + profileCardModelList.size());
+                    Log.e("profileCardModelList", "onResponse: " + cardStackView.getLayoutDirection());
 
                 }
 
@@ -1031,5 +1034,6 @@ public class Activity_Home extends AppCompatActivity {
         finishAffinity();
         super.onBackPressed();
     }
+
 
 }

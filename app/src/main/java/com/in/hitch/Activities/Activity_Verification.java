@@ -2,10 +2,10 @@ package com.in.hitch.Activities;
 
 import static android.view.KeyEvent.KEYCODE_BACK;
 import static com.in.hitch.Utils.Glob.Mobile_No;
+import static com.in.hitch.Utils.Glob.Plane_Name;
 import static com.in.hitch.Utils.Glob.Token;
 import static com.in.hitch.Utils.Glob.User_Id;
 import static com.in.hitch.Utils.Glob.base_url;
-
 
 
 import android.app.ProgressDialog;
@@ -65,7 +65,6 @@ public class Activity_Verification extends AppCompatActivity {
         init();
 
 
-
     }
 
     private void init() {
@@ -111,8 +110,6 @@ public class Activity_Verification extends AppCompatActivity {
     }
 
 
-
-
     private void verifyOtp(String token, String user_id, String otp) {
 
         Api call = AppConfig.getClient(base_url).create(Api.class);
@@ -126,31 +123,33 @@ public class Activity_Verification extends AppCompatActivity {
 
                 VerifyOtpModel.VerifyData model = verifyOtpModel.getVerifyData();
 
-                if (response.isSuccessful()){
-                if (model.getIs_mobile_verify().equals("y") && model.getIs_completed_profile().equals("n")) {
-                    Toast.makeText(getApplicationContext(), "" + verifyOtpModel.getMessage(), Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
-                    Intent i = new Intent(Activity_Verification.this, Activity_Profile_completion.class);
-                    startActivity(i);
-                    finish();
+                if (response.isSuccessful()) {
+                    if (model.getIs_mobile_verify().equals("y") && model.getIs_completed_profile().equals("n")) {
+                        Toast.makeText(getApplicationContext(), "" + verifyOtpModel.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
+                        Intent i = new Intent(Activity_Verification.this, Activity_Profile_completion.class);
+                        startActivity(i);
+                        finish();
 
-                }
-                if (model.getIs_mobile_verify().equals("y") && model.getIs_completed_profile().equals("y")) {
-                    Toast.makeText(getApplicationContext(), "" + verifyOtpModel.getMessage(), Toast.LENGTH_SHORT).show();
-                    progressDialog.dismiss();
+                    }
+                    if (model.getIs_mobile_verify().equals("y") && model.getIs_completed_profile().equals("y")) {
+                        Toast.makeText(getApplicationContext(), "" + verifyOtpModel.getMessage(), Toast.LENGTH_SHORT).show();
+                        progressDialog.dismiss();
 
 
-                    SharedPreferences sharedPreferences = getSharedPreferences("MyPref", 0);
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("key", User_Id);
-                    editor.commit();
+                        Glob.Plane_Name = model.getPlan_name();
 
-                    Intent i = new Intent(Activity_Verification.this, Activity_Home.class);
-                    startActivity(i);
-                    finish();
-                }
-                }
-                else {
+                        SharedPreferences sharedPreferences = getSharedPreferences("MyPref", 0);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("key", User_Id);
+                        editor.putString("PlaneName", Plane_Name);
+                        editor.commit();
+
+                        Intent i = new Intent(Activity_Verification.this, Activity_Home.class);
+                        startActivity(i);
+                        finish();
+                    }
+                } else {
 
                     progressDialog.dismiss();
 
@@ -165,7 +164,7 @@ public class Activity_Verification extends AppCompatActivity {
 
                 progressDialog.dismiss();
 
-                Toast.makeText(getApplicationContext(), "" +"OTP invalid", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "" + "OTP invalid", Toast.LENGTH_SHORT).show();
             }
         });
     }
