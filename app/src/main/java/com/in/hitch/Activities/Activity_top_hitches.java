@@ -60,7 +60,7 @@ public class Activity_top_hitches extends AppCompatActivity {
 
         topHitchesRecycle = findViewById(R.id.topHitchesRecycle);
         init();
-        getWhoLikeYou(Glob.Token, "59");
+        getWhoLikeYou(Glob.Token, Glob.User_Id);
 
     }
 
@@ -82,7 +82,7 @@ public class Activity_top_hitches extends AppCompatActivity {
                 tv_who_likes_you.setTextColor(getResources().getColor(R.color.black));
                 tv_top_hitches.setTextColor(getResources().getColor(R.color.md_grey_500));
 
-                getWhoLikeYou(Glob.Token, "59");
+                getWhoLikeYou(Glob.Token, Glob.User_Id);
 
             }
         });
@@ -92,7 +92,7 @@ public class Activity_top_hitches extends AppCompatActivity {
 
                 tv_top_hitches.setTextColor(getResources().getColor(R.color.black));
                 tv_who_likes_you.setTextColor(getResources().getColor(R.color.md_grey_500));
-                getTopHitches(Glob.Token, "48");
+                getTopHitches(Glob.Token, Glob.User_Id);
             }
         });
 
@@ -134,8 +134,11 @@ public class Activity_top_hitches extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
 
-                Intent intent = new Intent(getApplicationContext(), Activity_Profile_details.class);
-                startActivity(intent);
+                String profileId = list.get(position).getUser_id();
+                Intent i = new Intent(Activity_top_hitches.this, Activity_Profile_details.class);
+                i.putExtra("profileId", profileId);
+                i.putExtra("flag", "Activity_top_hitches");
+                startActivity(i);
 
             }
 
@@ -162,6 +165,11 @@ public class Activity_top_hitches extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
 
+                String profileId = topHitchesModelList.get(position).getUser_id();
+                Intent i = new Intent(Activity_top_hitches.this, Activity_Profile_details.class);
+                i.putExtra("profileId", profileId);
+                i.putExtra("flag", "Activity_top_hitches");
+                startActivity(i);
             }
         });
 
@@ -192,7 +200,7 @@ public class Activity_top_hitches extends AppCompatActivity {
                     WhoLikesYouModel.WhoLikesYou model = dataList.get(i);
 
                     WhoLikesYouModel.WhoLikesYou data = new WhoLikesYouModel.WhoLikesYou(
-                            model.getFirst_name(), model.getLast_name(),
+                            model.getUser_id(),model.getFirst_name(), model.getLast_name(),
                             model.getAge(), model.getKm_diff(),
                             model.getImage()
                     );
@@ -233,7 +241,7 @@ public class Activity_top_hitches extends AppCompatActivity {
                     WhoLikesYouModel.WhoLikesYou model = dataList.get(i);
 
                     WhoLikesYouModel.WhoLikesYou data = new WhoLikesYouModel.WhoLikesYou(
-                            model.getFirst_name(), model.getLast_name(),
+                            model.getUser_id(),model.getFirst_name(), model.getLast_name(),
                             model.getAge(), model.getKm_diff(),
                             model.getImage()
                     );
@@ -241,7 +249,6 @@ public class Activity_top_hitches extends AppCompatActivity {
                 }
                 topRecycler();
                 progressDialog.dismiss();
-
 
             }
 

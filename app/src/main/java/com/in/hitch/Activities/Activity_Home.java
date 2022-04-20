@@ -7,17 +7,11 @@ import static com.in.hitch.Utils.Glob.Token;
 import static com.in.hitch.Utils.Glob.User_Id;
 import static com.in.hitch.Utils.Glob.base_url;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.IntentSender;
-import android.content.pm.PackageManager;
 import android.graphics.Point;
-import android.location.Address;
-import android.location.Geocoder;
-import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -48,7 +42,6 @@ import com.crystal.crystalrangeseekbar.interfaces.OnRangeSeekbarFinalValueListen
 import com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
@@ -59,7 +52,6 @@ import com.google.android.gms.tasks.Task;
 import com.in.hitch.Adapter.CardStackAdapter;
 import com.in.hitch.Model.CommonModel;
 import com.in.hitch.Model.GetUserFilterModel;
-import com.in.hitch.Model.ItemModel;
 import com.in.hitch.Model.Profile;
 import com.in.hitch.Model.ProfileCardModel;
 import com.in.hitch.R;
@@ -86,17 +78,14 @@ import com.yuyakaido.android.cardstackview.StackFrom;
 import com.yuyakaido.android.cardstackview.SwipeAnimationSetting;
 import com.yuyakaido.android.cardstackview.SwipeableMethod;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 
 import org.json.JSONArray;
@@ -142,6 +131,10 @@ public class Activity_Home extends AppCompatActivity {
 
     private LocationRequest locationRequest;
     private static final int REQUEST_CHECK_SETTINGS = 10001;
+    String profileUserId;
+    String likeFlag = "null";
+    String superLikeFlag = "null";
+    int likeRestriction = 0;
 
 
     @Override
@@ -191,9 +184,68 @@ public class Activity_Home extends AppCompatActivity {
 
 
         cardStackView = findViewById(R.id.card_stack_view);
-        manager = new CardStackLayoutManager(this);
-        manager.setStackFrom(StackFrom.None);
+        manager = new CardStackLayoutManager(this, new CardStackListener() {
+            @Override
+            public void onCardDragging(Direction direction, float ratio) {
 
+            }
+
+            @Override
+            public void onCardSwiped(Direction direction) {
+
+
+                if (direction == Direction.Right) {
+                    if (likeFlag.equals("likeButton")) {
+
+                        likeFlag = "null";
+
+                    } else {
+                        Log.e("onCardSwiped", "onCardSwiped: " + direction + profileUserId);
+                        addLike(Token, User_Id, profileUserId);
+                    }
+
+                }
+                if (direction == Direction.Left) {
+                    Log.e("onCardSwiped", "onCardSwiped: " + direction);
+
+                }
+                if (direction == Direction.Top) {
+
+                    if (superLikeFlag.equals("SuperLikeButton")){
+                        superLikeFlag = "null";
+                    }
+                    else {
+                        addSupperLike(Token, User_Id, profileUserId);
+                    }
+                }
+            }
+
+            @Override
+            public void onCardRewound() {
+
+            }
+
+            @Override
+            public void onCardCanceled() {
+
+            }
+
+            @Override
+            public void onCardAppeared(View view, int position) {
+
+            }
+
+            @Override
+            public void onCardDisappeared(View view, int position) {
+
+
+                profileUserId = profileCardModelList.get(position).getId();
+
+                Log.e("onCardSwiped", "onCardSwiped: " + profileUserId);
+
+            }
+        });
+        manager.setStackFrom(StackFrom.None);
         manager.setVisibleCount(3);
         manager.setTranslationInterval(8.0f);
         manager.setScaleInterval(0.95f);
@@ -802,29 +854,35 @@ public class Activity_Home extends AppCompatActivity {
                     adapter = new CardStackAdapter(profileCardModelList, getApplicationContext(), new CardStackAdapter.Click() {
                         @Override
                         public void onClickItem(int position) {
+                            String profileId = profileCardModelList.get(position).getId();
                             Intent i = new Intent(Activity_Home.this, Activity_Profile_details.class);
-                            i.putExtra("userId",profileCardModelList.get(position).getId());
+                            i.putExtra("profileId", profileId);
+                            i.putExtra("flag", "Activity_Home");
                             startActivity(i);
                         }
 
                         @Override
                         public void onClickReload(int position) {
 
-                            RewindAnimationSetting setting11 = new RewindAnimationSetting.Builder()
-                                    .setDirection(Direction.Left)
-                                    .setDuration(Duration.Normal.duration)
-                                    .setInterpolator(new AccelerateInterpolator())
-                                    .build();
 
-                            manager.setRewindAnimationSetting(setting11);
-                            manager.setCanScrollVertical(true);
-                            manager.setCanScrollHorizontal(true);
-                            manager.setDirections(Direction.FREEDOM);
-                            manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
-                            manager.setOverlayInterpolator(new AccelerateInterpolator());
-                            manager.setStackFrom(StackFrom.None);
-                            cardStackView.rewind();
+                            if (Glob.Plane_Name.equals("")) {
+                                Toast.makeText(Activity_Home.this, "" + "Purchase plane for rewind swipe", Toast.LENGTH_SHORT).show();
+                            } else {
 
+                                RewindAnimationSetting setting11 = new RewindAnimationSetting.Builder()
+                                        .setDirection(Direction.Left)
+                                        .setDuration(Duration.Normal.duration)
+                                        .setInterpolator(new AccelerateInterpolator())
+                                        .build();
+                                manager.setRewindAnimationSetting(setting11);
+                                manager.setCanScrollVertical(true);
+                                manager.setCanScrollHorizontal(true);
+                                manager.setDirections(Direction.FREEDOM);
+                                manager.setSwipeableMethod(SwipeableMethod.AutomaticAndManual);
+                                manager.setOverlayInterpolator(new AccelerateInterpolator());
+                                manager.setStackFrom(StackFrom.None);
+                                cardStackView.rewind();
+                            }
                         }
 
                         @Override
@@ -865,7 +923,8 @@ public class Activity_Home extends AppCompatActivity {
                             manager.setStackFrom(StackFrom.None);
                             cardStackView.swipe();
 
-                            addLike(Token, "48", profileCardModelList.get(position).getId());
+                            likeFlag = "likeButton";
+                            addLike(Token, User_Id, profileCardModelList.get(position).getId());
                         }
 
                         @Override
@@ -887,14 +946,15 @@ public class Activity_Home extends AppCompatActivity {
                             manager.setStackFrom(StackFrom.None);
                             cardStackView.swipe();
 
-                            addSupperLike(Token, "48", profileCardModelList.get(position).getId());
+                            superLikeFlag = "SuperLikeButton";
+                            addSupperLike(Token, User_Id, profileCardModelList.get(position).getId());
                         }
 
                         @Override
                         public void onClickFavourite(int position) {
 
 
-                            addToFavourite(Token, "48", profileCardModelList.get(position).getId());
+                            addToFavourite(Token, User_Id, profileCardModelList.get(position).getId());
 
                         }
                     });

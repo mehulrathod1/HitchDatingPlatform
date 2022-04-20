@@ -87,10 +87,12 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
             holder.sendMessageTime.setText(model.getTime());
             holder.first_chat.setVisibility(View.GONE);
         }
-        if (model.getMsg_type().equals("file")) {
+        if (model.getMsg_type().equals("file") && model.getType().equals("sent")) {
 
             holder.receivedMessage.setVisibility(View.GONE);
             holder.send_message.setVisibility(View.GONE);
+            holder.receivedMessageTime.setVisibility(View.GONE);
+            holder.userImage.setVisibility(View.GONE);
 
 
             holder.sendImage.setVisibility(View.VISIBLE);
@@ -99,6 +101,18 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
                     .load(model.getMessage())
                     .into(holder.sendImage);
 
+        }
+        if (model.getMsg_type().equals("file") && model.getType().equals("received")) {
+
+            holder.receivedMessage.setVisibility(View.GONE);
+            holder.send_message.setVisibility(View.GONE);
+            holder.sendMessageTime.setVisibility(View.GONE);
+            holder.receivedImage.setVisibility(View.VISIBLE);
+
+
+            Glide.with(context)
+                    .load(model.getMessage())
+                    .into(holder.receivedImage);
         }
 
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {

@@ -163,6 +163,14 @@ public class Activity_Favorite extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
 
+
+
+                String profileId = list.get(position).getUser_id();
+                Intent i = new Intent(Activity_Favorite.this, Activity_Profile_details.class);
+                i.putExtra("profileId", profileId);
+                i.putExtra("flag", "Activity_Favorite");
+                startActivity(i);
+
             }
         });
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));
@@ -220,7 +228,6 @@ public class Activity_Favorite extends AppCompatActivity {
                             Location location = new Location("providerNA");
                             location.setLongitude(longi);
                             location.setLatitude(lati);
-
 
                             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
                             List<Address> addresses = null;

@@ -51,9 +51,7 @@ public class Activity_My_Matches extends AppCompatActivity {
 //        setTitle("My Matches");
         getSupportActionBar().hide();
         init();
-        getMyMatches(Glob.Token,"48");
-
-
+        getMyMatches(Glob.Token, Glob.User_Id);
 
 
     }
@@ -152,6 +150,11 @@ public class Activity_My_Matches extends AppCompatActivity {
             @Override
             public void onItemClick(int position) {
 
+                String profileId = list.get(position).getUser_id();
+                Intent i = new Intent(Activity_My_Matches.this, Activity_Profile_details.class);
+                i.putExtra("profileId", profileId);
+                i.putExtra("flag", "Activity_My_Matches");
+                startActivity(i);
             }
         });
         recyclerView.setLayoutManager(new GridLayoutManager(this, 2));

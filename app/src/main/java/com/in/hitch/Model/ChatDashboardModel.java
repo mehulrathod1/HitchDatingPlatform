@@ -54,7 +54,7 @@ public class ChatDashboardModel {
         @Expose
         String user_id;
 
-        @SerializedName("image")
+        @SerializedName("from_profile_pic")
         @Expose
         String image;
 

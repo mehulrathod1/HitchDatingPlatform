@@ -31,7 +31,7 @@ public class Splash extends AppCompatActivity {
         loginId = prefs.getString("key", "null");
         plane_name = prefs.getString("PlaneName","null");
         Plane_Name = plane_name;
-        Log.e("getSharedPreferences", "onCreate: " + plane_name);
+        Log.e("getSharedPreferences", "onCreate: " + plane_name+loginId);
 
         if (loginId.equals("null")) {
             move(MainActivity.class);

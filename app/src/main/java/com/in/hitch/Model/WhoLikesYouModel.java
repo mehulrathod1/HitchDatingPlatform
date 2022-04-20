@@ -46,6 +46,10 @@ public class WhoLikesYouModel {
 
     public static class WhoLikesYou {
 
+        @SerializedName("user_id")
+        @Expose
+        String user_id;
+
         @SerializedName("first_name")
         @Expose
         String first_name;
@@ -67,7 +71,8 @@ public class WhoLikesYouModel {
         @Expose
         String image;
 
-        public WhoLikesYou(String first_name, String last_name, String age, String km_diff, String image) {
+        public WhoLikesYou(String user_id, String first_name, String last_name, String age, String km_diff, String image) {
+            this.user_id = user_id;
             this.first_name = first_name;
             this.last_name = last_name;
             this.age = age;
@@ -113,6 +118,14 @@ public class WhoLikesYouModel {
 
         public void setImage(String image) {
             this.image = image;
+        }
+
+        public String getUser_id() {
+            return user_id;
+        }
+
+        public void setUser_id(String user_id) {
+            this.user_id = user_id;
         }
     }
 }

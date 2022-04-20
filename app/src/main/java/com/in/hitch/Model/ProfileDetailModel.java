@@ -91,6 +91,20 @@ public class ProfileDetailModel {
         @Expose
         List<ImageList> imageLists = new ArrayList<>();
 
+
+
+        @SerializedName("chat_id")
+        @Expose
+        String chat_id;
+
+        public String getChat_id() {
+            return chat_id;
+        }
+
+        public void setChat_id(String chat_id) {
+            this.chat_id = chat_id;
+        }
+
         public List<ImageList> getImageLists() {
             return imageLists;
         }

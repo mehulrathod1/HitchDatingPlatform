@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -55,9 +56,10 @@ public class Activity_Profile_details extends AppCompatActivity {
     TextView reportUser, blockUser, cancel;
     ProgressDialog progressDialog;
     TextView userName, gender, profession, universityName, location, distance;
-
+    ImageView chatWith;
     ArrayList<ProfileDetailModel.ProfileDetail.ImageList> imageLists = new ArrayList<>();
 
+    String profileId, flag, chatId, user_name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +73,11 @@ public class Activity_Profile_details extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+        profileId = intent.getStringExtra("profileId");
+        flag = intent.getStringExtra("flag");
 
-        getProfileDetail(Token, "59", "53");
+        Log.e("profileId", "onCreate: " + profileId);
+        getProfileDetail(Token, Glob.User_Id, profileId);
 
         final Handler handler = new Handler();
 
@@ -108,10 +113,9 @@ public class Activity_Profile_details extends AppCompatActivity {
         universityName = findViewById(R.id.universityName);
         location = findViewById(R.id.location);
         distance = findViewById(R.id.distance);
-
+        chatWith = findViewById(R.id.chatWith);
         vp_slider = (ViewPager) findViewById(R.id.vp_slider);
         ll_dots = (LinearLayout) findViewById(R.id.ll_dots);
-
 
 
         rl_main = findViewById(R.id.main_layout);
@@ -120,6 +124,56 @@ public class Activity_Profile_details extends AppCompatActivity {
         progressDialog.setCancelable(false); // set cancelable to false
         progressDialog.setMessage("Please Wait"); // set message
 
+        chatWith.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (flag.equals("Activity_My_Matches")) {
+
+                    Intent i = new Intent(Activity_Profile_details.this, Activity_chat_dashboard.class);
+                    i.putExtra("chatId", chatId);
+                    i.putExtra("userId", profileId);
+                    if (imageLists.size() > 0) {
+                        i.putExtra("userImage", imageLists.get(0).getImage_name());
+                    } else {
+                        i.putExtra("userImage", "");
+                    }
+                    i.putExtra("userName", user_name);
+                    startActivity(i);
+                }
+
+                if (flag.equals("Activity_Home")|| flag.equals("Activity_top_hitches") ||flag.equals("Activity_Favorite") && Glob.Plane_Name.equals("Platinum")) {
+
+                    Intent i = new Intent(Activity_Profile_details.this, Activity_chat_dashboard.class);
+                    i.putExtra("chatId", chatId);
+                    i.putExtra("userId", profileId);
+                    if (imageLists.size() > 0) {
+                        i.putExtra("userImage", imageLists.get(0).getImage_name());
+                    } else {
+                        i.putExtra("userImage", "");
+                    }                    i.putExtra("userName", user_name);
+                    startActivity(i);
+                }
+                if (flag.equals("Activity_Home") || flag.equals("Activity_top_hitches") ||flag.equals("Activity_Favorite")  && Glob.Plane_Name.equals("Gold")) {
+
+                    Toast.makeText(Activity_Profile_details.this, "" + "Purchase plane for chat without match", Toast.LENGTH_SHORT).show();
+
+                }
+
+                if (flag.equals("Activity_Home") || flag.equals("Activity_top_hitches")||flag.equals("Activity_Favorite")  && Glob.Plane_Name.equals("Silver")) {
+
+                    Toast.makeText(Activity_Profile_details.this, "" + "Purchase plane for chat without match", Toast.LENGTH_SHORT).show();
+
+                }
+
+                if (flag.equals("Activity_Home") || flag.equals("Activity_top_hitches")|| flag.equals("Activity_Favorite")  && Glob.Plane_Name.equals("")) {
+
+                    Toast.makeText(Activity_Profile_details.this, "" + "Purchase plane for chat without match", Toast.LENGTH_SHORT).show();
+
+                }
+
+            }
+        });
 
     }
 
@@ -270,12 +324,11 @@ public class Activity_Profile_details extends AppCompatActivity {
                 universityName.setText(model.getSchool_name());
                 location.setText(model.getCurrent_location());
                 distance.setText(model.getKm_diff());
-
-
-
+                chatId = model.getChat_id();
+                user_name = model.getFirst_name() + " " + model.getLast_name();
 
                 List<ProfileDetailModel.ProfileDetail.ImageList> image = model.getImageLists();
-                for (int j =0;j<image.size();j++){
+                for (int j = 0; j < image.size(); j++) {
 
                     ProfileDetailModel.ProfileDetail.ImageList data = image.get(j);
 
@@ -284,9 +337,8 @@ public class Activity_Profile_details extends AppCompatActivity {
                     );
 
                     imageLists.add(a);
-                    Log.e("imageLists", "onResponse: "+a.getImage_name());
+                    Log.e("imageLists", "onResponse: " + a.getImage_name());
                 }
-
 
 
                 sliderPagerAdapter = new SliderPagerAdapter(Activity_Profile_details.this, imageLists);
