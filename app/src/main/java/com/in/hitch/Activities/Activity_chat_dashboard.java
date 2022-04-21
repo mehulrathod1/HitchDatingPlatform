@@ -54,6 +54,7 @@ import com.in.hitch.Model.ChatDashboardModel;
 import com.in.hitch.Model.ChatModel;
 import com.in.hitch.Model.CommonModel;
 import com.in.hitch.R;
+import com.in.hitch.Utils.Glob;
 import com.in.hitch.retrofit.Api;
 import com.in.hitch.retrofit.AppConfig;
 import com.in.hitch.retrofit.Responsee;
@@ -90,8 +91,8 @@ public class Activity_chat_dashboard extends AppCompatActivity {
     public final String APP_TAG = "hitch";
 
 
-    ImageView img_back, replay_cancel, img_mic, img_chat_send, img_option, select_from_gallery, pik_from_camera;
-    EditText edt_chat;
+    ImageView img_back, replay_cancel, img_mic, img_chat_send, img_option, select_from_gallery, pik_from_camera, replay_msg_send;
+    EditText edt_chat,edt_replay_msg;
     ImageView userImage;
     TextView userName, msg_replay, msg_delete, msg_copy, replay_to, replay_to_msg;
 
@@ -132,7 +133,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         Log.e(TAG, "onCreate: " + userId + chatId);
         init();
         setData();
-        getChatList(chatId, User_Id);
+        getChatMessage(chatId, User_Id);
         scheduleSendLocation();
     }
 
@@ -140,6 +141,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
 
         img_back = findViewById(R.id.img_back);
         edt_chat = findViewById(R.id.edt_chat);
+        edt_replay_msg = findViewById(R.id.edt_replay_msg);
         img_mic = findViewById(R.id.img_mic);
         img_option = findViewById(R.id.add_image);
         img_chat_send = findViewById(R.id.img_chat);
@@ -153,7 +155,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         replay_to = findViewById(R.id.replay_to);
         replay_to_msg = findViewById(R.id.replay_to_msg);
         replay_cancel = findViewById(R.id.replay_cancel);
-
+        replay_msg_send = findViewById(R.id.replay_msg_send);
         ChatLayout = findViewById(R.id.ChatLayout);
 
         msg_delete = findViewById(R.id.msg_delete);
@@ -310,7 +312,22 @@ public class Activity_chat_dashboard extends AppCompatActivity {
 
             }
         });
+        replay_msg_send.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+                msg_quote.setVisibility(View.GONE);
+                msgLayout.setVisibility(View.VISIBLE);
+
+                String message = edt_replay_msg.getText().toString();
+                String toServerUnicodeEncoded = StringEscapeUtils.escapeJava(message);
+
+
+                sendReplayMessage(Token, User_Id,selected_msg_id,toServerUnicodeEncoded);
+
+            }
+        });
         select_from_gallery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -351,11 +368,9 @@ public class Activity_chat_dashboard extends AppCompatActivity {
 
     }
 
-    public void getChatList(String chat_id, String user_id) {
+    public void getChatMessage(String chat_id, String user_id) {
 
         Api call = AppConfig.getClient(base_url).create(Api.class);
-
-
         call.getChat(Token, chat_id, user_id).enqueue(new Callback<ChatDashboardModel>() {
             @Override
             public void onResponse(Call<ChatDashboardModel> call, Response<ChatDashboardModel> response) {
@@ -442,7 +457,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                 CommonModel model = response.body();
 //                Toast.makeText(getApplicationContext(), "" + model.getMessage(), Toast.LENGTH_SHORT).show();
                 edt_chat.setText("");
-                getChatList(chatId, User_Id);
+                getChatMessage(chatId, User_Id);
 
             }
 
@@ -451,6 +466,27 @@ public class Activity_chat_dashboard extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void sendReplayMessage(String token, String user_id, String message_id, String message) {
+
+        Api call = AppConfig.getClient(base_url).create(Api.class);
+
+        call.sendReplayMessage(token, user_id, message_id, message).enqueue(new Callback<CommonModel>() {
+            @Override
+            public void onResponse(Call<CommonModel> call, Response<CommonModel> response) {
+
+                CommonModel model = response.body();
+                Toast.makeText(Activity_chat_dashboard.this, "" + model.getMessage(), Toast.LENGTH_SHORT).show();
+                getChatMessage(chatId, User_Id);
+            }
+
+            @Override
+            public void onFailure(Call<CommonModel> call, Throwable t) {
+
+            }
+        });
+
     }
 
     public void deleteMessage(String msgId) {
@@ -465,7 +501,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                 selected_msg_id.equals(selected_msg);
 
 
-                getChatList(chatId, User_Id);
+                getChatMessage(chatId, User_Id);
 
                 Toast.makeText(getApplicationContext(), "" + model.getMessage(), Toast.LENGTH_SHORT).show();
                 progressDialog.dismiss();
@@ -570,12 +606,12 @@ public class Activity_chat_dashboard extends AppCompatActivity {
 
                 if (chatListSize == 0) {
 
-                    getChatList(chatId, User_Id);
+                    getChatMessage(chatId, User_Id);
                     chatListSize = list.size() + 1;
                 }
                 if (chatListSize == s) {
 
-                    getChatList(chatId, User_Id);
+                    getChatMessage(chatId, User_Id);
                     chatListSize = list.size() + 1;
                 }
 
@@ -665,7 +701,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
 
 
                             sendFileMessage(User_Id, userId, img_file);
-                            getChatList(chatId, User_Id);
+                            getChatMessage(chatId, User_Id);
 
 //                            add_user_image(User_Id, img_file);
                         } else {
@@ -706,7 +742,7 @@ public class Activity_chat_dashboard extends AppCompatActivity {
                                 }
                                 Log.e("img_file", "onClick: " + img_file);
                                 sendFileMessage(User_Id, userId, img_file);
-                                getChatList(chatId, User_Id);
+                                getChatMessage(chatId, User_Id);
 
 //                                add_user_image(User_Id, img_file);
                             } else {
@@ -815,6 +851,5 @@ public class Activity_chat_dashboard extends AppCompatActivity {
         }
         return inSampleSize;
     }
-
 
 }

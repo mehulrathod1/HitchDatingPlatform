@@ -37,7 +37,7 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_action_location"
                 android:fontFamily="sans-serif"
-                android:text=" Bali, Indonasia"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="@dimen/_14sdp"
                 android:textStyle="bold"
@@ -110,13 +110,13 @@
         android:orientation="vertical">
 
 
-        <com.mindorks.placeholderview.SwipePlaceHolderView
-            android:id="@+id/swipeView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@+id/bottodem_navigation"
-            android:layout_below="@+id/location_settings"
-            android:visibility="gone" />
+<!--        <com.mindorks.placeholderview.SwipePlaceHolderView-->
+<!--            android:id="@+id/swipeView"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_above="@+id/bottodem_navigation"-->
+<!--            android:layout_below="@+id/location_settings"-->
+<!--             />-->
 
         <com.yuyakaido.android.cardstackview.CardStackView
             android:id="@+id/card_stack_view"

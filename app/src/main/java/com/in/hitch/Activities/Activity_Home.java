@@ -102,7 +102,7 @@ public class Activity_Home extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     CardView cv_filters, cv_notifications;
     FrameLayout source_frame, main_frameLayout;
-    SwipePlaceHolderView mSwipeView;
+//    SwipePlaceHolderView mSwipeView;
     private AdView adView;
     FrameLayout frameLayout;
     Spinner sp_sexual_orientation, sp_religion, sp_interested_in;
@@ -134,7 +134,7 @@ public class Activity_Home extends AppCompatActivity {
     String profileUserId;
     String likeFlag = "null";
     String superLikeFlag = "null";
-    int likeRestriction = 0;
+    int count = 0;
 
 
     @Override
@@ -143,7 +143,7 @@ public class Activity_Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         getSupportActionBar().hide();
         init();
-        getProfileCard(Token, "48");
+        getProfileCard(Token, User_Id);
 
 
         turnOnGps();
@@ -153,7 +153,7 @@ public class Activity_Home extends AppCompatActivity {
     private void init() {
 
 
-        mSwipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
+//        mSwipeView = (SwipePlaceHolderView) findViewById(R.id.swipeView);
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         cv_filters = findViewById(R.id.account_settinngs);
         cv_notifications = findViewById(R.id.notifications);
@@ -195,6 +195,7 @@ public class Activity_Home extends AppCompatActivity {
 
 
                 if (direction == Direction.Right) {
+
                     if (likeFlag.equals("likeButton")) {
 
                         likeFlag = "null";
@@ -388,79 +389,79 @@ public class Activity_Home extends AppCompatActivity {
             }
         });
 
-        Display display = getWindowManager().getDefaultDisplay();
-        Point size = new Point();
-        display.getSize(size);
-        int width = size.x;
-        int height = size.y;
+//        Display display = getWindowManager().getDefaultDisplay();
+//        Point size = new Point();
+//        display.getSize(size);
+//        int width = size.x;
+//        int height = size.y;
+//
+//        mSwipeView.getBuilder()
+//                .setDisplayViewCount(2)
+//                .setIsUndoEnabled(true)
+//                .setSwipeDecor(new SwipeDecor()
+//                        .setViewWidth((int) (0.96 * width))
+//                        .setViewHeight((int) (0.75 * height))
+//                        .setPaddingTop(20)
+//                        .setRelativeScale(0.01f)
+//                        .setSwipeInMsgLayoutId(R.layout.swipe_in_msg_view)
+//                        .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg_view));
+//
+//
+//        for (Profile profile : Utils.loadProfiles(this.getApplicationContext())) {
+//            mSwipeView.addView(new TinderCard(getApplicationContext(), profile, mSwipeView, new TinderCard.OnItemClickListener() {
+//                @Override
+//                public void onItemClick() {
+//
+//                    Intent i = new Intent(Activity_Home.this, Activity_Profile_details.class);
+//                    startActivity(i);
+//
+//                }
+//            }));
+//        }
+//        mSwipeView.addItemRemoveListener(new ItemRemovedListener() {
+//            @Override
+//            public void onItemRemoved(int count) {
+//
+//                if (count > 2) {
+//                    alertDialog = new AlertDialog.Builder(Activity_Home.this);
+//                    LayoutInflater inflater = getLayoutInflater();
+//                    View dialoglayout = inflater.inflate(R.layout.activity_match_screen, null);
+//                    btn_send_message = dialoglayout.findViewById(R.id.send_message);
+//                    close = dialoglayout.findViewById(R.id.closeAdd);
+//                    btn_continue_hitches = dialoglayout.findViewById(R.id.continue_hitching);
+//                    alertDialog.setView(dialoglayout);
+//                    alert = alertDialog.create();
+//                    alert.show();
+//
+//                    btn_continue_hitches.setOnClickListener(new View.OnClickListener() {
+//                        public void onClick(View v) {
+//                            alert.dismiss();
+//                        }
+//                    });
+//                    btn_send_message.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//
+//                            Intent i = new Intent(Activity_Home.this, Activity_chat_dashboard.class);
+//                            startActivity(i);
+//                        }
+//                    });
+//                    close.setOnClickListener(new View.OnClickListener() {
+//                        @Override
+//                        public void onClick(View v) {
+//                            alert.dismiss();
+//                        }
+//                    });
+//                }
+//
+//            }
+//        });
 
-        mSwipeView.getBuilder()
-                .setDisplayViewCount(2)
-                .setIsUndoEnabled(true)
-                .setSwipeDecor(new SwipeDecor()
-                        .setViewWidth((int) (0.96 * width))
-                        .setViewHeight((int) (0.75 * height))
-                        .setPaddingTop(20)
-                        .setRelativeScale(0.01f)
-                        .setSwipeInMsgLayoutId(R.layout.swipe_in_msg_view)
-                        .setSwipeOutMsgLayoutId(R.layout.swipe_out_msg_view));
-
-
-        for (Profile profile : Utils.loadProfiles(this.getApplicationContext())) {
-            mSwipeView.addView(new TinderCard(getApplicationContext(), profile, mSwipeView, new TinderCard.OnItemClickListener() {
-                @Override
-                public void onItemClick() {
-
-                    Intent i = new Intent(Activity_Home.this, Activity_Profile_details.class);
-                    startActivity(i);
-
-                }
-            }));
-        }
-        mSwipeView.addItemRemoveListener(new ItemRemovedListener() {
-            @Override
-            public void onItemRemoved(int count) {
-
-                if (count > 2) {
-                    alertDialog = new AlertDialog.Builder(Activity_Home.this);
-                    LayoutInflater inflater = getLayoutInflater();
-                    View dialoglayout = inflater.inflate(R.layout.activity_match_screen, null);
-                    btn_send_message = dialoglayout.findViewById(R.id.send_message);
-                    close = dialoglayout.findViewById(R.id.closeAdd);
-                    btn_continue_hitches = dialoglayout.findViewById(R.id.continue_hitching);
-                    alertDialog.setView(dialoglayout);
-                    alert = alertDialog.create();
-                    alert.show();
-
-                    btn_continue_hitches.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            alert.dismiss();
-                        }
-                    });
-                    btn_send_message.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-
-                            Intent i = new Intent(Activity_Home.this, Activity_chat_dashboard.class);
-                            startActivity(i);
-                        }
-                    });
-                    close.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            alert.dismiss();
-                        }
-                    });
-                }
-
-            }
-        });
-
-        adView = new AdView(this);
-        adView.setAdUnitId(getString(R.string.banner_ad_unit));
-        frameLayout = findViewById(R.id.adaptive_adview);
-        // frameLayout.addView(adView);
-        //loadBanner();
+//        adView = new AdView(this);
+//        adView.setAdUnitId(getString(R.string.banner_ad_unit));
+//        frameLayout = findViewById(R.id.adaptive_adview);
+//         //frameLayout.addView(adView);
+        ////loadBanner();
     }
 
     private void loadBanner() {

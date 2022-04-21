@@ -184,6 +184,15 @@ public interface Api {
 
 
     @FormUrlEncoded
+    @POST("send_reply_message.php")
+    Call<CommonModel> sendReplayMessage(
+            @Field("token") String token,
+            @Field("user_id") String user_id,
+            @Field("message_id") String message_id,
+            @Field("message") String message);
+
+
+    @FormUrlEncoded
     @POST("delete_message.php")
     Call<CommonModel> deleteMessage(
             @Field("token") String token,
